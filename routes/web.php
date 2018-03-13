@@ -13,10 +13,7 @@
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/profil', 'ProfilController@index')->name('profil');
+Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
-
-Route::get('contact', 'ContactController@getForm');
-Route::post('contact', 'ContactController@postForm');
-Route::get('email', 'EmailController@getForm');
-Route::post('email', ['uses' => 'EmailController@postForm', 'as' => 'storeEmail']);
