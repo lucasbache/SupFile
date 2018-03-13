@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('upload', 'UploadController@uploadForm');
+
+Route::post('upload', 'UploadController@uploadSubmit');
+
+Route::get('createRepo', 'createRepoController@repoForm');
+
+Route::post('createRepo', 'createRepoController@repoSubmit');
