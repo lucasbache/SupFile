@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\repository;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use File;
 
 class RegisterController extends Controller
 {
@@ -62,10 +65,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        $userid = User::all()->first();
+        $repoName = $data['email'];
+        repository::create([
+            'user_id' => $userid->id,
+            'name' => $repoName,
+            'dossierPrimaire' => 'Y',
+            'cheminDossier' => 'storage/'.$repoName.'/',
+            'dossierParent' => 'storage/'
+        ]);
+        File::makeDirectory('storage/'.$repoName.'/', 0777, true);
+
+        return $user;
+
     }
 }

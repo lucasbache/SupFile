@@ -10,15 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/profil', 'ProfilController@index')->name('profil');
+Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 Route::get('upload', 'UploadController@uploadForm');
-
 Route::post('upload', 'UploadController@uploadSubmit');
-
 Route::get('createRepo', 'createRepoController@repoForm');
-
 Route::post('createRepo', 'createRepoController@repoSubmit');
+Route::get('repertoire', 'afficherDossier@index');
