@@ -11,8 +11,10 @@ class CreateFileEntriesTable extends Migration
     {
         Schema::create('file_entries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('filename');
-            $table->string('filepath');
+            $table->string('user_id');
+            $table->string('name');
+            $table->string('cheminFichier');
+            $table->string('dossierStockage');
             $table->timestamps();
         });
     }

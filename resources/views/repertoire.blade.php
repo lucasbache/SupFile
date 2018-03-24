@@ -10,8 +10,24 @@
                     <a href="{{ url('/upload') }}">Ajouter un fichier</a>
                 </div>
                 <div class="panel-body">
-                    Vos fichiers :
-
+                    Dossier : {{Session::get('destination')}}
+                    @foreach($userepo as $repository)
+                        @if($repository->dossierPrimaire != 'Y')
+                            @if($repository->dossierParent == Session::get('dossierActuel'))
+                                <br>
+                                <a href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
+                                {{ Session::put('destination',$repository->name) }}
+                            @endif
+                        @endif
+                    @endforeach
+                    <br>
+                    Fichier :
+                    @foreach($userFile as $File)
+                        @if($File->dossierStockage == Session::get('dossierActuel'))
+                            <br>
+                            <p>{{ $File->name }}</p>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>

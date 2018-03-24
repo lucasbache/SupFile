@@ -17,17 +17,22 @@ class createRepoController extends Controller
 
     public function repoSubmit(createRepoRequest $request)
     {
+        //On recherche les infos utilisateur
         $user = Auth::user();
+
+        //On récupère le nom du dossier et on crée le chemin du dossier qui va être crée
         $repoName = $request->input('name');
-        $cheminDossier = session()->get('cheminActuel').$repoName.'/';
-        repository::create([
+        $cheminDossier = session()->get('dossierActuel').$repoName.'/';
+
+        //On crée le dossier
+        $dossier = repository::create([
             'user_id' => $user->id,
             'name' => $repoName,
             'dossierPrimaire' => 'N',
             'cheminDossier' => $cheminDossier,
-            'dossierParent' => session()->get('cheminActuel')
+            'dossierParent' => session()->get('dossierActuel')
         ]);
-        File::makeDirectory('storage/'.$user->email.'/'.$repoName.'/', 0777, true);
+        File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
 
         return redirect('home')->with("success", "Le répertoire a bien été crée");
     }

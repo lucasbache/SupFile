@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class fileEntries extends Model
 {
-    protected $fillable = ['filepath', 'filename'];
+    protected $fillable = ['user_id','name', 'cheminFichier', 'dossierStockage',];
 }

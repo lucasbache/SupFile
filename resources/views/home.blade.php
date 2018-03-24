@@ -16,9 +16,11 @@
                 Vos répertoires :
                 @foreach($userepo as $repository)
                     @if($repository->dossierPrimaire != 'Y')
-                    <br>
-                    <input type="button" value="{{ $repository->name }}">
-                    <a href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
+                        @if($repository->dossierParent == Session::get('dossierActuel'))
+                            <br>
+                            <a href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
+                            {{ Session::put('destination',$repository->name) }}
+                        @endif
                     @endif
                 @endforeach
             </div>

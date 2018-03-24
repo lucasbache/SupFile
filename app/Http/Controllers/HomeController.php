@@ -25,10 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        //On récupère les infos utilisateurs
         $user = Auth::user();
-        $userepo = repository::findById($user->id);
-        $cheminActuel = 'storage/'.$user->email.'/';
-        session()->put('cheminActuel',$cheminActuel);
+
+        //On recherche les dossiers et fichiers à afficher
+        $userepo = repository::findRepoById($user->id);
+
+        //On crée le chemin du dossier actuel et on le met en session
+        $dossierActuel = 'storage/'.$user->email.'/';
+        session()->put('dossierActuel',$dossierActuel);
+
         return view('home',compact('userepo'));
     }
 
