@@ -11,4 +11,5 @@ class DownloadController extends Controller
         $fileDownload = session()->get('dossierActuel').$filename.'/';
         return Storage::download($fileDownload);
     }
+
 }
