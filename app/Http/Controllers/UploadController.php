@@ -17,7 +17,7 @@ class UploadController extends Controller
     public function uploadSubmit(UploadRequest $request)
     {
         if ($request != null) {
-            foreach ($request->photos as $photo) {
+            foreach ($request->photos as $file) {
                 //On récupère les informations de l'utilisateur
                 $user = Auth::user();
 
@@ -25,7 +25,8 @@ class UploadController extends Controller
                 $dossierActuel = session()->get('dossierActuel');
 
                 //On insert le fichier dans le répertoire
-                $filepath = $photo->store($dossierActuel);
+                //$filepath = $file->storeAs($dossierActuel, $request->input('name'));
+                $filepath = $file->store($dossierActuel);
 
                 //On créer le fichier dans la base de donnée
                 fileEntries::create([

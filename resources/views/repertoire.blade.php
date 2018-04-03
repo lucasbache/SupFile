@@ -26,6 +26,7 @@
                         @if($File->dossierStockage == Session::get('dossierActuel'))
                             <br>
                             <p>{{ $File->name }}</p>
+                            <a href="{{ URL::to( '/download/'.$File->name)  }}" target="_blank">Télécharger le fichier</a>
                         @endif
                     @endforeach
                 </div>

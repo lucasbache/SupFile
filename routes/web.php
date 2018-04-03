@@ -19,6 +19,7 @@ Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 Route::get('upload', 'UploadController@uploadForm');
 Route::post('upload', 'UploadController@uploadSubmit');
+Route::get('download/{filename}', 'DownloadController@download');
 Route::get('createRepo', 'createRepoController@repoForm');
 Route::post('createRepo', 'createRepoController@repoSubmit');
 Route::get('repertoire', 'afficherDossier@index');
