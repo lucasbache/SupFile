@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+// Some methods which were generated with the app
+
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();

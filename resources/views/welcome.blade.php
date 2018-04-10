@@ -89,6 +89,7 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                     <a href="http://localhost/SupDrive/public/login">login</a>
+                    <a href="{{ url('/upload') }}">Upload</a>
                 </div>
             </div>
         </div>

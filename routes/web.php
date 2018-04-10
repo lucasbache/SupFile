@@ -19,3 +19,10 @@ Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
 //Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
+
+Route::get('upload', 'UploadController@uploadForm');
+Route::post('upload', 'UploadController@uploadSubmit');
+Route::get('download/{filename}', 'DownloadController@download');
+Route::get('createRepo', 'createRepoController@repoForm');
+Route::post('createRepo', 'createRepoController@repoSubmit');
+Route::get('repertoire', 'afficherDossier@index');
