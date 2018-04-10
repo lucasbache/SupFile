@@ -15,8 +15,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profil', 'ProfilController@index')->name('profil');
 Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
-Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
-Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+//Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+//Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
+Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
+
 Route::get('upload', 'UploadController@uploadForm');
 Route::post('upload', 'UploadController@uploadSubmit');
 Route::get('download/{filename}', 'DownloadController@download');
