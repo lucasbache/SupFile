@@ -16,3 +16,17 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/test', function(){
+    return response()->json(['auth'=>'no']);
+});
+
+Route::post('/login', array('uses' => 'Auth\ApiAuthController@login'));
+
+
+Route::Group(['middleware' => ['auth:api']], function(){
+    Route::get('/test2', function(){
+        return response()->json(['auth'=>'yes']);
+    });
+});
