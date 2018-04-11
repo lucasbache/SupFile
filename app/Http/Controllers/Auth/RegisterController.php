@@ -77,10 +77,10 @@ class RegisterController extends Controller
             'user_id' => $userid->id,
             'name' => $repoName,
             'dossierPrimaire' => 'Y',
-            'cheminDossier' => 'storage/'.$repoName.'/',
+            'cheminDossier' => $repoName.'/',
             'dossierParent' => 'storage/'
         ]);
-        File::makeDirectory('storage/'.$repoName.'/', 0777, true);
+        File::makeDirectory($repoName.'/', 0777, true);
 
         return $user;
 

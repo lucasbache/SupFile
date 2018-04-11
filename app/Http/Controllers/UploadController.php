@@ -21,12 +21,14 @@ class UploadController extends Controller
                 //On récupère les informations de l'utilisateur
                 $user = Auth::user();
                 $userId = $user->id;
-                $nomFichier = $request->input('name');
 
                 //On prépare le dossier dans lequel va être stocké le fichier
                 $dossierActuel = session()->get('dossierActuel');
 
-                $this->uploadFile($userId, $nomFichier, $dossierActuel, $file);
+                //On récupère le nom du fichier
+                $nomFicComplet = $_FILES['photos']['name'][0];
+
+                $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
 
             }
 
@@ -37,16 +39,38 @@ class UploadController extends Controller
         }
     }
 
-    public function uploadFile($userId, $nomFichier, $dossierActuel, $file){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
+
+        //On vérifie que le fichier n'existe pas
+        $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+        $compteur = 0;
+        while(!$sameFile->isEmpty())
+        {
+            $compteur += 1;
+            if($compteur > 1)
+            {
+                $prefixFile = explode("(", $nomFicComplet);
+                $extension = explode(".", end($prefixFile));
+                $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
+            }
+            else
+            {
+                $explodeFile = explode(".", $nomFicComplet);
+                $prefixFile = $explodeFile[0] . '(' . $compteur . ')';
+                $nomFicComplet = $prefixFile . '.' . end($explodeFile);
+            }
+
+            $sameFile = null;
+            $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+        }
 
         //On insert le fichier dans le répertoire
-        //$filepath = $file->storeAs($dossierActuel, $request->input('name'));
-        $filepath = $file->store($dossierActuel);
+        $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
 
         //On créer le fichier dans la base de donnée
         fileEntries::create([
             'user_id' => $userId,
-            'name' => $nomFichier,
+            'name' => $nomFicComplet,
             'cheminFichier' => $filepath,
             'dossierStockage' => $dossierActuel
         ]);
