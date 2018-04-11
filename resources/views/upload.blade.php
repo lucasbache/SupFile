@@ -17,10 +17,12 @@
             <br /><br />
             Séléctionner votre fichier:
             <br />
-            <input type="file" name="photos[]" multiple />
+            <input type="file" name="photos[]" multiple/>
             <br /><br />
             <input type="submit" value="Upload" />
         </form>
+    </div>
     <div class="col-md-8 col-md-offset-2">
+    </div>
 
 @endsection

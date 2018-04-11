@@ -32,7 +32,7 @@ class HomeController extends Controller
         $userepo = repository::findRepoById($user->id);
 
         //On crée le chemin du dossier actuel et on le met en session
-        $dossierActuel = 'storage/'.$user->email.'/';
+        $dossierActuel = $user->email.'/';
         session()->put('dossierActuel',$dossierActuel);
 
         return view('home',compact('userepo'));

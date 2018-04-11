@@ -23,10 +23,13 @@ class afficherDossier extends Controller
         //On cherche les infos de l'utilisateur
         $user = Auth::user();
 
+        //On liste tous les dossiers
+        $listeDossier = explode("/",$dossierActuel);
+
         //On cherche ensuite les dossiers et les fichiers par Id (on fera un tri dans la vue pour savoir quoi afficher)
         $userepo = repository::findRepoById($user->id);
         $userFile = fileEntries::findFileById($user->id);
 
-        return view('repertoire',compact('userepo','userFile'));
+        return view('repertoire',compact('userepo','userFile','listeDossier'));
     }
 }

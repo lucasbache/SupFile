@@ -6,8 +6,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{ url('/createRepo') }}">Ajouter un répertoire</a>
-                    <a href="{{ url('/upload') }}">Ajouter un fichier</a>
+                    @foreach($listeDossier as $dossier)
+                        <a class="btn btn-info" href="{{ url('/repertoire') }}"> > {{ $dossier }}</a>
+                    @endforeach
+                    <a class="btn btn-primary" href="{{ url('/createRepo') }}">Ajouter un répertoire</a>
+                    <a class="btn btn-primary" href="{{ url('/upload') }}">Ajouter un fichier</a>
                 </div>
                 <div class="panel-body">
                     Dossier : {{Session::get('destination')}}
@@ -15,8 +18,7 @@
                         @if($repository->dossierPrimaire != 'Y')
                             @if($repository->dossierParent == Session::get('dossierActuel'))
                                 <br>
-                                <a href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
-                                {{ Session::put('destination',$repository->name) }}
+                                <a class="btn btn-info" onClick="destination({{$repository->name}});">{{ $repository->name }}</a>
                             @endif
                         @endif
                     @endforeach

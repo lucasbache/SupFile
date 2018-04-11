@@ -6,11 +6,19 @@
     </div>
 @endif
 
+<script type="text/javascript">
+    function destination(repoDestination){
+        Session["destination"]=repoDestination;
+        console.log("Test");
+        window.location = '/repertoire'
+    }
+</script>
+
 @section('content')<div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="{{ url('/createRepo') }}">Ajouter un répertoire</a>
+                <a class="btn btn-primary" href="{{ url('/createRepo') }}">Ajouter un répertoire</a>
             </div>
             <div class="panel-body">
                 Vos répertoires :
@@ -18,7 +26,7 @@
                     @if($repository->dossierPrimaire != 'Y')
                         @if($repository->dossierParent == Session::get('dossierActuel'))
                             <br>
-                            <a href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
+                            <a class="btn btn-info" onclick="destination('{{ $repository->name }}')" href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
                             {{ Session::put('destination',$repository->name) }}
                         @endif
                     @endif

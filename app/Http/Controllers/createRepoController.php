@@ -41,7 +41,8 @@ class createRepoController extends Controller
             'cheminDossier' => $cheminDossier,
             'dossierParent' => $dossierActuel
         ]);
-        File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
+        //File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
+        File::makeDirectory($cheminDossier, 0777, true);
     }
 
 
