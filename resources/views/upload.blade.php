@@ -11,9 +11,8 @@
     <div class="col-md-8 col-md-offset-2">
         <form method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-            Nom du fichier:
             <br />
-            <input type="text" name="name" />
+            <input type="text" name="name" value="rien" hidden/>
             <br /><br />
             Séléctionner votre fichier:
             <br />
@@ -21,8 +20,6 @@
             <br /><br />
             <input type="submit" value="Upload" />
         </form>
-    </div>
     <div class="col-md-8 col-md-offset-2">
-    </div>
 
 @endsection
