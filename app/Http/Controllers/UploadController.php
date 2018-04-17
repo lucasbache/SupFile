@@ -29,13 +29,12 @@ class UploadController extends Controller
                 $nomFicComplet = $_FILES['photos']['name'][0];
 
                 $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
-
             }
 
-            return redirect()->back()->with("success", "Le fichier a bien été envoyé !");
+            return redirect()->action('afficherDossier@index')->with("success", "Le fichier a bien été envoyé !");
         }
         else{
-            return redirect()->back()->with("error", "Aucun fichier n'a été sélectionné !");
+            return redirect()->action('afficherDossier@index')->with("error", "Aucun fichier n'a été sélectionné !");
         }
     }
 
