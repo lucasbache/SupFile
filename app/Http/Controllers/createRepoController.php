@@ -23,7 +23,7 @@ class createRepoController extends Controller
 
         //On récupère le nom du dossier et on crée le chemin du dossier qui va être crée
         $repoName = $request->input('name');
-        $cheminDossier = session()->get('dossierActuel').$repoName.'/';
+        $cheminDossier = session()->get('dossierActuel').'/'.$repoName;
 
         $dossierActuel = session()->get('dossierActuel');
 

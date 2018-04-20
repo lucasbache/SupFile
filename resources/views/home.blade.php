@@ -26,8 +26,7 @@
                     @if($repository->dossierPrimaire != 'Y')
                         @if($repository->dossierParent == Session::get('dossierActuel'))
                             <br>
-                            <a class="btn btn-info" onclick="destination('{{ $repository->name }}')" href="{{ url('/repertoire') }}">{{ $repository->name }}</a>
-                            {{ Session::put('destination',$repository->name) }}
+                            <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
                         @endif
                     @endif
                 @endforeach
