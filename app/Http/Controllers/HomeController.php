@@ -29,11 +29,10 @@ class HomeController extends Controller
         $user = Auth::user();
 
         //On recherche les dossiers et fichiers à afficher
-        $userepo = repository::findRepoById($user->id);
+        $userepo = repository::findRepoByUserId($user->id);
 
         //On crée le chemin du dossier actuel et on le met en session
-        $dossierActuel = $user->email.'/';
-        session()->put('dossierActuel',$dossierActuel);
+        $dossierActuel = $user->email;
 
         return view('home',compact('userepo'));
     }

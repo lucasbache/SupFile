@@ -25,4 +25,4 @@ Route::post('upload', 'UploadController@uploadSubmit');
 Route::get('download/{filename}', 'DownloadController@download');
 Route::get('createRepo', 'createRepoController@repoForm');
 Route::post('createRepo', 'createRepoController@repoSubmit');
-Route::get('repertoire', 'afficherDossier@index');
+Route::get('repertoire/{id}', 'afficherDossier@index');
