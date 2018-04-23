@@ -6,25 +6,17 @@
     </div>
 @endif
 
-<script type="text/javascript">
-    function destination(repoDestination){
-        Session["destination"]=repoDestination;
-        console.log("Test");
-        window.location = '/repertoire'
-    }
-</script>
-
 @section('content')<div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a class="btn btn-primary" href="{{ url('/createRepo') }}">Ajouter un répertoire</a>
+                <a class="btn btn-primary" href="{{ URL::to('/createRepo/'.$dossierActuel->id) }}">Ajouter un répertoire</a>
             </div>
             <div class="panel-body">
                 Vos répertoires :
                 @foreach($userepo as $repository)
                     @if($repository->dossierPrimaire != 'Y')
-                        @if($repository->dossierParent == Session::get('dossierActuel'))
+                        @if($repository->dossierParent == $dossierActuel->cheminDossier)
                             <br>
                             <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
                         @endif
