@@ -20,8 +20,9 @@
                 Nom du dossier
                 <br />
                 <input type="text" name="name" />
+                <input type="hidden" name="path" value="{{$repoPath}}" />
                 <br /><br />
-                <input type="submit" value="Créer" />
+                <input type="Submit" value="Créer" />
             </form-group>
         </form>
     </div>

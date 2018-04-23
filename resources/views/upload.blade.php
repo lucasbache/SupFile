@@ -17,6 +17,8 @@
             Séléctionner votre fichier:
             <br />
             <input type="file" name="photos[]" multiple/>
+            <input type="hidden" name="path" value="{{$repoPath}}" />
+            <input type="hidden" name="id" value="{{$id}}" />
             <br /><br />
             <input type="submit" value="Upload" />
         </form>
