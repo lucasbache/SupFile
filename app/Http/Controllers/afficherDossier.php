@@ -23,7 +23,9 @@ class afficherDossier extends Controller
 
         //On liste tous les dossiers
         $listeDossierChemin = explode("/",$dossierActuel);
-        $dossierFichier = implode('.',$listeDossierChemin);
+        $dossFic = explode("/",$dossierActuel);
+        array_shift($dossFic);
+        $dossierFichier = implode('.',$dossFic);
 
         $tailleTab = count($listeDossierChemin);
 
@@ -35,8 +37,9 @@ class afficherDossier extends Controller
             array_push($listeDossier, repository::findRepoByPath($path));
             array_pop($listeDossierChemin);
         }
+
         $listeDossier = array_reverse($listeDossier);
-        //$listeDossierColl = collect($listeDossier);
+
         //On cherche ensuite les dossiers et les fichiers par Id (on fera un tri dans la vue pour savoir quoi afficher)
         $userepo = repository::findRepoByUserId($user->id);
         $userFile = fileEntries::findFileById($user->id);

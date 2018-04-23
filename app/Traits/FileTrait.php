@@ -60,6 +60,7 @@ trait FileTrait
     }
 
     public function downloadFile($fileDownload){
+
         return Storage::download($fileDownload);
     }
 
