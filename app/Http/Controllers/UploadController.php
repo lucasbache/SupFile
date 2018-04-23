@@ -6,12 +6,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UploadRequest;
 use App\fileEntries;
 use Illuminate\Support\Facades\Auth;
+use App\repository;
+use App\Traits\FileTrait;
 
 class UploadController extends Controller
 {
-    public function uploadForm()
+    use FileTrait;
+
+    public function uploadForm($id)
     {
-        return view('upload');
+        $repo = repository::findRepoById($id);
+        $repoPath = $repo->cheminDossier;
+        return view('upload',compact('repoPath','id'));
     }
 
     public function uploadSubmit(UploadRequest $request)
@@ -23,56 +29,21 @@ class UploadController extends Controller
                 $userId = $user->id;
 
                 //On prépare le dossier dans lequel va être stocké le fichier
-                $dossierActuel = session()->get('dossierActuel');
+                $dossierActuel = $request->input('path');
 
                 //On récupère le nom du fichier
                 $nomFicComplet = $_FILES['photos']['name'][0];
 
+                $idRepo = $request->input('id');
+
                 $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
             }
 
-            return redirect()->action('afficherDossier@index')->with("success", "Le fichier a bien été envoyé !");
+            return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
         }
         else{
             return redirect()->action('afficherDossier@index')->with("error", "Aucun fichier n'a été sélectionné !");
         }
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
-
-        //On vérifie que le fichier n'existe pas
-        $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
-        $compteur = 0;
-        while(!$sameFile->isEmpty())
-        {
-            $compteur += 1;
-            if($compteur > 1)
-            {
-                $prefixFile = explode("(", $nomFicComplet);
-                $extension = explode(".", end($prefixFile));
-                $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
-            }
-            else
-            {
-                $explodeFile = explode(".", $nomFicComplet);
-                $prefixFile = $explodeFile[0] . '(' . $compteur . ')';
-                $nomFicComplet = $prefixFile . '.' . end($explodeFile);
-            }
-
-            $sameFile = null;
-            $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
-        }
-
-        //On insert le fichier dans le répertoire
-        $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
-
-        //On créer le fichier dans la base de donnée
-        fileEntries::create([
-            'user_id' => $userId,
-            'name' => $nomFicComplet,
-            'cheminFichier' => $filepath,
-            'dossierStockage' => $dossierActuel
-        ]);
-
-    }
 }

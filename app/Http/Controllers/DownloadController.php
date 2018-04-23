@@ -1,15 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Storage;
+use App\Traits\FileTrait;
 
 class DownloadController extends Controller
 {
-    public function download($filename)
-    {
-        $fileDownload = session()->get('dossierActuel').$filename.'/';
-        return Storage::download($fileDownload);
-    }
 
+    use FileTrait;
+
+    public function download($filename,$dossierFichier)
+    {
+        $user = Auth::user();
+
+        $cheminPoint = explode('.', $dossierFichier);
+        array_unshift($cheminPoint, $user->email);
+        $dossierActuel = implode('/', $cheminPoint);
+        dd($dossierActuel);
+        $fileDownload = $dossierActuel.'/'.$filename;
+
+        $this->downloadFile($fileDownload);
+    }
 }
