@@ -12,15 +12,9 @@ class DownloadController extends Controller
 
     public function download($filename,$dossierFichier)
     {
-        $user = Auth::user();
+        $email = Auth::user()->email;
 
-        $cheminPoint = explode('.', $dossierFichier);
-        array_unshift($cheminPoint, $user->email);
-        $dossierActuel = implode('/', $cheminPoint);
-
-        $fileDownload = $dossierActuel.'/'.$filename;
-
-        return Storage::download($fileDownload);
-        //$this->downloadFile($fileDownload);
+        //return Storage::download($fileDownload);
+        return $this->downloadFile($filename,$dossierFichier, $email);
     }
 }

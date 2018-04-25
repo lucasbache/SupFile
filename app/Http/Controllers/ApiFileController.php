@@ -12,9 +12,9 @@ class ApiFileController extends Controller
     use FileTrait;
 
     public function upload(Request $request){
-        $dossierActuel = $request['dossierActuel'];
+        $dossierActuel = $request['folder'];
         $file = $request['file'];
-        $nomFicComplet = $request['nomFicComplet'];
+        $nomFicComplet = $request['filename'];
         $uid = $request->user()->id;
 
         if(strlen($uid)==0 || strlen($dossierActuel)==0 || strlen($file)==0 || strlen($nomFicComplet)==0){
@@ -30,9 +30,26 @@ class ApiFileController extends Controller
     public function repoCreate(Request $request){
 
         $uid = $request->user()->id;
-        $dossierActuel = $request['dossierActuel'];
-        $repoName = $request['repoName'];
-        $cheminDossier = $request['cheminDossier'];
+        $parentpath = $request['parent'];
+        $repoName = $request['name'];
+        $cheminDossier = $parentpath.'/'.$repoName;
 
+        if(strlen($uid)==0 || strlen($parentpath)==0 || strlen($repoName)==0){
+            return json_encode(array('error' => 'missing parameters'));
+        }
+        else
+        {
+            $this->createRepo($uid, $repoName, $cheminDossier, $parentpath);
+            return json_encode(array('success' => 'repository successfully created'));
+        }
     }
+
+    public function downloadFileApi(Request $request){
+        $filename = $request['filename'];
+        $folder = $request['folder'];
+        $email = $request->user()->email;
+
+        return $this->downloadFile($filename, $folder, $email);
+    }
+
 }

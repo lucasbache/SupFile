@@ -8,19 +8,6 @@ use File;
 
 trait FileTrait
 {
-    public function createrepo($userId, $repoName, $cheminDossier, $dossierActuel){
-        //On crée le dossier
-        $dossier = repository::create([
-            'user_id' => $userId,
-            'name' => $repoName,
-            'dossierPrimaire' => 'N',
-            'cheminDossier' => $cheminDossier,
-            'dossierParent' => $dossierActuel
-        ]);
-        //File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
-        File::makeDirectory($cheminDossier, 0777, true);
-    }
-
     public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
 
         //On vérifie que le fichier n'existe pas
@@ -59,7 +46,28 @@ trait FileTrait
 
     }
 
-    public function downloadFile($fileDownload){
+    public function createRepo($userId, $repoName, $cheminDossier, $dossierActuel)
+    {
+        //On crée le dossier
+        $dossier = repository::create([
+            'user_id' => $userId,
+            'name' => $repoName,
+            'dossierPrimaire' => 'N',
+            'cheminDossier' => $cheminDossier,
+            'dossierParent' => $dossierActuel
+        ]);
+        //File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
+        File::makeDirectory($cheminDossier, 0777, true);
+
+    }
+
+    public function downloadFile($filename,$dossierFichier,$email)
+    {
+        $cheminPoint = explode('.', $dossierFichier);
+        array_unshift($cheminPoint, $email);
+        $dossierActuel = implode('/', $cheminPoint);
+
+        $fileDownload = $dossierActuel.'/'.$filename;
 
         return Storage::download($fileDownload);
     }
