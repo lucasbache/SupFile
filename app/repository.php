@@ -24,4 +24,14 @@ class repository extends Model
         $repobypath = DB::table('repositories')->where('cheminDossier', '=', $path)->get();
         return $repobypath->first();
     }
+
+    public static function findRepoCreate($id, $repoName, $dossierStockage)
+    {
+        $repoCreate = DB::table('repositories')
+            ->where('user_id', '=', $id)
+            ->where('name', '=', $repoName)
+            ->where('cheminDossier', '=', $dossierStockage)
+            ->get();
+        return $repoCreate;
+    }
 }
