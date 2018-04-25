@@ -80,7 +80,7 @@ class RegisterController extends Controller
             'cheminDossier' => $repoName,
             'dossierParent' => 'storage/'
         ]);
-        File::makeDirectory($repoName.'/', 0777, true);
+        Storage::makeDirectory($repoName.'/', 0777, true);
 
         return $user;
 
