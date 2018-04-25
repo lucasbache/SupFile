@@ -24,6 +24,12 @@ class fileEntries extends Model
             ->get();
         return $filecreate;
     }
+
+    public static function findFileByPath($path)
+    {
+        $filebyid = DB::table('file_entries')->where('dossierStockage', '=', $path)->get();
+        return $filebyid;
+    }
 }
 
 

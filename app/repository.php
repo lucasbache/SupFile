@@ -24,4 +24,16 @@ class repository extends Model
         $repobypath = DB::table('repositories')->where('cheminDossier', '=', $path)->get();
         return $repobypath->first();
     }
+
+    public static function findRepoByPathMulti($path)
+    {
+        $repobypath = DB::table('repositories')->where('cheminDossier', '=', $path)->get();
+        return $repobypath;
+    }
+
+    public static function findRepoByParentPath($path)
+    {
+        $repobypath = DB::table('repositories')->where('dossierParent', '=', $path)->get();
+        return $repobypath->first();
+    }
 }
