@@ -15,7 +15,7 @@ class afficherDossier extends Controller
         $repo = repository::findRepoById($id);
         $reponame = $repo->name;
 
-        //On concatène ensuite le chemin de l'ancien dossier avec le nom du dossier cible pour crée le chemin actuel
+        //On récupère le chemin du dossier actuel
         $dossierActuel = $repo->cheminDossier;
 
         //On cherche les infos de l'utilisateur

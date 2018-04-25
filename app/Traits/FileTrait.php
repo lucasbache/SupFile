@@ -8,7 +8,7 @@ use File;
 
 trait FileTrait
 {
-    public function createrepo($userId, $repoName, $cheminDossier, $dossierActuel){
+    public function createRepo($userId, $repoName, $cheminDossier, $dossierActuel){
         //On crée le dossier
         $dossier = repository::create([
             'user_id' => $userId,
@@ -17,8 +17,9 @@ trait FileTrait
             'cheminDossier' => $cheminDossier,
             'dossierParent' => $dossierActuel
         ]);
-        //File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
-        File::makeDirectory($cheminDossier, 0777, true);
+
+        $dossierCree = Storage::makeDirectory($cheminDossier, 0777, true);
+        return $dossier->id;
     }
 
     public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
