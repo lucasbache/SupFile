@@ -9,6 +9,24 @@ use File;
 trait FileTrait
 {
     public function createRepo($userId, $repoName, $cheminDossier, $dossierActuel){
+
+        $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
+        $compteur = 0;
+        while(!$sameRepo->isEmpty())
+        {
+            $compteur += 1;
+            if($compteur > 1)
+            {
+                $repoName = $repoName."(".$compteur.")";
+            }
+            else
+            {
+                $repoName = $repoName."(".$compteur.")";
+            }
+
+            $sameRepo = null;
+            $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
+        }
         //On crée le dossier
         $dossier = repository::create([
             'user_id' => $userId,
@@ -18,7 +36,7 @@ trait FileTrait
             'dossierParent' => $dossierActuel
         ]);
 
-        $dossierCree = Storage::makeDirectory($cheminDossier, 0777, true);
+        Storage::makeDirectory($cheminDossier, 0777, true);
         return $dossier->id;
     }
 
