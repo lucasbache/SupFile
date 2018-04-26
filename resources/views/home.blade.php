@@ -30,14 +30,6 @@
                             @endif
                         @endforeach
                     </ul>
-                    Vos Fichier :
-                    @foreach($userFile as $File)
-                        @if($File->dossierStockage == $dossierActuel->cheminDossier)
-                            <br>
-                            <p>{{ $File->name }}</p>
-                            <a href="{{ URL::to( '/download/'.$File->name.'/'.$nomDossierActuel)  }}">Télécharger le fichier</a>
-                        @endif
-                    @endforeach
                 </div>
             </div>
         </div>
@@ -60,6 +52,14 @@
                             @endif
                         @endforeach
                     </div>
+                    Vos Fichier :
+                    @foreach($userFile as $File)
+                        @if($File->dossierStockage == $dossierActuel->cheminDossier)
+                            <br>
+                            <p>{{ $File->name }}</p>
+                            <a href="{{ URL::to( '/download/'.$File->name.'/'.$nomDossierActuel)  }}">Télécharger le fichier</a>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
