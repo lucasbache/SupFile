@@ -6,13 +6,18 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    @foreach($listeDossier as $dossier)
-                        @if($dossier->dossierPrimaire == 'Y')
-                            <a class="btn btn-info" href="{{ URL::to( '/home' ) }}"> {{ $dossier->name }}</a>
-                        @else
-                            <a class="btn btn-info" href="{{ URL::to( '/repertoire/'.$dossier->id) }}"> {{ $dossier->name }}</a>
-                        @endif
-                    @endforeach
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @foreach($listeDossier as $dossier)
+                                @if($dossier->dossierPrimaire == 'Y')
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ URL::to( '/home' ) }}"> {{ $dossier->name }}</a></li>
+                                @else
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ URL::to( '/repertoire/'.$dossier->id) }}"> {{ $dossier->name }}</a></li>
+                                @endif
+                            @endforeach
+                        </ol>
+                    </nav>
+
                     <a class="btn btn-primary" href="{{ URL::to('/createRepo/'.$repo->id) }}">Ajouter un répertoire</a>
                     <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id) }}">Ajouter un fichier</a>
                 </div>

@@ -19,10 +19,14 @@
                     Vos répertoires :
                     <ul class="list-group">
                         @foreach($userepo as $repository)
-                            <li class="list-group-item d-flex justify-content-between align-items-center" >
-                                <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
-                                <span class="badge badge-primary badge-pill">14</span>
-                            </li>
+                            @if($repository->dossierPrimaire != 'Y')
+                                @if($repository->dossierParent == $dossierActuel->cheminDossier)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
+                                        <span class="badge badge-primary badge-pill">14</span>
+                                    </li>
+                                @endif
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -31,20 +35,25 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    Vos Dossiers :
-                    @foreach($userepo as $repository)
-                        @if($repository->dossierPrimaire != 'Y')
-                            @if($repository->dossierParent == $dossierActuel->cheminDossier)
-                                <br>
-                                <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
+                    <h3>Vos Dossiers :</h3>
+                    <div class="card-deck">
+                        @foreach($userepo as $repository)
+                            @if($repository->dossierPrimaire != 'Y')
+                                @if($repository->dossierParent == $dossierActuel->cheminDossier)
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h4 class="card-title">{{$repository->name}}</h4>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}" class="btn btn-primary">{{$repository->name}}</a>
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
 @endsection
