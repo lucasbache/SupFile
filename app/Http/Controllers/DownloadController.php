@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Traits\FileTrait;
+use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class DownloadController extends Controller
 {
@@ -12,12 +14,20 @@ class DownloadController extends Controller
     {
         $user = Auth::user();
 
-        $cheminPoint = explode('.', $dossierFichier);
-        array_unshift($cheminPoint, $user->email);
-        $dossierActuel = implode('/', $cheminPoint);
-        dd($dossierActuel);
-        $fileDownload = $dossierActuel.'/'.$filename;
+        if($dossierFichier == $user->email)
+        {
+            $fileDownload = $dossierFichier.'/'.$filename;
+        }
+        else
+        {
+            $cheminPoint = explode('.', $dossierFichier);
+            array_unshift($cheminPoint, $user->email);
+            $dossierActuel = implode('/', $cheminPoint);
 
-        $this->downloadFile($fileDownload);
+            $fileDownload = $dossierActuel.'/'.$filename;
+        }
+
+        return Storage::download($fileDownload);
+        //$this->downloadFile($fileDownload);
     }
 }

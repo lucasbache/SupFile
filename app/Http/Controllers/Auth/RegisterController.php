@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use File;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -80,7 +81,7 @@ class RegisterController extends Controller
             'cheminDossier' => $repoName,
             'dossierParent' => 'storage/'
         ]);
-        File::makeDirectory($repoName.'/', 0777, true);
+        Storage::makeDirectory($repoName.'/', 0777, true);
 
         return $user;
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\fileEntries;
 
 class HomeController extends Controller
 {
@@ -30,11 +31,17 @@ class HomeController extends Controller
 
         //On recherche les dossiers et fichiers à afficher
         $userepo = repository::findRepoByUserId($user->id);
+        $userFile = fileEntries::findFileById($user->id);
 
-        //On crée le chemin du dossier actuel et on le met en session
-        $dossierActuel = repository::findRepoByPath($user->email);
+        foreach ($userepo as $repo)
+        {
+            if($repo->cheminDossier == $user->email){
+                $dossierActuel = $repo;
+            }
+        }
+        $nomDossierActuel = $dossierActuel->cheminDossier;
 
-        return view('home',compact('userepo','dossierActuel'));
+        return view('home',compact('userepo','dossierActuel','userFile','nomDossierActuel'));
     }
 
     public function profil()
