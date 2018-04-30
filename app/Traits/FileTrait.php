@@ -8,6 +8,38 @@ use File;
 
 trait FileTrait
 {
+    public function createRepo($userId, $repoName, $cheminDossier, $dossierActuel){
+
+        $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
+        $compteur = 0;
+        while(!$sameRepo->isEmpty())
+        {
+            $compteur += 1;
+            if($compteur > 1)
+            {
+                $repoName = $repoName."(".$compteur.")";
+            }
+            else
+            {
+                $repoName = $repoName."(".$compteur.")";
+            }
+
+            $sameRepo = null;
+            $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
+        }
+        //On crée le dossier
+        $dossier = repository::create([
+            'user_id' => $userId,
+            'name' => $repoName,
+            'dossierPrimaire' => 'N',
+            'cheminDossier' => $cheminDossier,
+            'dossierParent' => $dossierActuel
+        ]);
+
+        Storage::makeDirectory($cheminDossier, 0777, true);
+        return $dossier->id;
+    }
+
     public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
 
         //On vérifie que le fichier n'existe pas
@@ -43,21 +75,6 @@ trait FileTrait
             'cheminFichier' => $filepath,
             'dossierStockage' => $dossierActuel
         ]);
-
-    }
-
-    public function createRepo($userId, $repoName, $cheminDossier, $dossierActuel)
-    {
-        //On crée le dossier
-        $dossier = repository::create([
-            'user_id' => $userId,
-            'name' => $repoName,
-            'dossierPrimaire' => 'N',
-            'cheminDossier' => $cheminDossier,
-            'dossierParent' => $dossierActuel
-        ]);
-        //File::makeDirectory($dossier->dossierParent.'/'.$repoName.'/', 0777, true);
-        File::makeDirectory($cheminDossier, 0777, true);
 
     }
 

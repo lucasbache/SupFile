@@ -32,9 +32,9 @@ class createRepoController extends Controller
 
         $dossierActuel = $request->input('path');
 
-        $this->createrepo($userId, $repoName, $cheminDossier, $dossierActuel);
+        $dossierCree = $this->createRepo($userId, $repoName, $cheminDossier, $dossierActuel);
 
-        return redirect('home')->with("success", "Le répertoire a bien été crée");
+        return redirect('repertoire/'.$dossierCree)->with("success", "Le répertoire a bien été crée");
     }
 
 
