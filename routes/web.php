@@ -13,6 +13,8 @@
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/home', array('uses' =>'HomeController@indextest'))->name('home');
+Route::post('/', array('uses' =>'HomeController@indextest'))->name('home');
 Route::get('/profil', 'ProfilController@index')->name('profil');
 Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
 //Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
@@ -25,4 +27,7 @@ Route::post('upload/{id}', 'UploadController@uploadSubmit');
 Route::get('download/{filename}/{dossierActuel}', 'DownloadController@download');
 Route::get('createRepo/{id}', 'createRepoController@repoForm');
 Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
-Route::get('repertoire/{id}', 'afficherDossier@index');
+Route::get('repertoire/{id}', 'repoController@index');
+Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
+Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
+

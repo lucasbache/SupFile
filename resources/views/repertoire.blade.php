@@ -23,6 +23,8 @@
                             @if($repository->dossierParent == $dossierActuel)
                                 <br>
                                 <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
+                                <br>
+                                <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$repo->id.'/'.'D') }}">Renommer le dossier</a>
                             @endif
                         @endif
                     @endforeach
@@ -33,6 +35,7 @@
                             <br>
                             <p>{{ $File->name }}</p>
                             <a href="{{ URL::to( '/download/'.$File->name.'/'.$dossierFichier)  }}">Télécharger le fichier</a>
+                            <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id.'/'.$repo->id.'/'.'F') }}">Renommer le fichier</a>
                         @endif
                     @endforeach
                 </div>
