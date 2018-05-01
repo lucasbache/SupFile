@@ -27,7 +27,6 @@ class repoController extends Controller
 
     public function index($id)
     {
-
         $repo = repository::findRepoById($id);
         $reponame = $repo->name;
 
@@ -63,21 +62,32 @@ class repoController extends Controller
         return view('repertoire',compact('userepo','userFile','listeDossier','reponame', 'dossierActuel','repo','dossierFichier'));
     }
 
-    public function renameFileForm($idFile){
+    public function renameForm($idFile,$idRepo,$objectType){
 
-        $id = $idFile;
-        return view('rename', compact('id'));
+        $idFic = $idFile;
+        $idDoss = $idRepo;
+        $objTyp = $objectType;
+        return view('rename', compact('idFic','idDoss','objTyp'));
     }
 
-    public function renameFileSubmit(renameRequest $request){
+    public function renameSubmit(renameRequest $request){
 
         $newName = $request->input('name');
-        $fileId = $request->input('id');
+        $objectId = $request->input('id');
+        $repoId = $request->input('idDoss');
+        $objectType = $request->input('objectType');
 
-        $this->renameFiles($fileId,$newName);
 
-        return view('home');
+        if($objectType == 'F')
+        {
+            $this->renameFiles($objectId,$newName);
+        }
+        else
+        {
+            $this->renameRepo($objectId,$newName);
+        }
 
+        return redirect('repertoire/'.$repoId)->with("success", "Nouveau nom pris en compte");
     }
 
 }

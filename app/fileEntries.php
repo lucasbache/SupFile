@@ -21,6 +21,12 @@ class fileEntries extends Model
         return $filebyid;
     }
 
+    public static function findFileByRepo($cheminDossier)
+    {
+        $fileByRepo = DB::table('file_entries')->where('dossierStockage', '=', $cheminDossier)->get();
+        return $fileByRepo;
+    }
+
     public static function findFileCreate($id, $filename, $reponame)
     {
         $filecreate = DB::table('file_entries')
@@ -38,6 +44,15 @@ class fileEntries extends Model
             ->update(['name' => $newName, 'cheminFichier' => $newPath]);
 
         return $renameFile;
+    }
+
+    public static function updateFile($id, $newPath, $newRepoStock){
+
+        $updateFile = DB::table('file_entries')
+            ->where('id', '=', $id)
+            ->update(['cheminFichier' => $newPath, 'dossierStockage' => $newRepoStock]);
+
+        return $updateFile;
     }
 }
 

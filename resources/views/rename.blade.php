@@ -15,7 +15,9 @@
                 Nom :
                 <br />
                 <input type="text" name="name" />
-                <input type="hidden" name="id" value="{{$id}}" />
+                <input type="hidden" name="id" value="{{$idFic}}" />
+                <input type="hidden" name="idDoss" value="{{$idDoss}}" />
+                <input type="hidden" name="objectType" value="{{$objTyp}}" />
                 <br /><br />
                 <input type="Submit" value="Valider" />
             </form-group>

@@ -28,6 +28,6 @@ Route::get('download/{filename}/{dossierActuel}', 'DownloadController@download')
 Route::get('createRepo/{id}', 'createRepoController@repoForm');
 Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
 Route::get('repertoire/{id}', 'repoController@index');
-Route::get('rename/{id}', 'repoController@renameFileform');
-Route::post('rename/{id}', 'repoController@renameFileSubmit');
+Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
+Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
 
