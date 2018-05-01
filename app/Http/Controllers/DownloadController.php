@@ -14,20 +14,6 @@ class DownloadController extends Controller
     {
         $user = Auth::user();
 
-        if($dossierFichier == $user->email)
-        {
-            $fileDownload = $dossierFichier.'/'.$filename;
-        }
-        else
-        {
-            $cheminPoint = explode('.', $dossierFichier);
-            array_unshift($cheminPoint, $user->email);
-            $dossierActuel = implode('/', $cheminPoint);
-
-            $fileDownload = $dossierActuel.'/'.$filename;
-        }
-
-        return Storage::download($fileDownload);
-        //$this->downloadFile($fileDownload);
+        return $this->downloadFile($user->email, $dossierFichier, $filename);
     }
 }

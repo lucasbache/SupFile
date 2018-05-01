@@ -78,9 +78,40 @@ trait FileTrait
 
     }
 
-    public function downloadFile($fileDownload){
+    public function downloadFile($userEmail, $dossierFichier, $filename){
 
+        if($dossierFichier == $userEmail)
+        {
+            $fileDownload = $dossierFichier.'/'.$filename;
+        }
+        else
+        {
+            $cheminPoint = explode('.', $dossierFichier);
+            array_unshift($cheminPoint, $userEmail);
+            $dossierActuel = implode('/', $cheminPoint);
+
+            $fileDownload = $dossierActuel.'/'.$filename;
+        }
         return Storage::download($fileDownload);
+    }
+
+    public function renameFiles($fileId, $newName){
+
+        $file = fileEntries::findFileById($fileId)->first();
+
+        $explodeFile = explode('.',$file->name);
+        $extensionFile = last($explodeFile);
+        $newNameFile =$newName.".".$extensionFile;
+
+        $nouveauCheminFic = explode("/",$file->cheminFichier);
+        array_pop($nouveauCheminFic);
+        array_push($nouveauCheminFic, $newNameFile);
+        $dossFichier = implode('/', $nouveauCheminFic);
+
+        fileEntries::renameFile($fileId, $newNameFile, $dossFichier);
+
+        Storage::move($file->cheminFichier, $dossFichier);
+
     }
 
 }

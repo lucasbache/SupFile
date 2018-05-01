@@ -6,9 +6,25 @@ use App\fileEntries;
 use Illuminate\Http\Request;
 use App\repository;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\renameRequest;
+use App\Traits\FileTrait;
 
-class afficherDossier extends Controller
+class repoController extends Controller
 {
+
+    use FileTrait;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index($id)
     {
 
@@ -42,9 +58,26 @@ class afficherDossier extends Controller
 
         //On cherche ensuite les dossiers et les fichiers par Id (on fera un tri dans la vue pour savoir quoi afficher)
         $userepo = repository::findRepoByUserId($user->id);
-        $userFile = fileEntries::findFileById($user->id);
+        $userFile = fileEntries::findFileByUserId($user->id);
 
         return view('repertoire',compact('userepo','userFile','listeDossier','reponame', 'dossierActuel','repo','dossierFichier'));
+    }
+
+    public function renameFileForm($idFile){
+
+        $id = $idFile;
+        return view('rename', compact('id'));
+    }
+
+    public function renameFileSubmit(renameRequest $request){
+
+        $newName = $request->input('name');
+        $fileId = $request->input('id');
+
+        $this->renameFiles($fileId,$newName);
+
+        return view('home');
+
     }
 
 }

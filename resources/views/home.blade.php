@@ -30,6 +30,7 @@
                         <br>
                         <p>{{ $File->name }}</p>
                         <a href="{{ URL::to( '/download/'.$File->name.'/'.$nomDossierActuel)  }}">Télécharger le fichier</a>
+                        <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id) }}">Renommer le fichier</a>
                     @endif
                 @endforeach
             </div>

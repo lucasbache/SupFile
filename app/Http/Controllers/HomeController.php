@@ -31,7 +31,7 @@ class HomeController extends Controller
 
         //On recherche les dossiers et fichiers à afficher
         $userepo = repository::findRepoByUserId($user->id);
-        $userFile = fileEntries::findFileById($user->id);
+        $userFile = fileEntries::findFileByUserId($user->id);
 
         foreach ($userepo as $repo)
         {
@@ -42,6 +42,10 @@ class HomeController extends Controller
         $nomDossierActuel = $dossierActuel->cheminDossier;
 
         return view('home',compact('userepo','dossierActuel','userFile','nomDossierActuel'));
+    }
+
+    public function indextest(Request $request){
+        return view();
     }
 
     public function profil()
