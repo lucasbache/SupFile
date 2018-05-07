@@ -38,7 +38,7 @@ trait FileTrait
             'dossierParent' => $dossierActuel
         ]);
 
-        Storage::makeDirectory($cheminDossier, 0777, true);
+        Storage::makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
