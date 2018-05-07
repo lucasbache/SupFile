@@ -46,4 +46,28 @@ class repository extends Model
             ->get();
         return $repoCreate;
     }
+
+    public static function renameRepo($id, $newName, $newPath){
+
+        $renameFile = DB::table('repositories')
+            ->where('id', '=', $id)
+            ->update(['name' => $newName, 'cheminDossier' => $newPath]);
+
+        return $renameFile;
+    }
+
+    public static function findRepoByStock($cheminDossier)
+    {
+        $RepoByStock = DB::table('repositories')->where('dossierParent', '=', $cheminDossier)->get();
+        return $RepoByStock;
+    }
+
+    public static function updateRepo($id, $newCheminDossier, $newDossierParent){
+
+        $updateRepo = DB::table('repositories')
+            ->where('id', '=', $id)
+            ->update(['cheminDossier' => $newCheminDossier, 'dossierParent' => $newDossierParent]);
+
+        return $updateRepo;
+    }
 }
