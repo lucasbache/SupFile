@@ -30,6 +30,6 @@ class DownloadController extends Controller
         //return Storage::download($fileDownload);
         //$this->downloadFile($fileDownload);
         //return Storage::download($fileDownload);
-        return $this->downloadFile($filename,$dossierFichier, $email);
+        //return $this->downloadFile($filename,$dossierFichier, $email);
     }
 }

@@ -74,7 +74,7 @@ class ApiFileController extends Controller
             foreach($files as $f){
                 array_push($filedata, $f->name);
             }
-
+//
             $data = array( "folders" => $repodata, "files" => $filedata);
 
             return json_encode($data);
