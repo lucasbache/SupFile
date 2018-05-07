@@ -14,7 +14,7 @@
                         @endif
                     @endforeach
                     <a class="btn btn-primary" href="{{ URL::to('/createRepo/'.$repo->id) }}">Ajouter un répertoire</a>
-                    <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id) }}">Ajouter un fichier</a>
+                    <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id.'/'.'Sec') }}">Ajouter un fichier</a>
                 </div>
                 <div class="panel-body">
                     Dossier : {{$reponame}}

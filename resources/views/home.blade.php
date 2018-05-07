@@ -11,7 +11,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <a class="btn btn-primary" href="{{ URL::to('/createRepo/'.$dossierActuel->id) }}">Ajouter un répertoire</a>
-                <a class="btn btn-primary" href="{{ URL::to('/upload/'.$dossierActuel->id) }}">Ajouter un fichier</a>
+                <a class="btn btn-primary" href="{{ URL::to('/upload/'.$dossierActuel->id.'/'.'Prim') }}">Ajouter un fichier</a>
             </div>
             <div class="panel-body">
                 Vos répertoires :
@@ -34,7 +34,7 @@
                         <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video">{{ $File->name }}</button>
                         <a href="{{ URL::to( '/download/'.$File->name.'/'.$nomDossierActuel)  }}">Télécharger le fichier</a>
                         <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id.'/'.$dossierActuel->id.'/'.'F') }}">Renommer le fichier</a>
-                        <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$dossierActuel->id.'/'.'Fic') }}">Supprimer le fichier</a>
+                        <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$dossierActuel->id.'/'.'Prim') }}">Supprimer le fichier</a>
                     @endif
                 @endforeach
             </div>
