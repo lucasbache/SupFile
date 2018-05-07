@@ -8,7 +8,6 @@ use App\repository;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\renameRequest;
 use App\Traits\FileTrait;
-use App\Traits\FileTrait;
 use App\Http\Requests\createRepoRequest;
 
 class repoController extends Controller
