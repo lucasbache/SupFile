@@ -187,7 +187,6 @@ trait FileTrait
             fileEntries::suppressFile($objectId);
             File::delete($objectPath);
         }
-
     }
 
 }

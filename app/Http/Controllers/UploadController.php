@@ -13,15 +13,18 @@ class UploadController extends Controller
 {
     use FileTrait;
 
-    public function uploadForm($id)
+    public function uploadForm($id, $typeDoss)
     {
         $repo = repository::findRepoById($id);
         $repoPath = $repo->cheminDossier;
-        return view('upload',compact('repoPath','id'));
+        return view('upload',compact('repoPath','id', 'typeDoss'));
     }
 
     public function uploadSubmit(UploadRequest $request)
     {
+        $typeDoss = null;
+        $idRepo = null;
+
         if ($request != null) {
             foreach ($request->photos as $file) {
                 //On récupère les informations de l'utilisateur
@@ -36,10 +39,18 @@ class UploadController extends Controller
 
                 $idRepo = $request->input('id');
 
+                $typeDoss = $request->input('typeDoss');
+
                 $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
             }
 
-            return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+            if($typeDoss == 'Prim')
+            {
+                return redirect('home');
+            }
+            else{
+                return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+            }
         }
         else{
             return redirect()->action('afficherDossier@index')->with("error", "Aucun fichier n'a été sélectionné !");
