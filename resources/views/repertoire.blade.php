@@ -25,6 +25,7 @@
                                 <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
                                 <br>
                                 <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$repo->id.'/'.'D') }}">Renommer le dossier</a>
+                                <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$repo->id.'/'.'Sec') }}">Supprimer le dossier</a>
                             @endif
                         @endif
                     @endforeach
@@ -37,6 +38,7 @@
                             <button onclick="launchModal('{{$File->name}}','../{{$File->cheminFichier}}')" data-modal-id="modal-video">{{ $File->name }}</button>
                             <a href="{{ URL::to( '/download/'.$File->name.'/'.$dossierFichier)  }}">Télécharger le fichier</a>
                             <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id.'/'.$repo->id.'/'.'F') }}">Renommer le fichier</a>
+                            <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.'Fic') }}">Supprimer le fichier</a>
                         @endif
                     @endforeach
                 </div>

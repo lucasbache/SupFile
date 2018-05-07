@@ -70,4 +70,13 @@ class repository extends Model
 
         return $updateRepo;
     }
+
+    public static function suppressRepo($id){
+
+        $suppresRepo = DB::table('repositories')
+            ->where('id', '=', $id)
+            ->delete();
+
+        return $suppresRepo;
+    }
 }
