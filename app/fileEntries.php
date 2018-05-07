@@ -37,6 +37,12 @@ class fileEntries extends Model
         return $filecreate;
     }
 
+    public static function findFileByPath($path)
+    {
+        $filebyid = DB::table('file_entries')->where('cheminFichier', '=', $path)->get();
+        return $filebyid;
+    }
+
     public static function renameFile($id, $newName, $newPath){
 
         $renameFile = DB::table('file_entries')
