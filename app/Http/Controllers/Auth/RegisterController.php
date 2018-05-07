@@ -66,13 +66,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $userid = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        $userid = User::all()->first();
         $repoName = $data['email'];
         repository::create([
             'user_id' => $userid->id,
@@ -83,7 +82,7 @@ class RegisterController extends Controller
         ]);
         Storage::makeDirectory($repoName.'/', 0777, true);
 
-        return $user;
+        return $userid;
 
     }
 }

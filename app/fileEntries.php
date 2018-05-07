@@ -39,7 +39,7 @@ class fileEntries extends Model
 
     public static function findFileByPath($path)
     {
-        $filebyid = DB::table('file_entries')->where('dossierStockage', '=', $path)->get();
+        $filebyid = DB::table('file_entries')->where('cheminFichier', '=', $path)->get();
         return $filebyid;
     }
 

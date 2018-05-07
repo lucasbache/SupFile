@@ -34,5 +34,7 @@ Route::Group(['middleware' => ['auth:api']], function(){
     Route::post('/downloadfile', array('uses' => 'ApiFileController@downloadFileApi'));
     Route::post('/createrepo', array('uses' => 'ApiFileController@repoCreate'));
     Route::post('/listfiles', array('uses' => 'ApiFileController@listFiles'));
+    Route::post('/rename/repo', array('uses' => 'ApiFileController@apiRenameRepo'));
+    Route::post('/rename/file', array('uses' => 'ApiFileController@apiRenameFile'));
 
 });

@@ -27,7 +27,7 @@ class repository extends Model
 
     public static function findRepoByPathMulti($path)
     {
-        $repobypath = DB::table('repositories')->where('cheminDossier', '=', $path)->get();
+        $repobypath = DB::table('repositories')->where('dossierParent', '=', $path)->get();
         return $repobypath;
     }
 
