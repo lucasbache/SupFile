@@ -24,7 +24,6 @@ function closeModal(){
 
 $(MyVidModal).keyup(function(e) {
     if (e.keyCode = 27) {
-        var vid = document.getElementById("myVid");
-        vid.pause();
+
     }
 });
