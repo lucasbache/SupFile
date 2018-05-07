@@ -36,5 +36,5 @@ Route::Group(['middleware' => ['auth:api']], function(){
     Route::post('/listfiles', array('uses' => 'ApiFileController@listFiles'));
     Route::post('/rename/repo', array('uses' => 'ApiFileController@apiRenameRepo'));
     Route::post('/rename/file', array('uses' => 'ApiFileController@apiRenameFile'));
-
+    Route::post('/delete', array('uses' => 'ApiFileController@apiDeleteFile'));
 });

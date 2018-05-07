@@ -126,4 +126,25 @@ class ApiFileController extends Controller
         }
     }
 
+    public function apiDeleteFile(Request $request){
+        $type = $request['type'];
+        $path = $request['path'];
+
+        if (strlen($type) == 0 || strlen($path) == 0) {
+            return json_encode(array('error' => 'missing parameters'));
+        }
+
+        if($type == "repo"){
+            $repo = repository::findRepoByPath($path);
+            $this->suppress("D", $repo->id);
+            return json_encode(array('success' => 'folder successfully deleted'));
+
+        }elseif ($type == "file"){
+            $file = fileEntries::findFileByPath($path)->first();
+            $this->suppress("F", $file->id);
+            return json_encode(array('success' => 'file successfully deleted'));
+        }else {
+            return json_encode(array('error' => 'wrong file type'));
+        }
+    }
 }
