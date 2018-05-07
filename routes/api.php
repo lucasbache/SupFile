@@ -16,3 +16,25 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/test', function(){
+    return response()->json(['auth'=>'no']);
+});
+
+Route::post('/login', array('uses' => 'Auth\ApiAuthController@login'));
+
+
+Route::Group(['middleware' => ['auth:api']], function(){
+    Route::get('/test2', function(){
+        return response()->json(['auth'=>'yes']);
+    });
+
+    Route::post('/upload', array('uses' => 'ApiFileController@upload'));
+    Route::post('/downloadfile', array('uses' => 'ApiFileController@downloadFileApi'));
+    Route::post('/createrepo', array('uses' => 'ApiFileController@repoCreate'));
+    Route::post('/listfiles', array('uses' => 'ApiFileController@listFiles'));
+    Route::post('/rename/repo', array('uses' => 'ApiFileController@apiRenameRepo'));
+    Route::post('/rename/file', array('uses' => 'ApiFileController@apiRenameFile'));
+
+});

@@ -25,6 +25,18 @@ class repository extends Model
         return $repobypath->first();
     }
 
+    public static function findRepoByPathMulti($path)
+    {
+        $repobypath = DB::table('repositories')->where('dossierParent', '=', $path)->get();
+        return $repobypath;
+    }
+
+    public static function findRepoByParentPath($path)
+    {
+        $repobypath = DB::table('repositories')->where('dossierParent', '=', $path)->get();
+        return $repobypath->first();
+    }
+
     public static function findRepoCreate($id, $repoName, $dossierStockage)
     {
         $repoCreate = DB::table('repositories')
@@ -33,5 +45,29 @@ class repository extends Model
             ->where('cheminDossier', '=', $dossierStockage)
             ->get();
         return $repoCreate;
+    }
+
+    public static function renameRepo($id, $newName, $newPath){
+
+        $renameFile = DB::table('repositories')
+            ->where('id', '=', $id)
+            ->update(['name' => $newName, 'cheminDossier' => $newPath]);
+
+        return $renameFile;
+    }
+
+    public static function findRepoByStock($cheminDossier)
+    {
+        $RepoByStock = DB::table('repositories')->where('dossierParent', '=', $cheminDossier)->get();
+        return $RepoByStock;
+    }
+
+    public static function updateRepo($id, $newCheminDossier, $newDossierParent){
+
+        $updateRepo = DB::table('repositories')
+            ->where('id', '=', $id)
+            ->update(['cheminDossier' => $newCheminDossier, 'dossierParent' => $newDossierParent]);
+
+        return $updateRepo;
     }
 }

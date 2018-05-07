@@ -17,16 +17,18 @@ trait FileTrait
             $compteur += 1;
             if($compteur > 1)
             {
-                $repoName = $repoName."(".$compteur.")";
-            }
-            else
-            {
+                $prefixFile = explode("(", $repoName);
+                $repoName = $prefixFile[0]."(".$compteur.")";
+            }else{
                 $repoName = $repoName."(".$compteur.")";
             }
 
             $sameRepo = null;
             $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
         }
+
+        $cheminDossier = $dossierActuel."/".$repoName;
+
         //On crée le dossier
         $dossier = repository::create([
             'user_id' => $userId,
@@ -36,7 +38,7 @@ trait FileTrait
             'dossierParent' => $dossierActuel
         ]);
 
-        Storage::makeDirectory($cheminDossier, 0777, true);
+        File::makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
@@ -78,9 +80,97 @@ trait FileTrait
 
     }
 
-    public function downloadFile($fileDownload){
+    public function downloadFile($userEmail, $dossierFichier, $filename){
 
-        return Storage::download($fileDownload);
+        if($dossierFichier == $userEmail)
+        {
+            $fileDownload = $dossierFichier.'/'.$filename;
+        }
+        else
+        {
+            $cheminPoint = explode('.', $dossierFichier);
+            array_unshift($cheminPoint, $userEmail);
+            $dossierActuel = implode('/', $cheminPoint);
+
+            $fileDownload = $dossierActuel.'/'.$filename;
+        }
+        return File::download($fileDownload);
+    }
+
+    public function renameFiles($objectId, $newName){
+
+        $file = fileEntries::findFileById($objectId)->first();
+
+        $explodeFile = explode('.',$file->name);
+        $extensionFile = last($explodeFile);
+        $newNameFile =$newName.".".$extensionFile;
+
+        $nouveauCheminFic = explode("/",$file->cheminFichier);
+        array_pop($nouveauCheminFic);
+        array_push($nouveauCheminFic, $newNameFile);
+        $dossFichier = implode('/', $nouveauCheminFic);
+
+        fileEntries::renameFile($objectId, $newNameFile, $dossFichier);
+
+        File::move($file->cheminFichier, $dossFichier);
+
+        return $file;
+
+    }
+
+    public function renameRepo($objectId, $newName){
+
+        $dossier = repository::findRepoById($objectId);
+
+        $fichierDossier = fileEntries::findFileByRepo($dossier->cheminDossier);
+
+        $dossierEnfant = repository::findRepoByStock($dossier->cheminDossier);
+
+        foreach ($fichierDossier as $fichier)
+        {
+            $nouveauDossStock = explode("/",$fichier->dossierStockage);
+            array_pop($nouveauDossStock);
+            array_push($nouveauDossStock, $newName);
+            $dossStockFichier = implode('/', $nouveauDossStock);
+
+            $cheminFich = explode('/',$fichier->cheminFichier);
+            array_pop($cheminFich);
+            array_pop($cheminFich);
+            array_push($cheminFich, $newName);
+            array_push($cheminFich, $fichier->name);
+            $nouveauCheminFich = implode('/', $cheminFich);
+
+            fileEntries::updateFile($fichier->id, $nouveauCheminFich, $dossStockFichier );
+        }
+
+        foreach ($dossierEnfant as $dossEnfant)
+        {
+            $nouveauDossParent = explode('/', $dossEnfant->dossierParent);
+            array_pop($nouveauDossParent);
+            array_push($nouveauDossParent, $newName);
+            $dossierParent = implode('/', $nouveauDossParent);
+
+            $nouveauCheminDoss = explode('/', $dossEnfant->cheminDossier);
+            array_pop($nouveauCheminDoss);
+            array_pop($nouveauCheminDoss);
+            array_push($nouveauCheminDoss, $newName);
+            array_push($nouveauCheminDoss, $dossEnfant->name);
+            $cheminDoss = implode('/', $nouveauCheminDoss);
+
+            repository::updateRepo($dossEnfant->id, $cheminDoss, $dossierParent);
+        }
+
+        $nouveauCheminDossier = explode('/',$dossier->cheminDossier);
+        array_pop($nouveauCheminDossier);
+        array_push($nouveauCheminDossier, $newName);
+        $cheminDossier = implode('/',$nouveauCheminDossier);
+
+        repository::renameRepo($objectId, $newName, $cheminDossier);
+
+        File::move($dossier->cheminDossier, $cheminDossier);
+
+        return $dossier;
+
     }
 
 }
