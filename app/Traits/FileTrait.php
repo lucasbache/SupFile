@@ -17,16 +17,18 @@ trait FileTrait
             $compteur += 1;
             if($compteur > 1)
             {
-                $repoName = $repoName."(".$compteur.")";
-            }
-            else
-            {
+                $prefixFile = explode("(", $repoName);
+                $repoName = $prefixFile[0]."(".$compteur.")";
+            }else{
                 $repoName = $repoName."(".$compteur.")";
             }
 
             $sameRepo = null;
             $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
         }
+
+        $cheminDossier = $dossierActuel."/".$repoName;
+
         //On crée le dossier
         $dossier = repository::create([
             'user_id' => $userId,
