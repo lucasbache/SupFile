@@ -38,7 +38,7 @@ trait FileTrait
             'dossierParent' => $dossierActuel
         ]);
 
-        Storage::makeDirectory($cheminDossier, 777, true);
+        File::makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
@@ -94,7 +94,7 @@ trait FileTrait
 
             $fileDownload = $dossierActuel.'/'.$filename;
         }
-        return Storage::download($fileDownload);
+        return File::download($fileDownload);
     }
 
     public function renameFiles($objectId, $newName){
@@ -112,7 +112,7 @@ trait FileTrait
 
         fileEntries::renameFile($objectId, $newNameFile, $dossFichier);
 
-        Storage::move($file->cheminFichier, $dossFichier);
+        File::move($file->cheminFichier, $dossFichier);
 
         return $file;
 
@@ -167,7 +167,7 @@ trait FileTrait
 
         repository::renameRepo($objectId, $newName, $cheminDossier);
 
-        Storage::move($dossier->cheminDossier, $cheminDossier);
+        File::move($dossier->cheminDossier, $cheminDossier);
 
         return $dossier;
 
