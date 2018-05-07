@@ -33,6 +33,8 @@ class HomeController extends Controller
         $userepo = repository::findRepoByUserId($user->id);
         $userFile = fileEntries::findFileById($user->id);
 
+        $nbFile = count($userFile);
+
         foreach ($userepo as $repo)
         {
             if($repo->cheminDossier == $user->email){
@@ -41,7 +43,7 @@ class HomeController extends Controller
         }
         $nomDossierActuel = $dossierActuel->cheminDossier;
 
-        return view('home',compact('userepo','dossierActuel','userFile','nomDossierActuel'));
+        return view('home',compact('userepo','dossierActuel','userFile','nomDossierActuel',"nbFile"));
     }
 
     public function profil()

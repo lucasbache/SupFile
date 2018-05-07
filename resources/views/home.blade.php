@@ -22,9 +22,13 @@
                         @foreach($userepo as $repository)
                             @if($repository->dossierPrimaire != 'Y')
                                 @if($repository->dossierParent == $dossierActuel->cheminDossier)
+                                    <script type="text/javascript">
+                                        nb = 1;
+                                        document.getElementById("nbFile").innerHTML = nb.toString();
+                                    </script>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
-                                        <span class="badge badge-primary badge-pill">14</span>
+                                        <span class="badge badge-primary badge-pill" id="nbFile"></span>
                                     </li>
                                 @endif
                             @endif
@@ -36,23 +40,37 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Vos Dossiers :</h3>
-                    <div class="card-deck">
-                        @foreach($userepo as $repository)
-                            @if($repository->dossierPrimaire != 'Y')
-                                @if($repository->dossierParent == $dossierActuel->cheminDossier)
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{$repository->name}}</h4>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}" class="btn btn-primary">{{$repository->name}}</a>
-                                        </div>
-                                    </div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            @foreach($userepo as $repository)
+                                @if($repository->dossierPrimaire == 'Y')
+                                    <li class="breadcrumb-item active" aria-current="page"><a href="{{ URL::to( '/home' ) }}"> {{ $repository->name }}</a></{ >
                                 @endif
-                            @endif
-                        @endforeach
+                            @endforeach
+                        </ol>
+                    </nav>
+                    <h3>Vos Dossiers :</h3>
+                    <div class="row">
+                        <div class="card-deck">
+                            @foreach($userepo as $repository)
+                                @if($repository->dossierPrimaire != 'Y')
+                                    @if($repository->dossierParent == $dossierActuel->cheminDossier)
+                                        <div class="col-md-4">
+                                            <div class="card" style="width: 18rem;">
+                                                <!--<img class="card-img-top" src="../public/Images/folder-icon.jpg" alt="teszt">-->
+                                                <div class="card-body">
+                                                    <h4 class="card-title">{{$repository->name}}</h4>
+                                                    <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}" class="btn btn-primary">Go to Folder</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
-                    Vos Fichier :
+
+                    <h3>Vos Fichier :</h3>
                     @foreach($userFile as $File)
                         @if($File->dossierStockage == $dossierActuel->cheminDossier)
                             <br>

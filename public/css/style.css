@@ -1,0 +1,19 @@
+
+.navbar-form .input-group-btn,
+.navbar-form .input-group-addon {
+    width: auto;
+}
+
+.navbar-input-group {
+    font-size: 0px; /*removes whitespace between button and input*/
+}
+
+.navbar-input-group .form-control {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.navbar-input-group .btn {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
+}
