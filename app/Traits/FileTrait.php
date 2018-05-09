@@ -5,6 +5,7 @@ use App\fileEntries;
 use App\repository;
 use Storage;
 use File;
+use Illuminate\Http\Response;
 
 trait FileTrait
 {
@@ -94,6 +95,9 @@ trait FileTrait
 
             $fileDownload = $dossierActuel.'/'.$filename;
         }
+        //dd(public_path()."/".$fileDownload);
+        //return Response::download(public_path()."/".$fileDownload, $filename);
+
         return File::download($fileDownload);
     }
 
