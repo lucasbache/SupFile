@@ -23,6 +23,12 @@ class ApiFileController extends Controller
         }
         else
         {
+            if($dossierActuel == "root"){
+                $dossierActuel = $request->user()->email;
+            }else{
+                $dossierActuel = $request->user()->email."/".$dossierActuel;
+            }
+
             $this->uploadFile($uid, $dossierActuel, $file, $nomFicComplet);
             return json_encode(array('success' => 'file upload successful'));
         }
@@ -33,13 +39,21 @@ class ApiFileController extends Controller
         $uid = $request->user()->id;
         $parentpath = $request['path'];
         $repoName = $request['name'];
-        $cheminDossier = $parentpath.'/'.$repoName;
+
 
         if(strlen($uid)==0 || strlen($parentpath)==0 || strlen($repoName)==0){
             return json_encode(array('error' => 'missing parameters'));
         }
         else
         {
+            if($parentpath == "root"){
+                $parentpath = $request->user()->email;
+            }else{
+                $parentpath = $request->user()->email."/".$parentpath;
+            }
+
+            $cheminDossier = $parentpath.'/'.$repoName;
+
             $this->createRepo($uid, $repoName, $cheminDossier, $parentpath);
             return json_encode(array('success' => 'repository successfully created'));
         }
@@ -50,7 +64,13 @@ class ApiFileController extends Controller
         $folder = $request['folder'];
         $email = $request->user()->email;
 
-        return $this->downloadFile($filename, $folder, $email);
+        if($folder == "root"){
+            $folder = $request->user()->email;
+        }else {
+            $folder = $request->user()->email."/".$folder;
+        }
+
+        return $this->downloadFile($email, $folder, $filename);
     }
 
     public function listFiles(Request $request){
@@ -82,7 +102,7 @@ class ApiFileController extends Controller
                     array_push($filedata, $f->name);
                 }
             }
-//
+
             $data = array( "folders" => $repodata, "files" => $filedata);
 
             return json_encode($data);
@@ -96,6 +116,12 @@ class ApiFileController extends Controller
 
         if (strlen($path) == 0 || strlen($newname) == 0) {
             return json_encode(array('error' => 'missing parameters'));
+        }
+
+        if($path == "root"){
+            $path = $request->user()->email;
+        }else {
+            $path = $request->user()->email."/".$path;
         }
 
         $repo = repository::findRepoByPath($path);
@@ -116,6 +142,12 @@ class ApiFileController extends Controller
             return json_encode(array('error' => 'missing parameters'));
         }
 
+        if($path == "root"){
+            $path = $request->user()->email;
+        }else {
+            $path = $request->user()->email."/".$path;
+        }
+
         $file = fileEntries::findFileByPath($path)->first();
         if ($file == null) {
             return json_encode(array('error' => 'file not found'));
@@ -132,6 +164,12 @@ class ApiFileController extends Controller
 
         if (strlen($type) == 0 || strlen($path) == 0) {
             return json_encode(array('error' => 'missing parameters'));
+        }
+
+        if($path == "root"){
+            $path = $request->user()->email;
+        }else {
+            $path = $request->user()->email."/".$path;
         }
 
         if($type == "repo"){
