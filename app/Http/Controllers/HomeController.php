@@ -43,7 +43,7 @@ class HomeController extends Controller
 
         return view('home',compact('userepo','dossierActuel','userFile','nomDossierActuel'));
     }
-    
+
     public function profil()
     {
         return view('profil');

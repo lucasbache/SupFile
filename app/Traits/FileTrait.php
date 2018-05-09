@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 use App\fileEntries;
+use App\stockage;
 use App\repository;
 use Storage;
 use File;
@@ -42,42 +43,57 @@ trait FileTrait
         return $dossier->id;
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier){
 
-        //On vérifie que le fichier n'existe pas
-        $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
-        $compteur = 0;
-        while(!$sameFile->isEmpty())
+        //On vérifie que le stockage ne dépasse pas 30Go
+        $stockageUtilise = stockage::findSizeByUserId($userId)->first();
+
+        if($stockageUtilise->stockageUtilise > 30000000000)
         {
-            $compteur += 1;
-            if($compteur > 1)
-            {
-                $prefixFile = explode("(", $nomFicComplet);
-                $extension = explode(".", end($prefixFile));
-                $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
-            }
-            else
-            {
-                $explodeFile = explode(".", $nomFicComplet);
-                $prefixFile = $explodeFile[0] . '(' . $compteur . ')';
-                $nomFicComplet = $prefixFile . '.' . end($explodeFile);
-            }
-
-            $sameFile = null;
-            $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+            return false;
         }
+        else{
 
-        //On insert le fichier dans le répertoire
-        $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
+            $nouvelleTailleFic = $stockageUtilise->stockageUtilise + $tailleFichier;
+            //On vérifie que le fichier n'existe pas
+            $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+            $compteur = 0;
+            while(!$sameFile->isEmpty())
+            {
+                $compteur += 1;
+                if($compteur > 1)
+                {
+                    $prefixFile = explode("(", $nomFicComplet);
+                    $extension = explode(".", end($prefixFile));
+                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
+                }
+                else
+                {
+                    $explodeFile = explode(".", $nomFicComplet);
+                    $prefixFile = $explodeFile[0] . '(' . $compteur . ')';
+                    $nomFicComplet = $prefixFile . '.' . end($explodeFile);
+                }
 
-        //On créer le fichier dans la base de donnée
-        fileEntries::create([
-            'user_id' => $userId,
-            'name' => $nomFicComplet,
-            'cheminFichier' => $filepath,
-            'dossierStockage' => $dossierActuel
-        ]);
+                $sameFile = null;
+                $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+            }
 
+            //On insert le fichier dans le répertoire
+            $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
+            //dd($tailleFichier);
+            //On créer le fichier dans la base de donnée
+            fileEntries::create([
+                'user_id' => $userId,
+                'name' => $nomFicComplet,
+                'cheminFichier' => $filepath,
+                'dossierStockage' => $dossierActuel,
+                'tailleFichier' => $tailleFichier
+            ]);
+
+            stockage::updateStorage($userId,$nouvelleTailleFic);
+
+            return true;
+        }
     }
 
     public function downloadFile($userEmail, $dossierFichier, $filename){

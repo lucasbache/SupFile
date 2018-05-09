@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\repository;
 use App\User;
+use App\stockage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -81,6 +82,11 @@ class RegisterController extends Controller
             'dossierParent' => 'storage/'
         ]);
         File::makeDirectory($repoName.'/', 777, true);
+
+        stockage::create([
+           'user_id' => $userid->id,
+           'stockageUtilise' => 0
+        ]);
 
         return $userid;
 
