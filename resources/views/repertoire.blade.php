@@ -7,7 +7,9 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <a class="btn btn-primary" href="{{ URL::to('/createRepo/'.$repo->id) }}">Ajouter un répertoire</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
+                            Ajouter un répertoire
+                        </button>
                         <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id) }}">Ajouter un fichier</a>
                     </div>
                     <div class="panel-body">
@@ -58,6 +60,7 @@
                                                         <h4 class="card-title">{{$repository->name}}</h4>
                                                         <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}" class="btn btn-primary">Go to Folder</a>
                                                         <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$repo->id.'/'.'D') }}">Renommer le dossier</a>
+                                                        <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$repo->id.'/'.'Sec') }}">Supprimer le dossier</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,84 +74,82 @@
                         @foreach($userFile as $File)
                             @if($File->dossierStockage == $dossierActuel)
                                 <br>
-                                <p>{{ $File->name }}</p>
+                                <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video">{{ $File->name }}</button>
                                 <a href="{{ URL::to( '/download/'.$File->name.'/'.$dossierFichier)  }}">Télécharger le fichier</a>
                                 <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id.'/'.$repo->id.'/'.'F') }}">Renommer le fichier</a>
+                                <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.'Fic') }}">Supprimer le fichier</a>
                             @endif
                         @endforeach
+                    </div>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
-                            Launch demo modal
-                        </button>
+                    <!-- Modal Folder Creation -->
+                    <div class="modal fade" id="createRepo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="post" enctype="multipart/form-data">
+                                    <form-group>
+                                        {{ csrf_field() }}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="createRepo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                                <form method="post" enctype="multipart/form-data">
-                                                    <form-group>
-                                                        {{ csrf_field() }}
-                                                        Nom du dossier
-                                                        <br />
-                                                        <input type="text" name="name" />
-                                                        <input type="hidden" name="path" value="{{$repoPath}}" />
-                                                        <input type="Submit" value="Créer" />
-                                                    </form-group>
-                                                </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Créer</button>
+                                            Nom du dossier
+                                            <br />
+                                            <input type="text" name="name" />
+                                            <input type="hidden" name="path" value="{{$repoPath}}" />
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Créer</button>
+                                        </div>
+                                    </form-group>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MODAL video -->
+                    <div class="modal fade" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button onclick="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-video">
+                                        <div id="MyVidModal" class="embed-responsive embed-responsive-16by9">
+                                            <video id='myVid' src='' width="568" height="240" controls></video>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-    <!-- MODAL video -->
-    <div class="modal fade" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button onclick="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-video">
-                        <div id="MyVidModal" class="embed-responsive embed-responsive-16by9">
-                            <video id='myVid' src='' width="568" height="240" controls></video>
+                    <!-- The Modal image -->
+                    <div class="modal fade" id="modal-image" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-image">
+                                        <img id="myImg" width="565" height="565" src="">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- The Modal image -->
-    <div class="modal fade" id="modal-image" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal-image">
-                        <img id="myImg" width="565" height="565" src="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
                 </div>
             </div>
         </div>

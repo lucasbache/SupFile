@@ -26,16 +26,23 @@ class repoController extends Controller
     }
 
 
-    public function index($id)
+    public function index($id = 'h')
     {
-        $repo = repository::findRepoById($id);
+        //On cherche les infos de l'utilisateur
+        $user = Auth::user();
+
+        if ($id == 'h'){
+            $repo = repository::findRepoByPath($user->email);
+        }else{
+            $repo = repository::findRepoById($id);
+        }
+
         $reponame = $repo->name;
 
         //On récupère le chemin du dossier actuel
         $dossierActuel = $repo->cheminDossier;
 
-        //On cherche les infos de l'utilisateur
-        $user = Auth::user();
+
 
         //On liste tous les dossiers
         $listeDossierChemin = explode("/",$dossierActuel);
@@ -56,7 +63,7 @@ class repoController extends Controller
 
         $listeDossier = array_reverse($listeDossier);
 
-        $repo = repository::findRepoById($id);
+        //$repo = repository::findRepoById($id);
         $repoPath = $repo->cheminDossier;
 
         //On cherche ensuite les dossiers et les fichiers par Id (on fera un tri dans la vue pour savoir quoi afficher)

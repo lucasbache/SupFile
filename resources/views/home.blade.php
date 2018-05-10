@@ -62,6 +62,7 @@
                                                 <!--<img class="card-img-top" src="../public/Images/folder-icon.jpg" alt="teszt">-->
                                                 <div class="card-header">
                                                     <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$dossierActuel->id.'/'.'D') }}">Renommer le dossier</a>
+                                                    <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$dossierActuel->id.'/'.'Prim') }}">Supprimer le dossier</a>
                                                 </div>
                                                 <div class="card-body">
                                                     <h4 class="card-title">{{$repository->name}}</h4>
@@ -79,15 +80,48 @@
                     @foreach($userFile as $File)
                         @if($File->dossierStockage == $dossierActuel->cheminDossier)
                             <br>
-                            <p>{{ $File->name }}</p>
+                            <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video">{{ $File->name }}</button>
                             <a href="{{ URL::to( '/download/'.$File->name.'/'.$nomDossierActuel)  }}">Télécharger le fichier</a>
                             <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id.'/'.$dossierActuel->id.'/'.'F') }}">Renommer le fichier</a>
+                            <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$dossierActuel->id.'/'.'Prim') }}">Supprimer le fichier</a>
                         @endif
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal Folder Creation -->
+    <div class="modal fade" id="createRepo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form method="post" enctype="multipart/form-data">
+                    <form-group>
+                        {{ csrf_field() }}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            Nom du dossier
+                            <br />
+                            <input type="text" name="name" />
+                            <input type="hidden" name="path" value="{{$repoPath}}" />
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Créer</button>
+                        </div>
+                    </form-group>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL video -->
     <div class="modal fade" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="modal-video-label">
         <div class="modal-dialog" role="document">
