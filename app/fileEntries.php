@@ -60,6 +60,15 @@ class fileEntries extends Model
 
         return $updateFile;
     }
+
+    public static function suppressFile($id){
+
+        $suppresFile = DB::table('file_entries')
+            ->where('id', '=', $id)
+            ->delete();
+
+        return $suppresFile;
+    }
 }
 
 

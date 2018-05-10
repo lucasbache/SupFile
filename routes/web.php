@@ -22,14 +22,15 @@ Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
-Route::get('upload/{id}', 'UploadController@uploadForm');
-Route::post('upload/{id}', 'UploadController@uploadSubmit');
+Route::get('upload/{id}/{typeDoss}', 'UploadController@uploadForm');
+Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
 Route::get('download/{filename}/{dossierActuel}', 'DownloadController@download');
 Route::get('createRepo/{id}', 'createRepoController@repoForm');
 Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
 Route::get('repertoire/{id}', 'repoController@index');
 Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
 Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
+Route::get('suppress/{id}/{objectType}/{dossierId}/{typeDoss}', 'repoController@suppressFile');
 
 
 Route::get('repertoire/{id}', 'afficherDossier@index');

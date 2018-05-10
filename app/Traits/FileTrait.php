@@ -173,4 +173,20 @@ trait FileTrait
 
     }
 
+    public function suppress($objectType, $objectId){
+
+        if($objectType == 'D'){
+            $repo = repository::findRepoById($objectId);
+            $objectPath = $repo->cheminDossier;
+            repository::suppressRepo($objectId);
+            File::deleteDirectory($objectPath);
+        }
+        else{
+            $file = fileEntries::findFileById($objectId)->first();
+            $objectPath = $file->cheminFichier;
+            fileEntries::suppressFile($objectId);
+            File::delete($objectPath);
+        }
+    }
+
 }

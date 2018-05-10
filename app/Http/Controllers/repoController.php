@@ -112,4 +112,18 @@ class repoController extends Controller
         return redirect('repertoire/'.$repoId)->with("success", "Nouveau nom pris en compte");
     }
 
+    public function suppressFile($fileId, $objectType,$dossierId,$typeDoss){
+
+        $this->suppress($objectType,$fileId);
+
+        if($typeDoss == 'Prim' )
+        {
+            return redirect('home');
+        }
+        else{
+            return redirect('repertoire/'.$dossierId);
+        }
+
+    }
+
 }
