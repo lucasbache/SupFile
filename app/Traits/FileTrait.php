@@ -6,6 +6,7 @@ use App\stockage;
 use App\repository;
 use Storage;
 use File;
+use Illuminate\Support\Facades\Auth;
 
 trait FileTrait
 {
@@ -191,14 +192,26 @@ trait FileTrait
 
     public function suppress($objectType, $objectId){
 
+        $user = Auth::user();
+
+        //On veut supprimer un dossier
         if($objectType == 'D'){
             $repo = repository::findRepoById($objectId);
             $objectPath = $repo->cheminDossier;
             repository::suppressRepo($objectId);
             File::deleteDirectory($objectPath);
         }
+        //On veut supprimer un fichier
         else{
+            //On récupère la taille du stockage utilisé par l'utilisateur et l'objet "Fichier"
+            $stockageUser = stockage::findSizeByUserId($user->id)->first();
             $file = fileEntries::findFileById($objectId)->first();
+
+            //On crée la nouvelle taille de stockage et on update la bdd
+            $nouveauStockage = $stockageUser->stockageUtilise - $file->tailleFichier;
+            stockage::updateStorage($user->id, $nouveauStockage);
+
+            //On obtient le chemin du fichier à supprimer
             $objectPath = $file->cheminFichier;
             fileEntries::suppressFile($objectId);
             File::delete($objectPath);
