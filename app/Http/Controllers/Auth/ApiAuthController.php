@@ -20,8 +20,8 @@ class ApiAuthController extends Controller
         $response = $http->post('http://localhost:80/SupDrive/public/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
-                'client_id' => '2',
-                'client_secret' => 'hmc9y5HEN8fO9g00NeHFxGE9bhP1jwuLu4WiQ08S',
+                'client_id' => '4',
+                'client_secret' => 'mX1zYwx57uXhC4e9UIf7ZbXV7QO9lzx5oe06pqHx',
                 'username' => $request['email'],
                 'password' => $request['password'],
                 'scope' => '*',
