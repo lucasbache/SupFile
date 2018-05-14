@@ -84,6 +84,13 @@
                                     <input type="submit" class="btn btn-primary" name="password" value="Change Password">
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-md-4 control-label">Stockage disponible</label>
+                                <div class="col-md-6">
+                                    <p> {{$arrondiStockage}} Go</p>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

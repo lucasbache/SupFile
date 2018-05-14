@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class fileEntries extends Model
 {
-    protected $fillable = ['user_id', 'name', 'cheminFichier', 'dossierStockage',];
+    protected $fillable = ['user_id', 'name', 'cheminFichier', 'dossierStockage','tailleFichier'];
 
     public static function findFileByUserId($id)
     {
@@ -25,6 +25,12 @@ class fileEntries extends Model
     {
         $fileByRepo = DB::table('file_entries')->where('dossierStockage', '=', $cheminDossier)->get();
         return $fileByRepo;
+    }
+
+    public static function findAllFilesByPath($path)
+    {
+        $allFilesByPath = DB::table('file_entries')->where('dossierStockage', 'LIKE', "%{$path}%")->get();
+        return $allFilesByPath;
     }
 
     public static function findFileCreate($id, $filename, $reponame)

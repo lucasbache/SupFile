@@ -15,6 +15,7 @@ class CreateFileEntriesTable extends Migration
             $table->string('name');
             $table->string('cheminFichier');
             $table->string('dossierStockage');
+            $table->integer('tailleFichier');
             $table->timestamps();
         });
     }
