@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 use App\fileEntries;
-use App\stockage;
 use App\repository;
 use Storage;
 use File;
