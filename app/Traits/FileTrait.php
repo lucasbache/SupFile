@@ -6,6 +6,8 @@ use App\stockage;
 use App\repository;
 use Storage;
 use File;
+use COM;
+use Zipper;
 use Illuminate\Support\Facades\Auth;
 
 trait FileTrait
@@ -97,7 +99,7 @@ trait FileTrait
         }
     }
 
-    public function downloadFile($userEmail, $dossierFichier, $filename){
+    public function downloadFiles($userEmail, $dossierFichier, $filename){
 
         if($dossierFichier == $userEmail)
         {
@@ -105,13 +107,18 @@ trait FileTrait
         }
         else
         {
-            $cheminPoint = explode('.', $dossierFichier);
-            array_unshift($cheminPoint, $userEmail);
-            $dossierActuel = implode('/', $cheminPoint);
-
-            $fileDownload = $dossierActuel.'/'.$filename;
+            $fileDownload = $dossierFichier.'/'.$filename;
         }
-        return File::download($fileDownload);
+        return response()->download($fileDownload);
+    }
+
+    public function downloadRepos($dossier){
+
+        $files = glob($dossier->cheminDossier);
+
+        Zipper::make('public/'.$dossier->name)->add($files)->close();
+
+        return response()->download('public/'.$dossier->name);
     }
 
     public function renameFiles($objectId, $newName){
@@ -196,8 +203,34 @@ trait FileTrait
 
         //On veut supprimer un dossier
         if($objectType == 'D'){
+            $stockageUser = stockage::findSizeByUserId($user->id)->first();
+
             $repo = repository::findRepoById($objectId);
             $objectPath = $repo->cheminDossier;
+
+            $sousDossier = repository::findAllRepoByPath($objectPath);
+            $sousFichier = fileEntries::findAllFilesByPath($objectPath);
+
+            foreach($sousDossier as $sousDoss)
+            {
+                repository::suppressRepo($sousDoss->id);
+            }
+
+            foreach($sousFichier as $sousFic)
+            {
+                fileEntries::suppressFile($sousFic->id);
+            }
+
+            $chmDos = explode('/',$objectPath);
+            $cheminDossier = implode('\\', $chmDos);
+
+            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
+            $obj = new COM ( 'scripting.filesystemobject' );
+            $ref = $obj->getfolder ( $f );
+
+            $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+            stockage::updateStorage($user->id, $nouveauStockage);
+
             repository::suppressRepo($objectId);
             File::deleteDirectory($objectPath);
         }

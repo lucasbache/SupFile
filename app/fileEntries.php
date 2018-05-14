@@ -27,6 +27,12 @@ class fileEntries extends Model
         return $fileByRepo;
     }
 
+    public static function findAllFilesByPath($path)
+    {
+        $allFilesByPath = DB::table('file_entries')->where('dossierStockage', 'LIKE', "%{$path}%")->get();
+        return $allFilesByPath;
+    }
+
     public static function findFileCreate($id, $filename, $reponame)
     {
         $filecreate = DB::table('file_entries')
