@@ -13,7 +13,7 @@ class ApiFileController extends Controller
     use FileTrait;
 
     public function upload(Request $request){
-        $dossierActuel = $request['folder'];
+        $dossierActuel = $request['path'];
         $file = $request['file'];
         $nomFicComplet = $request['filename'];
         $uid = $request->user()->id;
@@ -84,28 +84,38 @@ class ApiFileController extends Controller
         {
             if($path == "root") {
                 $path = $request->user()->email;
+            }else{
+                $path = $request->user()->email."/".$path;
             }
 
             $repodata = [];
             $filedata = [];
-            $repo = repository::findRepoByPathMulti($path);
-            $files = fileEntries::findFileByRepo($path);
 
-            foreach($repo as $r){
-                if($r->user_id == $request->user()->id){
-                    array_push($repodata, $r->name);
+            $testrepo = repository::findRepoByPath($path);
+
+            if($testrepo == null){
+                return json_encode(array('error' => 'folder not found'));
+            }else {
+                $repo = repository::findRepoByPathMulti($path);
+                $files = fileEntries::findFileByRepo($path);
+
+
+                foreach ($repo as $r) {
+                    if ($r->user_id == $request->user()->id) {
+                        array_push($repodata, $r->name);
+                    }
                 }
-            }
 
-            foreach($files as $f){
-                if($r->user_id == $request->user()->id){
-                    array_push($filedata, $f->name);
+                foreach ($files as $f) {
+                    if ($r->user_id == $request->user()->id) {
+                        array_push($filedata, $f->name);
+                    }
                 }
+
+                $data = array("folders" => $repodata, "files" => $filedata);
+
+                return json_encode($data);
             }
-
-            $data = array( "folders" => $repodata, "files" => $filedata);
-
-            return json_encode($data);
         }
     }
 
