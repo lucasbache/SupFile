@@ -24,7 +24,8 @@ Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallba
 
 Route::get('upload/{id}/{typeDoss}', 'UploadController@uploadForm');
 Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
-Route::get('download/{filename}/{dossierActuel}', 'DownloadController@download');
+Route::get('downloadFile/{filename}/{idDossier}', 'DownloadController@downloadFile');
+Route::get('downloadRepo/{idDossier}', 'DownloadController@downloadRepo');
 Route::get('createRepo/{id}', 'createRepoController@repoForm');
 Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
 Route::get('repertoire/{id}', 'repoController@index');

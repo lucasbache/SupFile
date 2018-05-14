@@ -37,6 +37,12 @@ class repository extends Model
         return $repobypath->first();
     }
 
+    public static function findAllRepoByPath($path)
+    {
+        $allRepoByPath = DB::table('repositories')->where('dossierParent', 'LIKE', "%{$path}%")->get();
+        return $allRepoByPath;
+    }
+
     public static function findRepoCreate($id, $repoName, $dossierStockage)
     {
         $repoCreate = DB::table('repositories')

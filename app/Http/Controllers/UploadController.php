@@ -24,6 +24,7 @@ class UploadController extends Controller
     {
         $typeDoss = null;
         $idRepo = null;
+        $retourUpload = false;
 
         if ($request != null) {
             foreach ($request->photos as $file) {
@@ -37,19 +38,34 @@ class UploadController extends Controller
                 //On récupère le nom du fichier
                 $nomFicComplet = $_FILES['photos']['name'][0];
 
+                //On récupère la taille du fichier
+                $tailleFic = $_FILES['photos']['size'][0];
+
                 $idRepo = $request->input('id');
 
                 $typeDoss = $request->input('typeDoss');
 
-                $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
+                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic);
             }
 
             if($typeDoss == 'Prim')
             {
-                return redirect('home');
+                if($retourUpload == true)
+                {
+                    return redirect('home')->with("success", "Le fichier a bien été envoyé !");
+                }
+                else{
+                    return redirect('home')->with("error", "Limite de stockage atteinte");
+                }
             }
             else{
-                return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+                if($retourUpload == true)
+                {
+                    return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+                }
+                else{
+                    return redirect('repertoire/'.$idRepo)->with("error", "Limite de stockage atteinte");
+                }
             }
         }
         else{

@@ -43,9 +43,16 @@ class HomeController extends Controller
 
         return view('home',compact('userepo','dossierActuel','userFile','nomDossierActuel'));
     }
-    
+
     public function profil()
     {
-        return view('profil');
+        $user = Auth::user();
+        $stkgUsr = stockage::findSizeByUserId($user->id)->first();
+
+        $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
+
+        $arrondiStockage = round($stockageUser ,0);
+
+        return view('profil', compact('arrondiStockage'));
     }
 }

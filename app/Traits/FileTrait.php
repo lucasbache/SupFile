@@ -5,7 +5,9 @@ use App\fileEntries;
 use App\repository;
 use Storage;
 use File;
-use Illuminate\Http\Response;
+use COM;
+use Zipper;
+use Illuminate\Support\Facades\Auth;
 
 trait FileTrait
 {
@@ -43,45 +45,60 @@ trait FileTrait
         return $dossier->id;
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier){
 
-        //On vérifie que le fichier n'existe pas
-        $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
-        $compteur = 0;
-        while(!$sameFile->isEmpty())
+        //On vérifie que le stockage ne dépasse pas 30Go
+        $stockageUtilise = stockage::findSizeByUserId($userId)->first();
+
+        if($stockageUtilise->stockageUtilise > 30000000000)
         {
-            $compteur += 1;
-            if($compteur > 1)
-            {
-                $prefixFile = explode("(", $nomFicComplet);
-                $extension = explode(".", end($prefixFile));
-                $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
-            }
-            else
-            {
-                $explodeFile = explode(".", $nomFicComplet);
-                $prefixFile = $explodeFile[0] . '(' . $compteur . ')';
-                $nomFicComplet = $prefixFile . '.' . end($explodeFile);
-            }
-
-            $sameFile = null;
-            $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+            return false;
         }
+        else{
 
-        //On insert le fichier dans le répertoire
-        $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
+            $nouvelleTailleFic = $stockageUtilise->stockageUtilise + $tailleFichier;
+            //On vérifie que le fichier n'existe pas
+            $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+            $compteur = 0;
+            while(!$sameFile->isEmpty())
+            {
+                $compteur += 1;
+                if($compteur > 1)
+                {
+                    $prefixFile = explode("(", $nomFicComplet);
+                    $extension = explode(".", end($prefixFile));
+                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
+                }
+                else
+                {
+                    $explodeFile = explode(".", $nomFicComplet);
+                    $prefixFile = $explodeFile[0] . '(' . $compteur . ')';
+                    $nomFicComplet = $prefixFile . '.' . end($explodeFile);
+                }
 
-        //On créer le fichier dans la base de donnée
-        fileEntries::create([
-            'user_id' => $userId,
-            'name' => $nomFicComplet,
-            'cheminFichier' => $filepath,
-            'dossierStockage' => $dossierActuel
-        ]);
+                $sameFile = null;
+                $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
+            }
 
+            //On insert le fichier dans le répertoire
+            $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
+            //dd($tailleFichier);
+            //On créer le fichier dans la base de donnée
+            fileEntries::create([
+                'user_id' => $userId,
+                'name' => $nomFicComplet,
+                'cheminFichier' => $filepath,
+                'dossierStockage' => $dossierActuel,
+                'tailleFichier' => $tailleFichier
+            ]);
+
+            stockage::updateStorage($userId,$nouvelleTailleFic);
+
+            return true;
+        }
     }
 
-    public function downloadFile($userEmail, $dossierFichier, $filename){
+    public function downloadFiles($userEmail, $dossierFichier, $filename){
 
         if($dossierFichier == $userEmail)
         {
@@ -89,16 +106,18 @@ trait FileTrait
         }
         else
         {
-            $cheminPoint = explode('.', $dossierFichier);
-            array_unshift($cheminPoint, $userEmail);
-            $dossierActuel = implode('/', $cheminPoint);
-
-            $fileDownload = $dossierActuel.'/'.$filename;
+            $fileDownload = $dossierFichier.'/'.$filename;
         }
-        //dd(public_path()."/".$fileDownload);
-        //return Response::download(public_path()."/".$fileDownload, $filename);
+        return response()->download($fileDownload);
+    }
 
-        return File::download($fileDownload);
+    public function downloadRepos($dossier){
+
+        $files = glob($dossier->cheminDossier);
+
+        Zipper::make('public/'.$dossier->name)->add($files)->close();
+
+        return response()->download('public/'.$dossier->name);
     }
 
     public function renameFiles($objectId, $newName){
@@ -179,14 +198,52 @@ trait FileTrait
 
     public function suppress($objectType, $objectId){
 
+        $user = Auth::user();
+
+        //On veut supprimer un dossier
         if($objectType == 'D'){
+            $stockageUser = stockage::findSizeByUserId($user->id)->first();
+
             $repo = repository::findRepoById($objectId);
             $objectPath = $repo->cheminDossier;
+
+            $sousDossier = repository::findAllRepoByPath($objectPath);
+            $sousFichier = fileEntries::findAllFilesByPath($objectPath);
+
+            foreach($sousDossier as $sousDoss)
+            {
+                repository::suppressRepo($sousDoss->id);
+            }
+
+            foreach($sousFichier as $sousFic)
+            {
+                fileEntries::suppressFile($sousFic->id);
+            }
+
+            $chmDos = explode('/',$objectPath);
+            $cheminDossier = implode('\\', $chmDos);
+
+            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
+            $obj = new COM ( 'scripting.filesystemobject' );
+            $ref = $obj->getfolder ( $f );
+
+            $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+            stockage::updateStorage($user->id, $nouveauStockage);
+
             repository::suppressRepo($objectId);
             File::deleteDirectory($objectPath);
         }
+        //On veut supprimer un fichier
         else{
+            //On récupère la taille du stockage utilisé par l'utilisateur et l'objet "Fichier"
+            $stockageUser = stockage::findSizeByUserId($user->id)->first();
             $file = fileEntries::findFileById($objectId)->first();
+
+            //On crée la nouvelle taille de stockage et on update la bdd
+            $nouveauStockage = $stockageUser->stockageUtilise - $file->tailleFichier;
+            stockage::updateStorage($user->id, $nouveauStockage);
+
+            //On obtient le chemin du fichier à supprimer
             $objectPath = $file->cheminFichier;
             fileEntries::suppressFile($objectId);
             File::delete($objectPath);
