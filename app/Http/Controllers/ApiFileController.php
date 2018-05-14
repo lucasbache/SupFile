@@ -61,7 +61,7 @@ class ApiFileController extends Controller
 
     public function downloadFileApi(Request $request){
         $filename = $request['filename'];
-        $folder = $request['folder'];
+        $folder = $request['path'];
         $email = $request->user()->email;
 
         if($folder == "root"){
