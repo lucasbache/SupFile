@@ -70,7 +70,7 @@ class ApiFileController extends Controller
             $folder = $request->user()->email."/".$folder;
         }
 
-        return $this->downloadFile($email, $folder, $filename);
+        return $this->downloadFiles($email, $folder, $filename);
     }
 
     public function listFiles(Request $request){
