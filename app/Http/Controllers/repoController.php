@@ -26,15 +26,19 @@ class repoController extends Controller
         $this->middleware('auth');
     }
 
-    public function postRepo(createRepoRequest $request)
+    public function postRepo(Request $request)
     {
         //check which submit was clicked on
-        if(Input::get('createRepo')) {
-            $this->repoSubmit($request);
+        if(Input::get('createRepoButton')) {
+            return $this->repoSubmit($request);
         }
-        elseif(Input::get('uploadFile')) {
-            $this->uploadSubmit($request);
+        elseif(Input::get('uploadFileButton'))
+        {
+            return $this->uploadSubmit($request);
         }
+        //else{
+
+        //}
 
     }
 
@@ -53,8 +57,6 @@ class repoController extends Controller
 
         //On récupère le chemin du dossier actuel
         $dossierActuel = $repo->cheminDossier;
-
-
 
         //On liste tous les dossiers
         $listeDossierChemin = explode("/",$dossierActuel);
@@ -75,21 +77,17 @@ class repoController extends Controller
 
         $listeDossier = array_reverse($listeDossier);
 
-        //$repo = repository::findRepoById($id);
         $repoPath = $repo->cheminDossier;
 
         //On cherche ensuite les dossiers et les fichiers par Id (on fera un tri dans la vue pour savoir quoi afficher)
         $userepo = repository::findRepoByUserId($user->id);
         $userFile = fileEntries::findFileByUserId($user->id);
 
-        //test max
-        $typeDoss = 'Sec';
-
         return view('repertoire',compact('userepo','userFile','listeDossier','reponame', 'dossierActuel','repo','dossierFichier','repoPath','id', 'typeDoss'));
     }
 
 
-    public function repoSubmit(createRepoRequest $request)
+    public function repoSubmit(Request $request)
     {
         //On recherche les infos utilisateur
         $user = Auth::user();
@@ -147,10 +145,11 @@ class repoController extends Controller
         }
 
     }
-    public function uploadSubmit(createRepoRequest $request)
+    public function uploadSubmit(Request $request)
     {
         $typeDoss = null;
         $idRepo = null;
+        $retourUpload = false;
 
         if ($request != null) {
             foreach ($request->photos as $file) {
@@ -164,19 +163,34 @@ class repoController extends Controller
                 //On récupère le nom du fichier
                 $nomFicComplet = $_FILES['photos']['name'][0];
 
+                //On récupère la taille du fichier
+                $tailleFic = $_FILES['photos']['size'][0];
+
                 $idRepo = $request->input('id');
 
                 $typeDoss = $request->input('typeDoss');
 
-                $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
+                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic);
             }
 
             if($typeDoss == 'Prim')
             {
-                return redirect('home');
+                if($retourUpload == true)
+                {
+                    return redirect('home')->with("success", "Le fichier a bien été envoyé !");
+                }
+                else{
+                    return redirect('home')->with("error", "Limite de stockage atteinte");
+                }
             }
             else{
-                return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+                if($retourUpload == true)
+                {
+                    return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+                }
+                else{
+                    return redirect('repertoire/'.$idRepo)->with("error", "Limite de stockage atteinte");
+                }
             }
         }
         else{

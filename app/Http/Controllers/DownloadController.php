@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\fileEntries;
 use App\repository;
 use App\Traits\FileTrait;
 use Illuminate\Support\Facades\Auth;
@@ -11,14 +12,12 @@ class DownloadController extends Controller
 
     use FileTrait;
 
-    public function downloadFile($filename,$idDossier)
+    public function downloadFile($fileId)
     {
-        $user = Auth::user();
-        $dossierActuel = repository::findRepoById($idDossier);
-        $dossierFichier = $dossierActuel->dossierParent.'/'.$dossierActuel->name;
-        //dd($dossierFichier);
+        $file = fileEntries::findFileById($fileId)->first();
+        $filename = $file->cheminFichier;
 
-        return $this->downloadFiles($user->email, $dossierFichier, $filename);
+        return $this->downloadFiles($filename);
 
     }
 

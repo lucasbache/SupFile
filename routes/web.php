@@ -11,10 +11,12 @@
 |
 */
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'repoController@index')->name('home');
 Route::get('/', 'repoController@index')->name('home');
+Route::post('/home', 'repoController@postRepo');
+Route::post('/', 'repoController@postRepo');
 
 Route::get('/profil', 'ProfilController@index')->name('profil');
 Route::post('/profil', 'ProfilController@postAuth');
@@ -28,13 +30,11 @@ Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallba
 Route::get('upload/{id}/{typeDoss}', 'UploadController@uploadForm');
 Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
 
-Route::get('download/{filename}/{dossierActuel}', 'DownloadController@download');
-
-Route::get('downloadFile/{filename}/{idDossier}', 'DownloadController@downloadFile');
+Route::get('downloadFile/{fileId}', 'DownloadController@downloadFile');
 Route::get('downloadRepo/{idDossier}', 'DownloadController@downloadRepo');
 
-Route::get('createRepo/{id}', 'createRepoController@repoForm');
-Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
+//Route::get('createRepo/{id}', 'createRepoController@repoForm');
+//Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
 
 Route::get('repertoire/{id}', 'repoController@index');
 Route::post('repertoire/{id}', 'repoController@postRepo');

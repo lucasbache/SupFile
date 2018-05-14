@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@if(Session::has('success'))
+    <div class="alert alert-info">
+        {{ Session::get('success') }}
+    </div>
+@endif
+
+@if(Session::has('error'))
+    <div class="alert alert-info">
+        {{ Session::get('error') }}
+    </div>
+@endif
+
 @section('content')
 
     <div class="container">
@@ -13,7 +25,6 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadFile">
                             Ajouter un fichier
                         </button>
-                        <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id.'/'.'Sec') }}">Ajouter un fichier</a>
                     </div>
                     <div class="panel-body">
                         Vos répertoires :
@@ -79,7 +90,7 @@
                             @if($File->dossierStockage == $dossierActuel)
                                 <br>
                                 <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video">{{ $File->name }}</button>
-                                <a href="{{ URL::to( '/downloadFile/'.$File->name.'/'.$repo->id)  }}">Télécharger le fichier</a>
+                                <a href="{{ URL::to( '/downloadFile/'.$File->id)  }}">Télécharger le fichier</a>
                                 <a class="btn btn-primary" href="{{ URL::to('/rename/'.$File->id.'/'.$repo->id.'/'.'F') }}">Renommer le fichier</a>
                                 <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.'Fic') }}">Supprimer le fichier</a>
                             @endif
@@ -109,7 +120,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-primary" name="uploadFile" value="Créer">
+                                            <input type="submit" class="btn btn-primary" name="uploadFileButton" value="Créer" id="uploadFileButton">
                                         </div>
                                     </form-group>
                                 </form>
@@ -131,16 +142,14 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-
                                             Nom du dossier
                                             <br />
-                                            <input type="text" name="name" />
-                                            <input type="hidden" name="path" value="{{$repoPath}}" />
-
+                                            <input type="text" name="name">
+                                            <input type="hidden" name="path" value="{{$repoPath}}">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-primary" name="createRepo" value="Créer">
+                                            <input type="submit" class="btn btn-primary" name="createRepoButton" value="Créer" id="createRepoButton">
                                         </div>
                                     </form-group>
                                 </form>
