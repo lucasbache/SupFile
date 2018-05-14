@@ -15,11 +15,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'repoController@index')->name('home');
 Route::get('/', 'repoController@index')->name('home');
-Route::get('home/{id}/{idRepo}/{objectType}', 'repoController@renameform');
-Route::post('/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
 
 Route::get('/profil', 'ProfilController@index')->name('profil');
-Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
+Route::post('/profil', 'ProfilController@postAuth');
 
 //Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 //Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
@@ -36,9 +34,8 @@ Route::get('createRepo/{id}', 'createRepoController@repoForm');
 Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
 
 Route::get('repertoire/{id}', 'repoController@index');
-Route::post('repertoire/{id}', array('uses' => 'repoController@repoSubmit'));
-Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
-Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
+Route::post('repertoire/{id}', 'repoController@postRepo');
+//Route::post('repertoire/{id}', 'UploadController@uploadSubmit');
 
 Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
 Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');

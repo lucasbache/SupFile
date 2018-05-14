@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\renameRequest;
 use App\Traits\FileTrait;
 use App\Http\Requests\createRepoRequest;
+use Illuminate\Support\Facades\Input;
 
 class repoController extends Controller
 {
@@ -25,6 +26,17 @@ class repoController extends Controller
         $this->middleware('auth');
     }
 
+    public function postRepo(createRepoRequest $request)
+    {
+        //check which submit was clicked on
+        if(Input::get('createRepo')) {
+            $this->repoSubmit($request);
+        }
+        elseif(Input::get('uploadFile')) {
+            $this->uploadSubmit($request);
+        }
+
+    }
 
     public function index($id = 'h')
     {
@@ -70,7 +82,10 @@ class repoController extends Controller
         $userepo = repository::findRepoByUserId($user->id);
         $userFile = fileEntries::findFileByUserId($user->id);
 
-        return view('repertoire',compact('userepo','userFile','listeDossier','reponame', 'dossierActuel','repo','dossierFichier','repoPath'));
+        //test max
+        $typeDoss = 'Sec';
+
+        return view('repertoire',compact('userepo','userFile','listeDossier','reponame', 'dossierActuel','repo','dossierFichier','repoPath','id', 'typeDoss'));
     }
 
 
@@ -131,6 +146,42 @@ class repoController extends Controller
             return redirect('repertoire/'.$dossierId);
         }
 
+    }
+    public function uploadSubmit(createRepoRequest $request)
+    {
+        $typeDoss = null;
+        $idRepo = null;
+
+        if ($request != null) {
+            foreach ($request->photos as $file) {
+                //On récupère les informations de l'utilisateur
+                $user = Auth::user();
+                $userId = $user->id;
+
+                //On prépare le dossier dans lequel va être stocké le fichier
+                $dossierActuel = $request->input('path');
+
+                //On récupère le nom du fichier
+                $nomFicComplet = $_FILES['photos']['name'][0];
+
+                $idRepo = $request->input('id');
+
+                $typeDoss = $request->input('typeDoss');
+
+                $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet);
+            }
+
+            if($typeDoss == 'Prim')
+            {
+                return redirect('home');
+            }
+            else{
+                return redirect('repertoire/'.$idRepo)->with("success", "Le fichier a bien été envoyé !");
+            }
+        }
+        else{
+            return redirect()->action('afficherDossier@index')->with("error", "Aucun fichier n'a été sélectionné !");
+        }
     }
 
 }

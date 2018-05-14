@@ -10,7 +10,10 @@
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
                             Ajouter un répertoire
                         </button>
-                        <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id) }}">Ajouter un fichier</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadFile">
+                            Ajouter un fichier
+                        </button>
+                        <a class="btn btn-primary" href="{{ URL::to('/upload/'.$repo->id.'/'.'Sec') }}">Ajouter un fichier</a>
                     </div>
                     <div class="panel-body">
                         Vos répertoires :
@@ -82,6 +85,37 @@
                         @endforeach
                     </div>
 
+                    <!-- Modal File Upload -->
+                    <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="post" enctype="multipart/form-data">
+                                    <form-group>
+                                        {{ csrf_field() }}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Séléctionner votre fichier:
+                                            <br />
+                                            <input type="file" name="photos[]" accept="file_extension|video/mp4|image/*|media_type"/>
+                                            <input type="hidden" name="path" value="{{$repoPath}}" />
+                                            <input type="hidden" name="id" value="{{$repo->id}}" />
+                                            <input type="hidden" name="typeDoss" value="{{'Sec'}}" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <input type="submit" class="btn btn-primary" name="uploadFile" value="Créer">
+                                        </div>
+                                    </form-group>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Modal Folder Creation -->
                     <div class="modal fade" id="createRepo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -105,7 +139,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Créer</button>
+                                            <input type="submit" class="btn btn-primary" name="createRepo" value="Créer">
                                         </div>
                                     </form-group>
                                 </form>
