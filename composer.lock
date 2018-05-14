@@ -4,8 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b666d1e18c4bd98e2be59c2c3702ddb",
+    "content-hash": "59d4411b202d86aa244af0cbf50f61d8",
     "packages": [
+        {
+            "name": "chumper/zipper",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chumper/Zipper.git",
+                "reference": "6a1733c34d67c3952b8439afb36ad4ea5c3ceacb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chumper/Zipper/zipball/6a1733c34d67c3952b8439afb36ad4ea5c3ceacb",
+                "reference": "6a1733c34d67c3952b8439afb36ad4ea5c3ceacb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^5.0",
+                "illuminate/support": "^5.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Chumper\\Zipper\\ZipperServiceProvider"
+                    ],
+                    "aliases": {
+                        "Zipper": "Chumper\\Zipper\\Zipper"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Chumper\\Zipper\\": "src/Chumper/Zipper"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Plaschke",
+                    "email": "github@nilsplaschke.de",
+                    "homepage": "http://nilsplaschke.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a little neat helper for the ZipArchive methods with handy functions",
+            "homepage": "http://github.com/Chumper/zipper",
+            "keywords": [
+                "archive",
+                "laravel",
+                "zip"
+            ],
+            "time": "2017-07-17T08:05:10+00:00"
+        },
         {
             "name": "defuse/php-encryption",
             "version": "v2.2.0",
@@ -899,16 +959,16 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v3.0.9",
+            "version": "v3.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "fc1c8d415699e502f3e61cbc61e3250d5bd942eb"
+                "reference": "4d29ba66fdb38ec994b778e5e51657555cc10511"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/fc1c8d415699e502f3e61cbc61e3250d5bd942eb",
-                "reference": "fc1c8d415699e502f3e61cbc61e3250d5bd942eb",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/4d29ba66fdb38ec994b778e5e51657555cc10511",
+                "reference": "4d29ba66fdb38ec994b778e5e51657555cc10511",
                 "shasum": ""
             },
             "require": {
@@ -957,7 +1017,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2017-11-06T16:02:48+00:00"
+            "time": "2018-05-12T17:44:53+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -3415,16 +3475,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "1bac8c362b12f522fdd1f1fa3556284c91affa38"
+                "reference": "99e29d3596b16dabe4982548527d5ddf90232e99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/1bac8c362b12f522fdd1f1fa3556284c91affa38",
-                "reference": "1bac8c362b12f522fdd1f1fa3556284c91affa38",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/99e29d3596b16dabe4982548527d5ddf90232e99",
+                "reference": "99e29d3596b16dabe4982548527d5ddf90232e99",
                 "shasum": ""
             },
             "require": {
@@ -3433,7 +3493,8 @@
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~5.7|~6.1"
+                "phpdocumentor/phpdocumentor": "^2.9",
+                "phpunit/phpunit": "~5.7.10|~6.5"
             },
             "type": "library",
             "extra": {
@@ -3462,8 +3523,8 @@
                     "homepage": "http://davedevelopment.co.uk"
                 }
             ],
-            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succinct API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
-            "homepage": "http://github.com/mockery/mockery",
+            "description": "Mockery is a simple yet flexible PHP mock object framework",
+            "homepage": "https://github.com/mockery/mockery",
             "keywords": [
                 "BDD",
                 "TDD",
@@ -3476,7 +3537,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2017-10-06T16:20:43+00:00"
+            "time": "2018-05-08T08:54:48+00:00"
         },
         {
             "name": "myclabs/deep-copy",

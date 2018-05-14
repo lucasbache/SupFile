@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\stockage;
 
 class ProfilController extends Controller
 {
@@ -79,6 +80,13 @@ class ProfilController extends Controller
 
     public function index()
     {
-        return view('profil');
+        $user = Auth::user();
+        $stkgUsr = stockage::findSizeByUserId($user->id)->first();
+
+        $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
+
+        $arrondiStockage = round($stockageUser ,0);
+
+        return view('profil', compact('arrondiStockage'));
     }
 }
