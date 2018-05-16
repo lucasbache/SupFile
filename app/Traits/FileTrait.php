@@ -8,6 +8,8 @@ use File;
 use COM;
 use Zipper;
 use Illuminate\Support\Facades\Auth;
+use App\stockage;
+
 
 trait FileTrait
 {
@@ -98,17 +100,9 @@ trait FileTrait
         }
     }
 
-    public function downloadFiles($userEmail, $dossierFichier, $filename){
+    public function downloadFiles($dossierFichier){
 
-        if($dossierFichier == $userEmail)
-        {
-            $fileDownload = $dossierFichier.'/'.$filename;
-        }
-        else
-        {
-            $fileDownload = $dossierFichier.'/'.$filename;
-        }
-        return response()->download($fileDownload);
+        return response()->download($dossierFichier);
     }
 
     public function downloadRepos($dossier){
