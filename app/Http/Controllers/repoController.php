@@ -136,7 +136,7 @@ class repoController extends Controller
 
         $this->suppress($objectType,$fileId);
 
-        if($typeDoss == 'Prim' )
+        if($typeDoss == 'storage' )
         {
             return redirect('home');
         }
@@ -173,7 +173,7 @@ class repoController extends Controller
                 $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic);
             }
 
-            if($typeDoss == 'Prim')
+            if($typeDoss == 'storage/')
             {
                 if($retourUpload == true)
                 {
