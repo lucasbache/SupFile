@@ -166,11 +166,14 @@ class repoController extends Controller
                 //On récupère la taille du fichier
                 $tailleFic = $_FILES['photos']['size'][0];
 
+                $extsn = explode('.', $nomFicComplet);
+                $extension = last($extsn);
+
                 $idRepo = $request->input('id');
 
                 $typeDoss = $request->input('typeDoss');
 
-                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic);
+                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic, $extension);
             }
 
             if($typeDoss == 'storage/')

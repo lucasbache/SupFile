@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class fileEntries extends Model
 {
-    protected $fillable = ['user_id', 'name', 'cheminFichier', 'dossierStockage','tailleFichier'];
+    protected $fillable = ['user_id', 'name', 'cheminFichier', 'dossierStockage','tailleFichier', 'extension'];
 
     public static function findFileByUserId($id)
     {

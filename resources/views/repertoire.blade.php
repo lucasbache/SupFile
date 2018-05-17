@@ -79,30 +79,6 @@
                                 @endforeach
                             </ol>
                         </nav>
-                    <!-- <h3>Vos Dossiers :</h3>
-                        <div class="row">
-                            <div class="card-deck">
-                                @foreach($userepo as $repository)
-                        @if($repository->dossierPrimaire != 'Y')
-                            @if($repository->dossierParent == $dossierActuel)
-                                <div class="col-md-4">
-                                    <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="../public/Images/folder-icon.jpg" alt="test">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{$repository->name}}</h4>
-                                                        <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}" class="btn btn-primary">Go to Folder</a>
-                                                        <a class="btn btn-primary" href="{{ URL::to('/downloadRepo/'.$repository->id) }}">Télécharger le dossier</a>
-                                                        <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$repo->id.'/'.'D') }}">Renommer le dossier</a>
-                                                        <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$repo->id.'/'.'Sec') }}">Supprimer le dossier</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                        @endif
-                    @endforeach
-                            </div>
-                        </div>-->
-
                         <h3>Vos fichiers :</h3>
                         <div class="card-deck">
                             @foreach($userFile as $File)
@@ -123,7 +99,14 @@
                                             <div class="card-body text-primary">
                                                 <h4 class="card-title">{{$File->name}}</h4>
                                                 <br>
-                                                <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video" class="btn btn-primary">Preview</button>
+                                                @if($File->extension == 'jpg'
+                                                    or $File->extension == 'jpeg'
+                                                    or $File->extension == 'png'
+                                                    or $File->extension == 'txt'
+                                                    or $File->extension == 'mp4'
+                                                    or $File->extension == 'docx')
+                                                    <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video" class="btn btn-primary">Preview</button>
+                                                @endif
                                             </div>
                                             <div class="card-footer">
                                                 <small class="text-muted">Last update on {{$File->updated_at}}</small>
@@ -236,7 +219,49 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-image">
-                                        <img id="myImg" width="565" height="565" src="">
+                                        <img id="myImg" width="100%" height="auto" src="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Modal doc -->
+                    <div class="modal fade" id="modal-doc" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-video-label">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-doc">
+                                        <p id="myDoc">
+                                        {{$content = File::get($File->cheminFichier)}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Modal doc -->
+                    <div class="modal fade" id="modal-docx" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-video-label">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-docx">
+                                        <p id="myDocx">
+                                            {{File::get($File->cheminFichier)}}
+                                        </p>
                                     </div>
                                 </div>
                             </div>

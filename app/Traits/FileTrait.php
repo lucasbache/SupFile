@@ -45,7 +45,7 @@ trait FileTrait
         return $dossier->id;
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier, $extension){
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
@@ -89,7 +89,8 @@ trait FileTrait
                 'name' => $nomFicComplet,
                 'cheminFichier' => $filepath,
                 'dossierStockage' => $dossierActuel,
-                'tailleFichier' => $tailleFichier
+                'tailleFichier' => $tailleFichier,
+                'extension' => $extension
             ]);
 
             stockage::updateStorage($userId,$nouvelleTailleFic);
