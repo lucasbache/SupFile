@@ -1,15 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\fileEntries;
+use App\repository;
+use App\Traits\FileTrait;
+use Illuminate\Support\Facades\Auth;
 use Storage;
 
 class DownloadController extends Controller
 {
-    public function download($filename)
+
+    use FileTrait;
+
+    public function downloadFile($fileId)
     {
-        $fileDownload = session()->get('dossierActuel').$filename.'/';
-        return Storage::download($fileDownload);
+        $file = fileEntries::findFileById($fileId)->first();
+        $filename = $file->cheminFichier;
+
+        return $this->downloadFiles($filename);
+
     }
 
+    public function downloadRepo($idDossier)
+    {
+        $repertoire = repository::findRepoById($idDossier);
+        return $this->downloadRepos($repertoire);
+    }
 }

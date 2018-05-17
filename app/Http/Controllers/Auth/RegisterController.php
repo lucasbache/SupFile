@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\repository;
 use App\User;
+use App\stockage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use File;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -65,13 +67,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $userid = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
 
-        $userid = User::all()->first();
         $repoName = $data['email'];
         repository::create([
             'user_id' => $userid->id,
@@ -80,9 +81,14 @@ class RegisterController extends Controller
             'cheminDossier' => $repoName,
             'dossierParent' => 'storage/'
         ]);
-        File::makeDirectory($repoName.'/', 0777, true);
+        File::makeDirectory($repoName.'/', 777, true);
 
-        return $user;
+        stockage::create([
+           'user_id' => $userid->id,
+           'stockageUtilise' => 0
+        ]);
+
+        return $userid;
 
     }
 }

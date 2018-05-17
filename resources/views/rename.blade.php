@@ -6,23 +6,20 @@
         @endforeach
     </ul>
 @endif
-@if(Session::has('success'))
-    <div class="alert alert-info">
-        {{ Session::get('success') }}
-    </div>
-@endif
 
 @section('content')<div class="row">
     <div class="col-md-8 col-md-offset-2">
         <form method="post" enctype="multipart/form-data">
             <form-group>
                 {{ csrf_field() }}
-                Nom du dossier
+                Nom :
                 <br />
                 <input type="text" name="name" />
-                <input type="hidden" name="path" value="{{$repoPath}}" />
+                <input type="hidden" name="id" value="{{$idFic}}" />
+                <input type="hidden" name="idDoss" value="{{$idDoss}}" />
+                <input type="hidden" name="objectType" value="{{$objTyp}}" />
                 <br /><br />
-                <input type="Submit" value="Créer" />
+                <input type="Submit" value="Valider" />
             </form-group>
         </form>
     </div>

@@ -16,10 +16,13 @@
             <br /><br />
             Séléctionner votre fichier:
             <br />
-            <input type="file" name="photos[]" multiple/>
+            <input type="file" name="photos[]" accept="file_extension|video/mp4|image/*|media_type"/>
+            <input type="hidden" name="path" value="{{$repoPath}}" />
+            <input type="hidden" name="id" value="{{$id}}" />
+            <input type="hidden" name="typeDoss" value="{{$typeDoss}}" />
             <br /><br />
             <input type="submit" value="Upload" />
         </form>
-    <div class="col-md-8 col-md-offset-2">
+    </div>
 
 @endsection
