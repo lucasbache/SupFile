@@ -27,12 +27,10 @@ trait FileTrait
             }else{
                 $repoName = $repoName."(".$compteur.")";
             }
-
+            $cheminDossier = $dossierActuel."/".$repoName;
             $sameRepo = null;
             $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
         }
-
-        $cheminDossier = $dossierActuel."/".$repoName;
 
         //On crée le dossier
         $dossier = repository::create([
