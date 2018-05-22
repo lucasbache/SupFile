@@ -9,6 +9,9 @@ use COM;
 use Zipper;
 use Illuminate\Support\Facades\Auth;
 use App\stockage;
+use AppDocument;
+use AppHttpRequests;
+use AppHttpControllersController;
 
 
 trait FileTrait
@@ -80,9 +83,22 @@ trait FileTrait
                 $sameFile = fileEntries::findFileCreate($userId, $nomFicComplet, $dossierActuel);
             }
 
+            $fp = app('FilePreviews');
+
+            $options = [
+                'metadata' => ['checksum', 'ocr'],
+                'data' => [
+                    'document_id' => 1
+                ]
+            ];
+
             //On insert le fichier dans le répertoire
             $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
-            //dd($tailleFichier);
+            dd($filepath);
+            $urlPreview = $fp->generate($filepath);
+
+            dd($urlPreview);
+
             //On créer le fichier dans la base de donnée
             fileEntries::create([
                 'user_id' => $userId,

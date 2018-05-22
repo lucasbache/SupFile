@@ -238,8 +238,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-doc">
-                                        <p id="myDoc">
-                                        {{$content = File::get($File->cheminFichier)}}
+                                        <p id="myDoc" >
+
                                         </p>
                                     </div>
                                 </div>

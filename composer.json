@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "chumper/zipper": "1.0.x",
         "fideloper/proxy": "~3.3",
+        "filepreviews/filepreviews-laravel": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.5.*",
         "laravel/passport": "4.0",

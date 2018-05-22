@@ -165,6 +165,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
+        FilePreviews\Laravel\FilePreviewsServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -227,7 +228,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'Zipper' => Chumper\Zipper\Zipper::class
+        'Zipper' => Chumper\Zipper\Zipper::class,
+        'FilePreviews' => FilePreviews\Laravel\FilePreviewsFacade::class
 
     ],
 

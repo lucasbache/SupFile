@@ -25,10 +25,6 @@ function launchModal(filename, cheminDossier){
             document.getElementById("myDoc").src = cheminDossier;
             $('#modal-doc').modal('show');
             break;
-        case 'docx':
-            document.getElementById("myDocx").src = cheminDossier;
-            $('#modal-docx').modal('show');
-            break;
     }
 }
 
