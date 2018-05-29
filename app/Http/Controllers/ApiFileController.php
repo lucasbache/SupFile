@@ -61,7 +61,7 @@ class ApiFileController extends Controller
 
     public function downloadFileApi(Request $request){
         $filename = $request['filename'];
-        $folder = $request['folder'];
+        $folder = $request['path'];
         $email = $request->user()->email;
 
         if($folder == "root"){
@@ -70,7 +70,7 @@ class ApiFileController extends Controller
             $folder = $request->user()->email."/".$folder;
         }
 
-        return $this->downloadFile($email, $folder, $filename);
+        return $this->downloadFiles($email, $folder, $filename);
     }
 
     public function listFiles(Request $request){
