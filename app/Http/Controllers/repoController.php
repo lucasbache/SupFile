@@ -36,9 +36,9 @@ class repoController extends Controller
         {
             return $this->uploadSubmit($request);
         }
-        //else{
-
-        //}
+        else{
+            return $this->renameSubmit($request);
+        }
 
     }
 
@@ -112,10 +112,10 @@ class repoController extends Controller
         return view('rename', compact('idFic','idDoss','objTyp'));
     }
 
-    public function renameSubmit(renameRequest $request){
+    public function renameSubmit(Request $request){
 
         $newName = $request->input('name');
-        $objectId = $request->input('id');
+        $objectId = $request->input('eventId');
         $repoId = $request->input('idDoss');
         $objectType = $request->input('objectType');
 
