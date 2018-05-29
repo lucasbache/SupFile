@@ -3,11 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12  align-self-center">
-            <div class="panel">
-
-                <div class="panel-body  align-self-center">
-                    <form class="form-group" method="POST" action="{{ route('login') }}">
+        <div class="col-md-8" style="margin-left: 30%; padding-top: 5%"²>
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <br/>
+                <div class="panel-body">
+                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
