@@ -1,0 +1,83 @@
+body
+{
+    background-color: #f2eef2;
+}
+
+.btn
+{
+    background-color: #7a9d96;
+    border-color: #4c6862;
+    color: white;
+}
+
+.btn-facebook
+{
+    background-color: #7a9d96;
+    border-color: #4c6862;
+}
+
+.btn:hover
+{
+    background-color: #4c6862;
+    color: lightcyan;
+    text-decoration: none;
+}
+
+.btn-primary /* boutons des dossiers */
+{
+    background-color: #7a9d96;
+    border-color: #416d64;
+}
+
+.btn-primary:hover
+{
+    background-color: #416d64;
+    border-color: #416d64;
+}
+
+.panel-body
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-outline-secondary
+{
+    color: white;
+}
+
+.navbar
+{
+    background-color: #f5ce28;
+}
+
+.card
+{
+    background-color: #0f4d60;
+}
+
+.form-group
+{
+}
+
+
+/* STYLE.CSS */
+
+.navbar-form .input-group-btn,
+.navbar-form .input-group-addon {
+    width: auto;
+}
+
+.navbar-input-group {
+    font-size: 0px; /*removes whitespace between button and input*/
+}
+
+.navbar-input-group .form-control {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.navbar-input-group .btn {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
+}
