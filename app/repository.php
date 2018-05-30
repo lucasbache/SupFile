@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class repository extends Model
 {
-    protected $fillable = ['user_id', 'name', 'dossierPrimaire', 'cheminDossier', 'dossierParent'];
+    protected $fillable = ['user_id', 'name', 'dossierPrimaire', 'cheminDossier', 'dossierParent', 'publicLink'];
 
     public static function findRepoByUserId($id)
     {
@@ -73,6 +73,15 @@ class repository extends Model
         $updateRepo = DB::table('repositories')
             ->where('id', '=', $id)
             ->update(['cheminDossier' => $newCheminDossier, 'dossierParent' => $newDossierParent]);
+
+        return $updateRepo;
+    }
+
+    public static function updatePublicLinkRepo($id, $publicLink){
+
+        $updateRepo = DB::table('repositories')
+            ->where('id', '=', $id)
+            ->update(['publicLink' => $publicLink]);
 
         return $updateRepo;
     }

@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use File;
 use Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class RegisterController extends Controller
 {
@@ -74,13 +75,22 @@ class RegisterController extends Controller
         ]);
 
         $repoName = $data['email'];
-        repository::create([
+
+        $repo = repository::create([
             'user_id' => $userid->id,
             'name' => $repoName,
             'dossierPrimaire' => 'Y',
             'cheminDossier' => $repoName,
-            'dossierParent' => 'storage/'
+            'dossierParent' => 'storage/',
+            'publicLink' => ' '
         ]);
+
+        $idCrypted = Crypt::encryptString($repo->id);
+
+        $publicLink = 'http://localhost/SupDrive/public/'.'downloadRepoPublic/'.$idCrypted;
+
+        repository::updatePublicLinkRepo($repo->id,$publicLink);
+
         File::makeDirectory($repoName.'/', 777, true);
 
         stockage::create([

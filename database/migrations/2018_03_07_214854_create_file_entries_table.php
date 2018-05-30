@@ -17,7 +17,7 @@ class CreateFileEntriesTable extends Migration
             $table->string('dossierStockage');
             $table->integer('tailleFichier');
             $table->string('extension');
-            $table->string('preview_url');
+            $table->string('publicLink');
             $table->timestamps();
         });
     }

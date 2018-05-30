@@ -159,7 +159,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img id="myImg" width="565" height="565" src="">
+                        <img id="myImg" width="*" height="100%" src="">
                     </div>
                 </div>
             </div>
