@@ -33,12 +33,8 @@ Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
 Route::get('downloadFile/{fileId}', 'DownloadController@downloadFile');
 Route::get('downloadRepo/{idDossier}', 'DownloadController@downloadRepo');
 
-//Route::get('createRepo/{id}', 'createRepoController@repoForm');
-//Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
-
 Route::get('repertoire/{id}', 'repoController@index');
 Route::post('repertoire/{id}', 'repoController@postRepo');
-//Route::post('repertoire/{id}', 'UploadController@uploadSubmit');
 
 Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
 Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
