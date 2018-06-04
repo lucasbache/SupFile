@@ -93,36 +93,36 @@
                             @foreach($userFile as $File)
                                 @if($File->dossierStockage == $dossierActuel)
                                     <div class="col-md-4">
-                                        <div class="card border-primary mb-3" style="width: 15rem;">
-                                            <div class="card-header">
-                                                <a href="{{ URL::to( '/downloadFile/'.$File->id)  }}">
+                                        <div class="card features homecard mb-3" style="width: 15rem;">
+                                            <div class="card-header" data-toggle="collapse" data-target="#{{$File->name}}" aria-expanded="false" aria-controls="cardCollapse">
+                                                <h4 class="card-title">{{$File->name}}</h4>
+
+                                            </div>
+                                            <div class="card-body text-primary" id="{{$File->name}}">
+                                                <a href="{{ URL::to( '/downloadFile/'.$File->id)  }}" title="Télécharger">
                                                     <i class="material-icons">get_app</i>
                                                 </a>
-                                                <a href="" data-toggle="modal" data-target="#renameFile" class="open-modal" data-id="{{$File->id}}">
+                                                <a href="" data-toggle="modal" data-target="#renameFile" class="open-modal" data-id="{{$File->id}}" title="Modifier">
                                                     <i class="material-icons">create</i>
                                                 </a>
-                                                <a href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.$repo->dossierParent) }}">
+                                                <a href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.$repo->dossierParent) }}" title="Supprimer">
                                                     <i class="material-icons">delete_forever</i>
                                                 </a>
-                                                <a href="" data-toggle="modal" data-target="#publicLink" class="open-modal-publicLink" data-id="{{$File->publicLink}}">
+                                                <a href="" data-toggle="modal" data-target="#publicLink" class="open-modal-publicLink" data-id="{{$File->publicLink}}" title="Partager">
                                                     <i class="material-icons">link</i>
                                                 </a>
-                                            </div>
-                                            <div class="card-body text-primary">
-                                                <h4 class="card-title">{{$File->name}}</h4>
-                                                <br>
                                                 @if($File->extension == 'jpg'
                                                     or $File->extension == 'jpeg'
                                                     or $File->extension == 'png'
                                                     or $File->extension == 'txt'
                                                     or $File->extension == 'mp4'
                                                     or $File->extension == 'docx')
-                                                <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
-                                                        data-modal-id="modal-video" class="btn btn-primary">Preview
-                                                </button>
+                                                <a href="" onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video" class="open-modal" title="Aperçu">
+                                                    <i class="material-icons">launch</i>
+                                                </a>
                                                 @endif
                                             </div>
-                                            <div class="card-footer">
+                                            <div class="card-footer cardCollapse">
                                                 <small class="text-muted">Last update on {{$File->updated_at}}</small>
                                             </div>
                                         </div>
