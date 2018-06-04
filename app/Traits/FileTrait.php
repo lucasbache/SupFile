@@ -48,7 +48,7 @@ trait FileTrait
 
         $idCrypted = Crypt::encryptString($dossier->id);
 
-        $publicLink = 'http://localhost/SupDrive/public/'.'downloadRepoPublic/'.$idCrypted;
+        $publicLink = 'https://supdrive.azurewebsites.net/public/'.'downloadRepoPublic/'.$idCrypted;
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
@@ -102,13 +102,13 @@ trait FileTrait
                 'cheminFichier' => $filepath,
                 'dossierStockage' => $dossierActuel,
                 'tailleFichier' => $tailleFichier,
-                'extension' => end($extension),
+                'extension' => $extension,
                 'publicLink' => ' '
             ]);
 
             $idCrypted = Crypt::encryptString($file->id);
 
-            $publicLink = 'http://localhost/SupDrive/public/'.'downloadFilePublic/'.$idCrypted;
+            $publicLink = 'https://supdrive.azurewebsites.net/public/'.'downloadFilePublic/'.$idCrypted;
 
             fileEntries::updatePublicLinkFile($file->id,$publicLink);
 
