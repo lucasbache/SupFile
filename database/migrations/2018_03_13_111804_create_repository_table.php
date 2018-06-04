@@ -16,6 +16,7 @@ class CreateRepositoryTable extends Migration
             $table->string('cheminDossier');
             $table->string('dossierParent');
             $table->string('name');
+            $table->string('publicLink');
             $table->timestamps();
         });
     }

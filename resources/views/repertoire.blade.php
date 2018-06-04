@@ -104,9 +104,16 @@
                                             <div class="card-body text-primary">
                                                 <h4 class="card-title">{{$File->name}}</h4>
                                                 <br>
+                                                @if($File->extension == 'jpg'
+                                                    or $File->extension == 'jpeg'
+                                                    or $File->extension == 'png'
+                                                    or $File->extension == 'txt'
+                                                    or $File->extension == 'mp4'
+                                                    or $File->extension == 'docx')
                                                 <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
                                                         data-modal-id="modal-video" class="btn btn-primary">Preview
                                                 </button>
+                                                @endif
                                             </div>
                                             <div class="card-footer">
                                                 <small class="text-muted">Last update on {{$File->updated_at}}</small>
@@ -287,14 +294,36 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-image">
-                                        <img id="myImg" width="565" height="565" src="">
+                                        <img id="myImg" width="100%" height="auto" src="">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- The Modal doc -->
+                    <div class="modal fade" id="modal-doc" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-video-label">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-doc">
+                                        <p id="myDoc" >
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
 @endsection

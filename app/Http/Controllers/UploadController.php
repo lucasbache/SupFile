@@ -38,6 +38,9 @@ class UploadController extends Controller
                 //On récupère le nom du fichier
                 $nomFicComplet = $_FILES['photos']['name'][0];
 
+                $extsn = explode('.', $nomFicComplet);
+                $extension = last($extsn);
+                dd($extension);
                 //On récupère la taille du fichier
                 $tailleFic = $_FILES['photos']['size'][0];
 
@@ -45,7 +48,7 @@ class UploadController extends Controller
 
                 $typeDoss = $request->input('typeDoss');
 
-                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic);
+                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic, $extension);
             }
 
             if($typeDoss == 'Prim')
