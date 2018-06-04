@@ -38,3 +38,14 @@ $(MyVidModal).keyup(function(e) {
 
     }
 });
+
+$(document).on("click", ".open-modal-publicLink", function () {
+    var publickLink = $(this).data('id');
+    $(".modal-body #publicLinkButton").val( publickLink );
+});
+
+function copyClipboard() {
+    var copyText = document.getElementById("publicLinkButton");
+    copyText.select();
+    document.execCommand("copy");
+}
