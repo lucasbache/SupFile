@@ -39,3 +39,6 @@ Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
 
 Route::get('suppress/{id}/{objectType}/{dossierId}/{typeDoss}', 'repoController@suppressFile');
 
+Route::get('/howto', 'howtoController@index');
+Route::get('/contact', 'contactController@index');
+
