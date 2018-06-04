@@ -78,8 +78,8 @@ trait FileTrait
                 if($compteur > 1)
                 {
                     $prefixFile = explode("(", $nomFicComplet);
-                    $extension = explode(".", end($prefixFile));
-                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
+                    $extensionFic = explode(".", end($prefixFile));
+                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extensionFic);
                 }
                 else
                 {

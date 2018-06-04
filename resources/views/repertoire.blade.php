@@ -143,7 +143,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Envoi du fichier</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -178,7 +178,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Créer votre dosiser</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -210,7 +210,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Renommer votre dossier</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -243,7 +243,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Renommer votre fichier</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -273,6 +273,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview de votre vidéo</h5>
                                     <button onclick="closeModal()" type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -295,6 +296,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview de votre image</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -314,6 +316,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview document</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
