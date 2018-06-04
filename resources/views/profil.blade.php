@@ -4,7 +4,7 @@
     {{ Form::open(array('url' => '/profil')) }}
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2" style="margin-left: 20%; padding-top: 5%">
                 <div class="panel panel-default">
                     <div class="panel-heading">Your Profile</div>
 
@@ -89,6 +89,9 @@
                                 <label for="" class="col-md-4 control-label">Stockage disponible</label>
                                 <div class="col-md-6">
                                     <p> {{$arrondiStockage}} Go</p>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped" style="width: {{$pourcentageStockage}}%" role="progressbar" aria-valuenow="{{$arrondiStockage}}" aria-valuemin="0" aria-valuemax="30"></div>
                                 </div>
                             </div>
                         </form>

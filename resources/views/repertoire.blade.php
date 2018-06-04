@@ -40,12 +40,16 @@
                                 @if($repository->dossierPrimaire != 'Y')
                                     @if($repository->dossierParent == $dossierActuel)
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">{{$repository->name}}</a>
+                                            <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}">
+                                                {{$repository->name}}
+                                            </a>
                                             <span class="badge">
                                             <a href="{{ URL::to('/downloadRepo/'.$repository->id) }}">
-                                                <i class="material-icons">get_app</i></a>
-                                            <a href="{{ URL::to('/rename/'.$repository->id.'/'.$repo->id.'/'.'D') }}">
-                                                <i class="material-icons">create</i></a>
+                                                <i class="material-icons">get_app</i>
+                                            </a>
+                                            <a href="" data-toggle="modal" data-target="#renameRepo" data-id="{{$repository->id}}" class="open-modal">
+                                                <i class="material-icons">create</i>
+                                            </a>
                                             <a href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$repo->id.'/'.'Sec') }}">
                                                 <i class="material-icons">delete_forever</i></a>
                                             </span>
@@ -79,29 +83,6 @@
                                 @endforeach
                             </ol>
                         </nav>
-                    <!-- <h3>Vos Dossiers :</h3>
-                        <div class="row">
-                            <div class="card-deck">
-                                @foreach($userepo as $repository)
-                        @if($repository->dossierPrimaire != 'Y')
-                            @if($repository->dossierParent == $dossierActuel)
-                                <div class="col-md-4">
-                                    <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="../public/Images/folder-icon.jpg" alt="test">
-                                        <div class="card-body">
-                                            <h4 class="card-title">{{$repository->name}}</h4>
-                                                        <a href="{{ URL::to( '/repertoire/'.$repository->id)  }}" class="btn btn-primary">Go to Folder</a>
-                                                        <a class="btn btn-primary" href="{{ URL::to('/downloadRepo/'.$repository->id) }}">Télécharger le dossier</a>
-                                                        <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$repo->id.'/'.'D') }}">Renommer le dossier</a>
-                                                        <a class="btn btn-primary" href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$repo->id.'/'.'Sec') }}">Supprimer le dossier</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                        @endif
-                    @endforeach
-                            </div>
-                        </div>-->
 
                         <h3>Vos fichiers :</h3>
                         <div class="card-deck">
@@ -113,7 +94,7 @@
                                                 <a href="{{ URL::to( '/downloadFile/'.$File->id)  }}">
                                                     <i class="material-icons">get_app</i>
                                                 </a>
-                                                <a href="{{ URL::to('/rename/'.$File->id.'/'.$repo->id.'/'.'F') }}">
+                                                <a href="" data-toggle="modal" data-target="#renameFile" class="open-modal" data-id="{{$File->id}}">
                                                     <i class="material-icons">create</i>
                                                 </a>
                                                 <a href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.$repo->dossierParent) }}">
@@ -123,7 +104,16 @@
                                             <div class="card-body text-primary">
                                                 <h4 class="card-title">{{$File->name}}</h4>
                                                 <br>
-                                                <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video" class="btn btn-primary">Preview</button>
+                                                @if($File->extension == 'jpg'
+                                                    or $File->extension == 'jpeg'
+                                                    or $File->extension == 'png'
+                                                    or $File->extension == 'txt'
+                                                    or $File->extension == 'mp4'
+                                                    or $File->extension == 'docx')
+                                                <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
+                                                        data-modal-id="modal-video" class="btn btn-primary">Preview
+                                                </button>
+                                                @endif
                                             </div>
                                             <div class="card-footer">
                                                 <small class="text-muted">Last update on {{$File->updated_at}}</small>
@@ -134,6 +124,8 @@
                             @endforeach
                         </div>
                     </div>
+                </div>
+            </div>
 
                     <!-- Modal File Upload -->
                     <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog"
@@ -202,6 +194,72 @@
                         </div>
                     </div>
 
+                    <!-- Modal rename Folder  -->
+                    <div class="modal fade" id="renameRepo" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="post" enctype="multipart/form-data">
+                                    <form-group>
+                                        {{ csrf_field() }}
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Nom du dossier
+                                            <br/>
+                                            <input type="text" name="name"/>
+                                            <input type="hidden" name="eventId" id="eventId"/>
+                                            <input type="hidden" name="idDoss" value="{{$repo->id}}"/>
+                                            <input type="hidden" name="objectType" value="D"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <input type="submit" class="btn btn-primary" value="Créer">
+                                        </div>
+                                    </form-group>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal rename File  -->
+                    <div class="modal fade" id="renameFile" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <form method="post" enctype="multipart/form-data">
+                                    <form-group>
+                                        {{ csrf_field() }}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Nom du dossier
+                                            <br/>
+                                            <input type="text" name="name" />
+                                            <input type="hidden" name="eventId" id="eventId" />
+                                            <input type="hidden" name="idDoss" value="{{$repo->id}}" />
+                                            <input type="hidden" name="objectType" value="F" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <input type="submit" class="btn btn-primary" value="Créer">
+                                        </div>
+                                    </form-group>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- MODAL video -->
                     <div class="modal fade" id="modal-video" tabindex="-1" role="dialog"
                          aria-labelledby="modal-video-label">
@@ -236,7 +294,28 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="modal-image">
-                                        <img id="myImg" width="565" height="565" src="">
+                                        <img id="myImg" width="100%" height="auto" src="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Modal doc -->
+                    <div class="modal fade" id="modal-doc" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-video-label">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-doc">
+                                        <p id="myDoc" >
+
+                                        </p>
                                     </div>
                                 </div>
                             </div>
