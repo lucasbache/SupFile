@@ -23,7 +23,7 @@
     <br/>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 side-repo fixed">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
@@ -65,6 +65,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -143,7 +144,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Importer un fichier</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -158,7 +159,7 @@
                                             <input type="hidden" name="typeDoss" value="{{$repo->dossierParent}}"/>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                             </button>
                                             <input type="submit" class="btn btn-primary" name="uploadFileButton"
                                                    value="Créer" id="uploadFileButton">
@@ -178,7 +179,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Créer un dossier</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -190,7 +191,7 @@
                                             <input type="hidden" name="path" value="{{$repoPath}}">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                             </button>
                                             <input type="submit" class="btn btn-primary" name="createRepoButton"
                                                    value="Créer" id="createRepoButton">
@@ -210,7 +211,7 @@
                                     <form-group>
                                         {{ csrf_field() }}
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalCenterTitle">Renommer</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -224,7 +225,7 @@
                                             <input type="hidden" name="objectType" value="D"/>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                             </button>
                                             <input type="submit" class="btn btn-primary" value="Créer">
                                         </div>
@@ -243,13 +244,13 @@
                                     <form-group>
                                         {{ csrf_field() }}
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Renommer</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Nom du dossier
+                                            Nom du fichier
                                             <br/>
                                             <input type="text" name="name" />
                                             <input type="hidden" name="eventId" id="eventId" />
@@ -257,7 +258,7 @@
                                             <input type="hidden" name="objectType" value="F" />
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                             </button>
                                             <input type="submit" class="btn btn-primary" value="Créer">
                                         </div>
