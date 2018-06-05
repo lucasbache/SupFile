@@ -1,0 +1,335 @@
+a{
+    color: #3f681c;
+}
+
+body {
+    font-family: 'Rubik', sans-serif;
+    position: relative;
+}
+
+a:hover,
+a:focus {
+    color: #69ba25;
+}
+
+h1 {
+    font-size: 60px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 45px;
+    font-weight: 300;
+    color: #66b721;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: #66b721;
+    font-size: 33px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #3f681c;
+}
+
+h5 {
+    font-size: 28px;
+    font-weight: 300;
+    color: #3f681c;
+    margin-bottom: 0.7rem;
+}
+
+p {
+    color: #3d4344;
+}
+.btn-primary:hover{
+    box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
+    color: #FFF;
+}
+
+.btn-light {
+    border-radius: 3px;
+    background: #FFF;
+    box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.26);
+    font-size: 14px;
+    font-weight: 500;
+    color: #3f681c;
+    margin: 0.5rem;
+    padding: 0.7rem 1.6rem;
+    line-height: 1.8;
+}
+
+.btn-group-lg>.btn,
+.btn-lg {
+    padding: 0.8rem 1rem;
+    font-size: 15px;
+}
+
+.light-bg {
+    background-color: #faf6fb;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title small {
+    color: #998a9b;
+}
+
+@media (max-width:767px) {
+    h1 {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 30px;
+    }
+}
+
+.card.features {
+    border: 0;
+    border-radius: 3px;
+    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.card.features:before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    color: #3f681c;
+    background: -moz-linear-gradient(top, #3f681c 0%, #69ba25 100%);
+    background: -webkit-linear-gradient(top, #3f681c 0%, #69ba25 100%);
+    background: linear-gradient(to bottom, #3f681c 0%, #69ba25 100%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card.features.inverted-card:before {
+    content: "";
+    width: 6px;
+    color: #3f681c;
+    background: -moz-linear-gradient(top, #69ba25 0%, #3f681c 100%);
+    background: -webkit-linear-gradient(top, #69ba25 0%, #3f681c 100%);
+    background: linear-gradient(to bottom, #69ba25 0%, #3f681c 100%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.side-repo{
+    /* background-color: red; */
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-radius: 0.5vw;
+}
+
+.howto-cards.card.features:hover {
+    transform: translateY(-3px);
+    -moz-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.08);
+}
+
+.card.features.inverted-card:hover {
+    transform: translateY(3px);
+    -moz-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.08);
+    -webkit-box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.08);
+}
+
+.box-icon {
+    box-shadow: 0px 0px 43px 0px rgba(0, 0, 0, 0.14);
+    padding: 10px;
+    width: 70px;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+    background-color: #FFF;
+}
+
+.circle-icon {
+    box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.07);
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    background-color: #FFF;
+    color: #69ba25;
+    font-size: 48px;
+    text-align: center;
+    line-height: 80px;
+    font-weight: 300;
+    transition: all 0.3s ease;
+}
+
+@media (max-width:992px) {
+    .circle-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+        line-height: 50px;
+    }
+}
+
+.ui-steps li:hover .circle-icon {
+    background-image: -moz-linear-gradient( 122deg, #549b18 0%, #8bed38 100%);
+    background-image: -webkit-linear-gradient( 122deg, #549b18 0%, #8bed38 100%);
+    background-image: -ms-linear-gradient( 122deg, #549b18 0%, #8bed38 100%);
+    background-image: linear-gradient( 122deg, #549b18 0%, #8bed38 100%);
+    box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.09);
+    color: #FFF;
+}
+
+.ui-steps li {
+    padding: 15px 0;
+}
+
+.ui-steps li:not(:last-child) {
+    border-bottom: 1px solid #f8e3f0;
+}
+
+.perspective-phone {
+    position: relative;
+    z-index: -1;
+}
+
+@media (min-width:992px) {
+    .perspective-phone {
+        margin-top: -150px;
+    }
+}
+
+
+/*  TABS
+----------------------*/
+
+.tab-content {
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: #FFF;
+    box-shadow: 0px 5px 7px 0px rgba(0, 0, 0, 0.04);
+    padding: 3rem;
+}
+
+@media (max-width:992px) {
+    .tab-content {
+        padding: 1.5rem;
+    }
+}
+
+.tab-content p {
+    line-height: 1.8;
+}
+
+.tab-content h2 {
+    margin-bottom: 0.5rem;
+}
+
+.nav-tabs {
+    border-bottom: 0;
+}
+
+.nav-tabs .nav-item .nav-link,
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover {
+    padding: 1rem 1rem;
+    border-color: #faf6fb #faf6fb #FFF;
+    font-size: 19px;
+    color: #b5a4c8;
+    background: #f5eff7;
+}
+
+/* body
+{
+    background-color: #f2eef2;
+} */
+
+.btn
+{
+    background-color: #3f681c;
+    border-color: #69ba25;
+    color: white;
+}
+
+.btn:hover
+{
+    color: lightcyan;
+    text-decoration: none;
+}
+
+.btn-primary /* boutons des dossiers */
+{
+    background-color: #69ba25;
+    border-color: #69ba25;
+}
+
+.btn-primary:hover
+{
+    background-color: #549b18;
+    border-color: #69ba25;
+}
+
+.homecard.card-header .homecard.card-footer
+{
+    display: none;
+}
+
+.panel-body
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-outline-secondary
+{
+    color: white;
+}
+
+.form-group
+{
+    text-align: center;
+}
+
+
+
+
+
+
+/* STYLE.CSS */
+
+.navbar-form .input-group-btn,
+.navbar-form .input-group-addon {
+    width: auto;
+}
+
+.navbar-input-group {
+    font-size: 0px; /*removes whitespace between button and input*/
+}
+
+.navbar-input-group .form-control {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.navbar-input-group .btn {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
+}

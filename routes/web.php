@@ -11,25 +11,34 @@
 |
 */
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
-Route::post('/home', array('uses' =>'HomeController@indextest'))->name('home');
-Route::post('/', array('uses' =>'HomeController@indextest'))->name('home');
+
+Route::get('/home', 'repoController@index')->name('home');
+Route::get('/', 'repoController@index')->name('home');
+Route::post('/home', 'repoController@postRepo');
+Route::post('/', 'repoController@postRepo');
+
 Route::get('/profil', 'ProfilController@index')->name('profil');
-Route::post('/profil', array('uses' => 'ProfilController@postAuth'));
-//Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
-//Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+Route::post('/profil', 'ProfilController@postAuth');
+
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
 Route::get('upload/{id}/{typeDoss}', 'UploadController@uploadForm');
 Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
-Route::get('downloadFile/{filename}/{idDossier}', 'DownloadController@downloadFile');
-Route::get('downloadRepo/{idDossier}', 'DownloadController@downloadRepo');
-Route::get('createRepo/{id}', 'createRepoController@repoForm');
-Route::post('createRepo/{id}', 'createRepoController@repoSubmit');
+
+Route::get('/downloadFile/{fileId}', 'DownloadController@downloadFile');
+Route::get('/downloadRepo/{idDossier}', 'DownloadController@downloadRepo');
+Route::get('/downloadFilePublic/{fileId}', 'DownloadController@downloadFilePublic');
+Route::get('/downloadRepoPublic/{idDossier}', 'DownloadController@downloadRepoPublic');
+
 Route::get('repertoire/{id}', 'repoController@index');
+Route::post('repertoire/{id}', 'repoController@postRepo');
+
 Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
 Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
+
 Route::get('suppress/{id}/{objectType}/{dossierId}/{typeDoss}', 'repoController@suppressFile');
+
+Route::get('/howto', 'howtoController@index');
+Route::get('/contact', 'contactController@index');
 

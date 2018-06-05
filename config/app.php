@@ -106,7 +106,7 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher' => 'AES-128-CBC',
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +165,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
+        Academe\Laravel\AzureFileStorageDriver\ServiceProvider::class,
+        Matthewbdaly\LaravelAzureStorage\AzureStorageServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

@@ -8,6 +8,13 @@ use File;
 use COM;
 use Zipper;
 use Illuminate\Support\Facades\Auth;
+use App\stockage;
+use AppDocument;
+use AppHttpRequests;
+use AppHttpControllersController;
+use Illuminate\Support\Facades\Crypt;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+
 
 trait FileTrait
 {
@@ -25,12 +32,10 @@ trait FileTrait
             }else{
                 $repoName = $repoName."(".$compteur.")";
             }
-
+            $cheminDossier = $dossierActuel."/".$repoName;
             $sameRepo = null;
             $sameRepo = repository::findRepoCreate($userId, $repoName, $cheminDossier);
         }
-
-        $cheminDossier = $dossierActuel."/".$repoName;
 
         //On crée le dossier
         $dossier = repository::create([
@@ -38,14 +43,22 @@ trait FileTrait
             'name' => $repoName,
             'dossierPrimaire' => 'N',
             'cheminDossier' => $cheminDossier,
-            'dossierParent' => $dossierActuel
+            'dossierParent' => $dossierActuel,
+            'publicLink' => ' '
         ]);
 
+        $idCrypted = Crypt::encryptString($dossier->id);
+
+        $publicLink = 'http://localhost/SupDrive/public/'.'downloadRepoPublic/'.$idCrypted;
+
+        repository::updatePublicLinkRepo($dossier->id,$publicLink);
+
         File::makeDirectory($cheminDossier, 777, true);
+        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier, $extension){
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
@@ -66,8 +79,8 @@ trait FileTrait
                 if($compteur > 1)
                 {
                     $prefixFile = explode("(", $nomFicComplet);
-                    $extension = explode(".", end($prefixFile));
-                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
+                    $extensionFic = explode(".", end($prefixFile));
+                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extensionFic);
                 }
                 else
                 {
@@ -82,15 +95,23 @@ trait FileTrait
 
             //On insert le fichier dans le répertoire
             $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
-            //dd($tailleFichier);
+
             //On créer le fichier dans la base de donnée
-            fileEntries::create([
+            $file = fileEntries::create([
                 'user_id' => $userId,
                 'name' => $nomFicComplet,
                 'cheminFichier' => $filepath,
                 'dossierStockage' => $dossierActuel,
-                'tailleFichier' => $tailleFichier
+                'tailleFichier' => $tailleFichier,
+                'extension' => $extension,
+                'publicLink' => ' '
             ]);
+
+            $idCrypted = Crypt::encryptString($file->id);
+
+            $publicLink = 'http://localhost/SupDrive/public/'.'downloadFilePublic/'.$idCrypted;
+
+            fileEntries::updatePublicLinkFile($file->id,$publicLink);
 
             stockage::updateStorage($userId,$nouvelleTailleFic);
 
@@ -98,17 +119,9 @@ trait FileTrait
         }
     }
 
-    public function downloadFiles($userEmail, $dossierFichier, $filename){
+    public function downloadFiles($dossierFichier){
 
-        if($dossierFichier == $userEmail)
-        {
-            $fileDownload = $dossierFichier.'/'.$filename;
-        }
-        else
-        {
-            $fileDownload = $dossierFichier.'/'.$filename;
-        }
-        return response()->download($fileDownload);
+        return response()->download($dossierFichier);
     }
 
     public function downloadRepos($dossier){

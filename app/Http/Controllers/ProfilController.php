@@ -86,7 +86,8 @@ class ProfilController extends Controller
         $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
 
         $arrondiStockage = round($stockageUser ,0);
+        $pourcentageStockage = round($stockageUser,0)/3*10;
 
-        return view('profil', compact('arrondiStockage'));
+        return view('profil', compact('arrondiStockage','pourcentageStockage'));
     }
 }
