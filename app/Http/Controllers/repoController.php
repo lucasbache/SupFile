@@ -119,11 +119,12 @@ class repoController extends Controller
         $repoId = $request->input('idDoss');
         $objectType = $request->input('objectType');
 
-
+        //Si le type d'objet est F (file), on appel la fonction renameFiles
         if($objectType == 'F')
         {
             $this->renameFiles($objectId,$newName);
         }
+        //Sinon, c'est un dossier
         else
         {
             $this->renameRepo($objectId,$newName);
@@ -132,9 +133,9 @@ class repoController extends Controller
         return redirect('repertoire/'.$repoId)->with("success", "Nouveau nom pris en compte");
     }
 
-    public function suppressFile($fileId, $objectType,$dossierId,$typeDoss){
+    public function suppressObject($objectId, $objectType,$dossierId,$typeDoss){
 
-        $this->suppress($objectType,$fileId);
+        $this->suppress($objectType,$objectId);
 
         if($typeDoss == 'storage' )
         {
@@ -145,6 +146,7 @@ class repoController extends Controller
         }
 
     }
+
     public function uploadSubmit(Request $request)
     {
         $typeDoss = null;
@@ -166,14 +168,11 @@ class repoController extends Controller
                 //On récupère la taille du fichier
                 $tailleFic = $_FILES['photos']['size'][0];
 
-                $extsn = explode('.', $nomFicComplet);
-                $extension = last($extsn);
-
                 $idRepo = $request->input('id');
 
                 $typeDoss = $request->input('typeDoss');
 
-                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic, $extension);
+                $retourUpload = $this->uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFic);
             }
 
             if($typeDoss == 'storage/')

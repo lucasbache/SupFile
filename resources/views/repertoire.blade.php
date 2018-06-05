@@ -115,7 +115,7 @@
                                                     or $File->extension == 'jpeg'
                                                     or $File->extension == 'png'
                                                     or $File->extension == 'mp4')
-                                                <a href="" onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video" class="open-modal" title="Aperçu">
+                                                <a href="" onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"  title="Aperçu">
                                                     <i class="material-icons">launch</i>
                                                 </a>
                                                 @endif
@@ -309,27 +309,6 @@
                         </div>
                     </div>
 
-                    <!-- The Modal doc -->
-                    <div class="modal fade" id="modal-doc" tabindex="-1" role="dialog"
-                         aria-labelledby="modal-video-label">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview document</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="modal-doc">
-                                        <p id="myDoc" >
-
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- The Modal public link -->
                     <div class="modal fade" id="publicLink" tabindex="-1" role="dialog"
                          aria-labelledby="modal-video-label">
