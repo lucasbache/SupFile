@@ -65,7 +65,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -274,6 +273,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview de votre vidéo</h5>
                                     <button onclick="closeModal()" type="button" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -296,6 +296,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview de votre image</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -315,6 +316,7 @@
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Preview document</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
