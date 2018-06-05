@@ -18,6 +18,8 @@ class ApiFileController extends Controller
         $nomFicComplet = $request['filename'];
         $uid = $request->user()->id;
 
+        $tailleFichier = $file->getSize();
+
         if(strlen($uid)==0 || strlen($dossierActuel)==0 || strlen($file)==0 || strlen($nomFicComplet)==0){
             return json_encode(array('error' => 'missing parameters'));
         }
@@ -29,7 +31,7 @@ class ApiFileController extends Controller
                 $dossierActuel = $request->user()->email."/".$dossierActuel;
             }
 
-            $this->uploadFile($uid, $dossierActuel, $file, $nomFicComplet);
+            $this->uploadFile($uid, $dossierActuel, $file, $nomFicComplet, $tailleFichier);
             return json_encode(array('success' => 'file upload successful'));
         }
     }
@@ -102,7 +104,7 @@ class ApiFileController extends Controller
                     }
                 }
                 foreach ($files as $f) {
-                    if ($r->user_id == $request->user()->id) {
+                    if ($f->user_id == $request->user()->id) {
                         array_push($filedata, $f->name);
                     }
                 }
