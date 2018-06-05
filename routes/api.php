@@ -26,10 +26,6 @@ Route::post('/login', array('uses' => 'Auth\ApiAuthController@login'));
 
 
 Route::Group(['middleware' => ['auth:api']], function(){
-    Route::get('/test2', function(){
-        return response()->json(['auth'=>'yes']);
-    });
-
     Route::post('/upload', array('uses' => 'ApiFileController@upload'));
     Route::post('/downloadfile', array('uses' => 'ApiFileController@downloadFileApi'));
     Route::post('/createrepo', array('uses' => 'ApiFileController@repoCreate'));

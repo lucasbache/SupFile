@@ -76,7 +76,6 @@ class ApiFileController extends Controller
     public function listFiles(Request $request){
         $path = $request['path'];
 
-
         if(strlen($path)==0 ) {
             return json_encode(array('error' => 'missing parameters'));
         }
@@ -87,10 +86,8 @@ class ApiFileController extends Controller
             }else{
                 $path = $request->user()->email."/".$path;
             }
-
             $repodata = [];
             $filedata = [];
-
             $testrepo = repository::findRepoByPath($path);
 
             if($testrepo == null){
@@ -99,19 +96,16 @@ class ApiFileController extends Controller
                 $repo = repository::findRepoByPathMulti($path);
                 $files = fileEntries::findFileByRepo($path);
 
-
                 foreach ($repo as $r) {
                     if ($r->user_id == $request->user()->id) {
                         array_push($repodata, $r->name);
                     }
                 }
-
                 foreach ($files as $f) {
                     if ($r->user_id == $request->user()->id) {
                         array_push($filedata, $f->name);
                     }
                 }
-
                 $data = array("folders" => $repodata, "files" => $filedata);
 
                 return json_encode($data);
