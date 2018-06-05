@@ -52,7 +52,11 @@
                                                 <i class="material-icons">create</i>
                                             </a>
                                             <a href="{{ URL::to('/suppress/'.$repository->id.'/'.'D'.'/'.$repo->id.'/'.'Sec') }}">
-                                                <i class="material-icons">delete_forever</i></a>
+                                                <i class="material-icons">delete_forever</i>
+                                            </a>
+                                            <a href="" data-toggle="modal" data-target="#publicLink" class="open-modal-publicLink" data-id="{{$repository->publicLink}}">
+                                                <i class="material-icons">link</i>
+                                            </a>
                                             </span>
                                         </li>
                                     @endif
@@ -104,14 +108,25 @@
                                                     </a>
                                                     <a href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.$repo->dossierParent) }}">
                                                         <i class="material-icons">delete_forever</i>
+
+                                                    </a>
+                                                    <a href="" data-toggle="modal" data-target="#publicLink" class="open-modal-publicLink" data-id="{{$File->publicLink}}">
+                                                        <i class="material-icons">link</i>
                                                     </a>
                                                 </div>
                                                 <div class="card-body text-primary">
                                                     <h4 class="card-title">{{$File->name}}</h4>
                                                     <br>
+                                                    @if($File->extension == 'jpg'
+                                                    or $File->extension == 'jpeg'
+                                                    or $File->extension == 'png'
+                                                    or $File->extension == 'txt'
+                                                    or $File->extension == 'mp4'
+                                                    or $File->extension == 'docx')
                                                     <button onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
                                                             data-modal-id="modal-video" class="btn btn-primary">Preview
                                                     </button>
+                                                    @endif
                                                 </div>
                                                 <div class="card-footer">
                                                     <small class="text-muted">Last update
@@ -360,7 +375,48 @@
             </div>
         </div>
 
-    </div>
-    </div>
+                    <!-- The Modal doc -->
+                    <div class="modal fade" id="modal-doc" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-video-label">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-doc">
+                                        <p id="myDoc" >
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The Modal public link -->
+                    <div class="modal fade" id="publicLink" tabindex="-1" role="dialog"
+                         aria-labelledby="modal-video-label">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Lien public</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" aria-describedby="basic-addon2" name="publicLinkButton" id="publicLinkButton" />
+                                        <div class="input-group-append">
+                                            <button onclick="copyClipboard()" class="btn btn-outline-secondary" value="" type="button">Copier le lien</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 @endsection

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class fileEntries extends Model
 {
-    protected $fillable = ['user_id', 'name', 'cheminFichier', 'dossierStockage','tailleFichier'];
+    protected $fillable = ['user_id', 'name', 'cheminFichier', 'dossierStockage','tailleFichier', 'extension', 'publicLink'];
 
     public static function findFileByUserId($id)
     {
@@ -74,6 +74,15 @@ class fileEntries extends Model
             ->delete();
 
         return $suppresFile;
+    }
+
+    public static function updatePublicLinkFile($id, $publicLink){
+
+        $updateFile = DB::table('file_entries')
+            ->where('id', '=', $id)
+            ->update(['publicLink' => $publicLink]);
+
+        return $updateFile;
     }
 }
 

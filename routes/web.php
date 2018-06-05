@@ -11,8 +11,7 @@
 |
 */
 Auth::routes();
-//Route::get('/home', 'HomeController@index')->name('home');
-//Route::get('/', 'HomeController@index')->name('home');
+
 Route::get('/home', 'repoController@index')->name('home');
 Route::get('/', 'repoController@index')->name('home');
 Route::post('/home', 'repoController@postRepo');
@@ -20,9 +19,6 @@ Route::post('/', 'repoController@postRepo');
 
 Route::get('/profil', 'ProfilController@index')->name('profil');
 Route::post('/profil', 'ProfilController@postAuth');
-
-//Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
-//Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 
 Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
@@ -40,4 +36,7 @@ Route::get('rename/{id}/{idRepo}/{objectType}', 'repoController@renameform');
 Route::post('rename/{id}/{idRepo}/{objectType}', 'repoController@renameSubmit');
 
 Route::get('suppress/{id}/{objectType}/{dossierId}/{typeDoss}', 'repoController@suppressFile');
+
+Route::get('/howto', 'howtoController@index');
+Route::get('/contact', 'contactController@index');
 

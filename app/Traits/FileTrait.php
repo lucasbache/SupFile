@@ -9,6 +9,10 @@ use COM;
 use Zipper;
 use Illuminate\Support\Facades\Auth;
 use App\stockage;
+use AppDocument;
+use AppHttpRequests;
+use AppHttpControllersController;
+use Illuminate\Support\Facades\Crypt;
 
 
 trait FileTrait
@@ -38,14 +42,22 @@ trait FileTrait
             'name' => $repoName,
             'dossierPrimaire' => 'N',
             'cheminDossier' => $cheminDossier,
-            'dossierParent' => $dossierActuel
+            'dossierParent' => $dossierActuel,
+            'publicLink' => ' '
         ]);
+
+        $idCrypted = Crypt::encryptString($dossier->id);
+
+        $publicLink = 'http://localhost/SupDrive/public/'.'downloadRepoPublic/'.$idCrypted;
+
+        repository::updatePublicLinkRepo($dossier->id,$publicLink);
+
 
         File::makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier, $extension){
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
@@ -82,15 +94,23 @@ trait FileTrait
 
             //On insert le fichier dans le répertoire
             $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
-            //dd($tailleFichier);
+
             //On créer le fichier dans la base de donnée
-            fileEntries::create([
+            $file = fileEntries::create([
                 'user_id' => $userId,
                 'name' => $nomFicComplet,
                 'cheminFichier' => $filepath,
                 'dossierStockage' => $dossierActuel,
-                'tailleFichier' => $tailleFichier
+                'tailleFichier' => $tailleFichier,
+                'extension' => end($extension),
+                'publicLink' => ' '
             ]);
+
+            $idCrypted = Crypt::encryptString($file->id);
+
+            $publicLink = 'http://localhost/SupDrive/public/'.'downloadFilePublic/'.$idCrypted;
+
+            fileEntries::updatePublicLinkFile($file->id,$publicLink);
 
             stockage::updateStorage($userId,$nouvelleTailleFic);
 
