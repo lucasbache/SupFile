@@ -102,7 +102,7 @@ trait FileTrait
                 'cheminFichier' => $filepath,
                 'dossierStockage' => $dossierActuel,
                 'tailleFichier' => $tailleFichier,
-                'extension' => end($extension),
+                'extension' => $extension,
                 'publicLink' => ' '
             ]);
 
