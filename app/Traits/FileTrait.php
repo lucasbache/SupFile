@@ -62,10 +62,9 @@ trait FileTrait
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
-        
         $extsn = explode('.', $nomFicComplet);
         $extension = last($extsn);
-
+        
         if($stockageUtilise->stockageUtilise > 30000000000)
         {
             return false;
@@ -248,7 +247,7 @@ trait FileTrait
             stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
-
+            
             File::deleteDirectory($objectPath);
         }
         //On veut supprimer un fichier
