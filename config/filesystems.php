@@ -63,14 +63,11 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
-        'azure'  => [
-            'driver' => 'azure',
-            'account' => [
-                'name' => env('supdrivedisk1'),
-                'key' => env('pgLDMwgv9kXi3k8XAXgK8FRzezV2s9ydxKO4KmvrVnGvrluspMeNguBWwp1rM1nSKcsNdKIUNGVjsZErkxsNLQ=='),
-            ],
-            'blob-endpoint' => env('https://supdrivedisk1.blob.core.windows.net/'),
-            'container' => 'images'
+        'azure' => [
+            'driver'    => 'azure',
+            'name'      => env('AZURE_STORAGE_NAME'),
+            'key'       => env('AZURE_STORAGE_KEY'),
+            'container' => env('AZURE_STORAGE_CONTAINER'),
         ],
 
     ],
