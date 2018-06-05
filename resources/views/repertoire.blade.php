@@ -114,9 +114,7 @@
                                                 @if($File->extension == 'jpg'
                                                     or $File->extension == 'jpeg'
                                                     or $File->extension == 'png'
-                                                    or $File->extension == 'txt'
-                                                    or $File->extension == 'mp4'
-                                                    or $File->extension == 'docx')
+                                                    or $File->extension == 'mp4')
                                                 <a href="" onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')" data-modal-id="modal-video" class="open-modal" title="Aperçu">
                                                     <i class="material-icons">launch</i>
                                                 </a>
@@ -158,7 +156,8 @@
                                             <input type="hidden" name="typeDoss" value="{{$repo->dossierParent}}"/>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                Annuler
                                             </button>
                                             <input type="submit" class="btn btn-primary" name="uploadFileButton"
                                                    value="Créer" id="uploadFileButton">
@@ -186,7 +185,7 @@
                                         <div class="modal-body">
                                             Nom du dossier
                                             <br/>
-                                            <input type="text" name="name">
+                                            <input type="text" class="form-control" placeholder="Nom du dossier" name="name">
                                             <input type="hidden" name="path" value="{{$repoPath}}">
                                         </div>
                                         <div class="modal-footer">
@@ -218,7 +217,7 @@
                                         <div class="modal-body">
                                             Nom du dossier
                                             <br/>
-                                            <input type="text" name="name"/>
+                                            <input type="text" class="form-control" placeholder="Nom du dossier" name="name">
                                             <input type="hidden" name="eventId" id="eventId"/>
                                             <input type="hidden" name="idDoss" value="{{$repo->id}}"/>
                                             <input type="hidden" name="objectType" value="D"/>
@@ -251,7 +250,7 @@
                                         <div class="modal-body">
                                             Nom du fichier
                                             <br/>
-                                            <input type="text" name="name" />
+                                            <input type="text" class="form-control" placeholder="Nom du fichier" name="name">
                                             <input type="hidden" name="eventId" id="eventId" />
                                             <input type="hidden" name="idDoss" value="{{$repo->id}}" />
                                             <input type="hidden" name="objectType" value="F" />
