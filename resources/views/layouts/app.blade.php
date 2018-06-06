@@ -88,7 +88,7 @@
     <div style="margin-top: 6%;">
         @yield('content')
     </div>
-    <footer class="page-footer font-small">
+    <footer class="page-footer font-small fixed-bottom">
         <div class="container text-center text-md-left">
             <div class="row">
                 <div class="col-md-4">

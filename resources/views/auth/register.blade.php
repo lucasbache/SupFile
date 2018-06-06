@@ -1,17 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto">
-    <div class="row mx-auto">
-        <div class="col-md-8 col-md-offset-2 mx-auto">
+    <div class="row">
+        <div class="" style="padding-top: 5%">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}" style="margin-left: 30%; margin-top: 10%;">
+                <div class="panel-body text center login-page login-cont">
+                    <form class="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-10 control-label">Pseudo</label>
-                            <div class="col-md-8">
+                            <label for="name">Pseudo</label>
+                            <div class="">
                                 @if(!empty($name))
                                     <input id="name" type="text" class="form-control" name="name" value="{{$name}}" required autofocus>
                                 @else
@@ -25,8 +24,8 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-8 control-label">Adresse e-mail</label>
-                            <div class="col-md-8">
+                            <label for="email" class="">Adresse e-mail</label>
+                            <div class="">
                                 @if(!empty($email))
                                     <input id="email" type="email" class="form-control" name="email" value="{{$email}}" required>
                                 @else
@@ -40,9 +39,9 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-6 control-label">Mot de passe</label>
+                            <label for="password" class="">Mot de passe</label>
 
-                            <div class="col-md-8">
+                            <div class="">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -54,9 +53,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-6 control-label">Confirmation</label>
+                            <label for="password-confirm" class="">Confirmation</label>
 
-                            <div class="col-md-8">
+                            <div class="">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
@@ -73,5 +72,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
