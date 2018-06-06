@@ -14,7 +14,7 @@
             <br />
             <input type="text" name="name" value="rien" hidden/>
             <br /><br />
-            Séléctionner votre fichier:
+            Séléctionnez votre fichier:
             <br />
             <input type="file" name="photos[]" accept="file_extension|video/mp4|image/*|media_type"/>
             <input type="hidden" name="path" value="{{$repoPath}}" />

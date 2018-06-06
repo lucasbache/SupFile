@@ -18,6 +18,7 @@
     <!-- Styles -->
 
     <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -29,8 +30,7 @@
         <div class="container">
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ URL::to( '/home' ) }}">
-                <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supfile-logo.png') }}" height="50" width="200"
-                     alt="test">
+                <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supfile-logo.png') }}" height="50" alt="SupFile">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,6 +88,40 @@
     <div style="margin-top: 6%;">
         @yield('content')
     </div>
+    <footer class="page-footer font-small fixed-bottom">
+        <div class="container text-center text-md-left">
+            <div class="row">
+                <div class="col-md-4">
+                    <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supfile-logo.png') }}" height="30" alt="SupFile">
+                    <p>© 2018 Copyright
+                        <a href="/howto">SupFile</a>
+                    </p>
+                </div>
+                <hr class="">
+                <div class="col-md-4">
+                    <h5 class="text-uppercase h5">L'entreprise</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-uppercase h5">Mentions légales</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/legal">Mentions légales</a>
+                        </li>
+                        <li>
+                            <a href="/rgpd">Utilisation des données</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+  <!-- Copyright -->
+
+</footer>
 </div>
 
 <!-- Scripts -->
