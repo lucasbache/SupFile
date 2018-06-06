@@ -254,16 +254,16 @@ trait FileTrait
                 fileEntries::suppressFile($sousFic->id);
             }
 
-            $chmDos = explode('/',$objectPath);
-            $cheminDossier = implode('\\', $chmDos);
+            //$chmDos = explode('/',$objectPath);
+            //$cheminDossier = implode('\\', $chmDos);
 
-            $f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
-            $obj = new COM ( 'scripting.filesystemobject' );
-            $ref = $obj->getfolder ( $f );
+            //$f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
+            //$obj = new COM ( 'scripting.filesystemobject' );
+            //$ref = $obj->getfolder ( $f );
 
-            $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+            //$nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
 
-            stockage::updateStorage($user->id, $nouveauStockage);
+            //stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
 
