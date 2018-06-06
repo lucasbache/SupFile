@@ -64,7 +64,7 @@
                                 @if($repository->dossierPrimaire != 'Y')
                                     @if($repository->dossierParent == $dossierActuel->cheminDossier)
                                         <div class="col-md-4">
-                                            <div class="card" style="width: 18rem;">
+                                            <div class="card features" style="width: 18rem;">
                                                 <!--<img class="card-img-top" src="../public/Images/folder-icon.jpg" alt="teszt">-->
                                                 <div class="card-header">
                                                     <a class="btn btn-primary" href="{{ URL::to('/rename/'.$repository->id.'/'.$dossierActuel->id.'/'.'D') }}">Renommer le dossier</a>
@@ -105,7 +105,7 @@
                     <form-group>
                         {{ csrf_field() }}
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Créer un fichier</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

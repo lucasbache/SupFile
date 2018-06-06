@@ -13,6 +13,7 @@ use AppDocument;
 use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 
 trait FileTrait
@@ -52,8 +53,8 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-
         File::makeDirectory($cheminDossier, 777, true);
+        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
@@ -78,8 +79,8 @@ trait FileTrait
                 if($compteur > 1)
                 {
                     $prefixFile = explode("(", $nomFicComplet);
-                    $extension = explode(".", end($prefixFile));
-                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extension);
+                    $extensionFic = explode(".", end($prefixFile));
+                    $nomFicComplet = $prefixFile[0]."(".$compteur.")".".".end($extensionFic);
                 }
                 else
                 {

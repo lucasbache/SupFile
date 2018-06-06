@@ -1,37 +1,40 @@
 <!DOCTYPE html>
+
 <html lang="{{ app()->getLocale() }}">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- CSRF Token -->
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>Supfile</title>
+    <title>Supfile</title>
 
-<!-- Styles -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-      integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="{{ asset('css/header.css') }}" rel="stylesheet">
-<link href="{{ asset('css/main.css') }}" rel="stylesheet">
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
-<link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+          integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <!-- Branding Image -->
-            <a class="navbar-brand" href="#">
-                <img src="/public/Images/supfile-logo.png" height="30" alt="">
+            <a class="navbar-brand" href="#" >
+                <img id="logo" class="d-inline-block mr-1" src="/Images/supfile-logo.png" height="30" width="452" alt="test">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
 
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -84,6 +87,7 @@
     <div style="margin-top: 6%;">
         @yield('content')
     </div>
+
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -99,11 +103,24 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+<!-- Scripts --> <script src="{{ asset('js/app.js') }}"></script> <script src="{{ asset('js/functions.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).on("click", ".open-modal", function () {
         var eventId = $(this).data('id');
         $(".modal-body #eventId").val(eventId);
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('.js-smooth').on('click', function() {
+            var page = $(this).attr('href');
+            var speed = 1000;
+            $('html, body').animate( { scrollTop: $(page).offset().top }, speed );
+            return false;
+        });
+    });
+</script>
+
 </body>
 </html>

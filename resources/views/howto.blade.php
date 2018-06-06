@@ -3,17 +3,8 @@
 @section('content')
 
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.js-smooth').on('click', function() { // Au clic sur un élément
-                var page = $(this).attr('href'); // Page cible
-                var speed = 500;
-                $('html, body').animate( { scrollTop: $(page).offset().top }, speed ); // Go
-                return false;
-            });
-        });
-    </script>
+
+
 </head>
 
 <body>
@@ -38,7 +29,8 @@
 
         <div class="row" style="margin-top: 0%">
             <div class="col-12 col-lg-4">
-                <div class="card features">
+                <div class="">
+                <div class="howto-cards card features">
                     <div class="card-body">
                         <div class="media">
                             <span class="ti-face-smile gradient-fill ti-3x mr-3"></span>
@@ -50,8 +42,9 @@
                     </div>
                 </div>
             </div>
+            </div>
             <div class="col-12 col-lg-4">
-                <div class="card features">
+                <div class="howto-cards card features">
                     <div class="card-body">
                         <div class="media">
                             <span class="ti-settings gradient-fill ti-3x mr-3"></span>
@@ -64,7 +57,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-4">
-                <div class="card features">
+                <div class="howto-cards card features">
                     <div class="card-body">
                         <div class="media">
                             <span class="ti-lock gradient-fill ti-3x mr-3"></span>

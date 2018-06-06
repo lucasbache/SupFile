@@ -6,6 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "academe/laravel-azure-file-storage-driver": "^0.2.0",
         "chumper/zipper": "1.0.x",
         "fideloper/proxy": "~3.3",
         "filepreviews/filepreviews-laravel": "^1.0",
@@ -14,7 +15,9 @@
         "laravel/passport": "4.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.4.0"
+        "laravelcollective/html": "^5.4.0",
+        "matthewbdaly/laravel-azure-storage": "^1.0",
+        "microsoft/azure-storage-blob": "^1.1"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
