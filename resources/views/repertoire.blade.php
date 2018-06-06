@@ -126,7 +126,11 @@
                                                         @if($File->extension == 'jpg'
                                                             or $File->extension == 'jpeg'
                                                             or $File->extension == 'png'
-                                                            or $File->extension == 'mp4')
+                                                            or $File->extension == 'mp4'
+                                                            or $File->extension == 'PNG'
+                                                            or $File->extension == 'JPEG'
+                                                            or $File->extension == 'JPG'
+                                                            or $File->extension == 'MP4')
                                                             <a href=""
                                                                onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
                                                                data-modal-id="modal-video" class="open-modal"
