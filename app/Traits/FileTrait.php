@@ -257,7 +257,7 @@ trait FileTrait
             $chmDos = explode('/',$objectPath);
             $cheminDossier = implode('\\', $chmDos);
 
-            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
+            $f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
             $obj = new COM ( 'scripting.filesystemobject' );
             $ref = $obj->getfolder ( $f );
 
@@ -270,7 +270,7 @@ trait FileTrait
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
             $fileClient = FileRestProxy::createFileService($connectionString);
 
-            $shareName = 'users';
+            $shareName = 'users/'.$user->email;
             $directoryName = $repo->id;
 
             // Create directory.
