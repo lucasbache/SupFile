@@ -126,15 +126,18 @@
                                                         @if($File->extension == 'jpg'
                                                             or $File->extension == 'jpeg'
                                                             or $File->extension == 'png'
-                                                            or $File->extension == 'mp4'
                                                             or $File->extension == 'PNG'
                                                             or $File->extension == 'JPEG'
-                                                            or $File->extension == 'JPG'
-                                                            or $File->extension == 'MP4')
-                                                            <a href=""
-                                                               onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
-                                                               data-modal-id="modal-video" class="open-modal"
-                                                               title="Aperçu">
+                                                            or $File->extension == 'JPG')
+                                                                <a href="" data-toggle="modal" data-target="#modal-image"
+                                                                   class="open-modal-image" data-id="../{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                        @endif
+                                                        @if($File->extension == 'mp4'
+                                                        or $File->extension == 'MP4')
+                                                            <a href="" data-toggle="modal" data-target="#modal-video"
+                                                               class="open-modal-video" data-id="../{{$File->cheminFichier}}">
                                                                 <i class="material-icons">launch</i>
                                                             </a>
                                                         @endif
@@ -395,7 +398,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="modal-image">
-                                <img id="myImg" width="100%" height="auto" src="">
+                                <img width="100%" height="auto" id="myImg" name="myImg" src="">
                             </div>
                         </div>
                     </div>
@@ -416,7 +419,6 @@
                         <div class="modal-body">
                             <div class="modal-doc">
                                 <p id="myDoc">
-
                                 </p>
                             </div>
                         </div>
