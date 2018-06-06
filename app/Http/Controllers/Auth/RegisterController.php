@@ -76,6 +76,8 @@ class RegisterController extends Controller
 
         $repoName = $data['email'];
 
+        File::makeDirectory($repoName.'/', 777, true);
+
         $repo = repository::create([
             'user_id' => $userid->id,
             'name' => $repoName,
@@ -90,8 +92,6 @@ class RegisterController extends Controller
         $publicLink = 'http://localhost/SupDrive/public/'.'downloadRepoPublic/'.$idCrypted;
 
         repository::updatePublicLinkRepo($repo->id,$publicLink);
-
-        File::makeDirectory($repoName.'/', 777, true);
 
         stockage::create([
            'user_id' => $userid->id,
