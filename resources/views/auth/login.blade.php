@@ -5,7 +5,7 @@
         <div class="row">
             <div class="" style="padding-top: 5%">
                 <div class="panel panel-default">
-                    <div class="panel-body text center login-page">
+                    <div class="panel-body text center login-page login-cont">
                         <form class="form" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
 
