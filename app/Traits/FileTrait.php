@@ -68,8 +68,8 @@ trait FileTrait
         $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
         $fileClient = FileRestProxy::createFileService($connectionString);
 
-        $shareName = 'users';
-        $directoryName = $cheminDossier;
+        $shareName = 'https://supfiledisk2.blob.core.windows.net';
+        $directoryName = 'users/'.$cheminDossier;
 
         // Create directory.
         $fileClient->createDirectory($shareName, $directoryName);
