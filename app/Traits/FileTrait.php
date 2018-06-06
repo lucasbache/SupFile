@@ -13,6 +13,7 @@ use AppDocument;
 use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 
 trait FileTrait
@@ -52,15 +53,18 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-
         File::makeDirectory($cheminDossier, 777, true);
+        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
-    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier, $extension){
+    public function uploadFile($userId, $dossierActuel, $file, $nomFicComplet, $tailleFichier){
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
+        
+        $extsn = explode('.', $nomFicComplet);
+        $extension = last($extsn);
 
         if($stockageUtilise->stockageUtilise > 30000000000)
         {
@@ -240,9 +244,11 @@ trait FileTrait
             $ref = $obj->getfolder ( $f );
 
             $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+
             stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
+
             File::deleteDirectory($objectPath);
         }
         //On veut supprimer un fichier
