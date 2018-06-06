@@ -39,8 +39,8 @@
 
                             <div class="form-group">
                                 <div class="">
-                                        <label class="message">
-                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
+                                        <label class="">
+                                            <input type="checkbox" name="remember" class="message" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
                                         </label><br>
                                         <a class="message" href="{{ route('password.request') }}">
                                             Mot de passe oublié
