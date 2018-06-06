@@ -270,7 +270,7 @@ trait FileTrait
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
             $fileClient = FileRestProxy::createFileService($connectionString);
 
-            $shareName = 'users/'.repo->dossierParent;
+            $shareName = 'users/'.$repo->dossierParent;
             $directoryName = $repo->name;
 
             // Create directory.
