@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if(Session::has('success'))
-    <div class="notice notice-success alert-dismissible fade show" role="alert">
+    <div class="notice notice-success alert-dismissible fade show fixed-top" role="alert">
         {{ Session::get('success') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -27,14 +27,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
-                            Ajouter un répertoire
+                            Ajouter un dossier
                         </button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadFile">
                             Ajouter un fichier
                         </button>
                     </div>
                     <div class="panel-body">
-                        Vos répertoires :
+                        Vos dossiers :
                         <ul class="list-group">
                             @foreach($userepo as $repository)
                                 @if($repository->dossierPrimaire != 'Y')
@@ -100,8 +100,9 @@
                                 @foreach($userFile as $File)
                                     @if($File->dossierStockage == $dossierActuel)
                                         <div class="col-md-4">
-                                            <div class="card border-primary mb-3" style="width: 15rem;">
+                                            <div class="card mb-3" style="width: 15rem;">
                                                 <div class="card-header" data-toggle="collapse"
+                                                     style="cursor: pointer"
                                                      data-target="#{{$File->id}}" aria-expanded="false"
                                                      aria-controls="cardCollapse">
                                                     <h4 class="card-title">{{$File->name}}</h4>
@@ -126,7 +127,11 @@
                                                         @if($File->extension == 'jpg'
                                                             or $File->extension == 'jpeg'
                                                             or $File->extension == 'png'
-                                                            or $File->extension == 'mp4')
+                                                            or $File->extension == 'mp4'
+                                                            or $File->extension == 'JPG'
+                                                            or $File->extension == 'JPEG'
+                                                            or $File->extension == 'PNG'
+                                                            or $File->extension == 'MP4')
                                                             <a href=""
                                                                onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
                                                                data-modal-id="modal-video" class="open-modal"
@@ -445,5 +450,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 @endsection

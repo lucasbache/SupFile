@@ -39,4 +39,5 @@ Route::get('suppress/{id}/{objectType}/{dossierId}/{typeDoss}', 'repoController@
 
 Route::get('/howto', 'howtoController@index');
 Route::get('/contact', 'contactController@index');
-
+Route::get('/legal', 'legalController@index');
+Route::get('/rgpd', 'rgpdController@index');

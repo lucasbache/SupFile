@@ -1,12 +1,13 @@
 
 .login-cont .form {
-    position: relative;
+    position: absolute;
     z-index: 1;
-    background: red;
-    max-width: 500px;
+    background: white;
+    width: 20%;
     padding: 45px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    margin-left: 40%;
 }
 .login-cont .form input {
     background: whitesmoke;
@@ -17,16 +18,33 @@
 .login-cont .form button {
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #549b18;
     width: 100%;
-    border: 0;
+    border-radius: 6px;
+    border:none;
     padding: 15px;
     color: #FFFFFF;
     font-size: 14px;
 }
 .login-cont .form button:hover,.form button:active,.form button:focus {
-    background: #43A047;
+    background: #69ba25;
+    cursor: pointer;
+    border-radius: 36px;
+    transition: 500ms;
 }
+
+.login-cont .btn-social-icon {
+    background: #549b18;
+    border-radius: 6px;
+}
+
+.login-cont .btn-social-icon:hover {
+    background-color: #69ba25;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: 500ms;
+}
+
 .login-cont .form .message {
     margin: 15px 0 0;
     color: #b3b3b3;
@@ -268,6 +286,10 @@ p {
     .perspective-phone {
         margin-top: -150px;
     }
+}
+
+.breadcrumb{
+    cursor: pointer;
 }
 
 
