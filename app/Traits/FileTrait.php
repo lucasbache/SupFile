@@ -73,7 +73,7 @@ trait FileTrait
 
         // Create directory.
         $fileClient->createDirectory($shareName, $directoryName);
-        
+
         return $dossier->id;
     }
 
@@ -266,8 +266,16 @@ trait FileTrait
             stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
-            
-            File::deleteDirectory($objectPath);
+
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $fileClient = FileRestProxy::createFileService($connectionString);
+
+            $shareName = 'users';
+            $directoryName = $repo->id;
+
+            // Create directory.
+            $fileClient->deleteDirectory($shareName, $directoryName);
+
         }
         //On veut supprimer un fichier
         else{
