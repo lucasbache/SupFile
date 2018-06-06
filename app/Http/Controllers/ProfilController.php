@@ -15,6 +15,19 @@ class ProfilController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $user = Auth::user();
+        $stkgUsr = stockage::findSizeByUserId($user->id)->first();
+
+        $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
+
+        $arrondiStockage = round($stockageUser ,0);
+        $pourcentageStockage = round($stockageUser,0)/3*10;
+
+        return view('profil', compact('arrondiStockage','pourcentageStockage'));
+    }
+
     public function postAuth(Request $request)
     {
         //check which submit was clicked on
@@ -76,18 +89,5 @@ class ProfilController extends Controller
 
         return 3;
 
-    }
-
-    public function index()
-    {
-        $user = Auth::user();
-        $stkgUsr = stockage::findSizeByUserId($user->id)->first();
-
-        $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
-
-        $arrondiStockage = round($stockageUser ,0);
-        $pourcentageStockage = round($stockageUser,0)/3*10;
-
-        return view('profil', compact('arrondiStockage','pourcentageStockage'));
     }
 }

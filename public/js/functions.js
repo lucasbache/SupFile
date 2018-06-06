@@ -49,3 +49,17 @@ function copyClipboard() {
     copyText.select();
     document.execCommand("copy");
 }
+
+$(document).ready(function () {
+    $('.js-smooth').on('click', function () {
+        var page = $(this).attr('href');
+        var speed = 1000;
+        $('html, body').animate({scrollTop: $(page).offset().top}, speed);
+        return false;
+    });
+});
+
+$(document).on("click", ".open-modal", function () {
+    var eventId = $(this).data('id');
+    $(".modal-body #eventId").val(eventId);
+});
