@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+require_once "../vendor/autoload.php";
 use App\fileEntries;
 use App\repository;
 use Storage;
@@ -14,6 +15,17 @@ use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
+use MicrosoftAzure\Storage\Common\Internal\Resources;
+use MicrosoftAzure\Storage\Common\Internal\StorageServiceSettings;
+use MicrosoftAzure\Storage\Common\Models\Range;
+use MicrosoftAzure\Storage\Common\Models\Metrics;
+use MicrosoftAzure\Storage\Common\Models\RetentionPolicy;
+use MicrosoftAzure\Storage\Common\Models\ServiceProperties;
+use MicrosoftAzure\Storage\File\FileRestProxy;
+use MicrosoftAzure\Storage\File\FileSharedAccessSignatureHelper;
+use MicrosoftAzure\Storage\File\Models\CreateShareOptions;
+use MicrosoftAzure\Storage\File\Models\ListSharesOptions;
 
 
 trait FileTrait
@@ -53,8 +65,18 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
+        $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $fileClient = FileRestProxy::createFileService($connectionString);
+
+        $shareName = 'users';
+        $directoryName = $cheminDossier;
+
+        // Create directory.
+        $fileClient->createDirectory($shareName, $directoryName);
+
+        dd($fileClient);
         //File::makeDirectory($cheminDossier, 777, true);
-        Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
+        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
