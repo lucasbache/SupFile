@@ -68,7 +68,7 @@ trait FileTrait
         $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
         $fileClient = FileRestProxy::createFileService($connectionString);
 
-        $shareName = 'users';
+        $shareName = 'users/'.$dossierActuel;
         $directoryName = $repoName;
 
         // Create directory.
@@ -254,16 +254,16 @@ trait FileTrait
                 fileEntries::suppressFile($sousFic->id);
             }
 
-            $chmDos = explode('/',$objectPath);
-            $cheminDossier = implode('\\', $chmDos);
+            //$chmDos = explode('/',$objectPath);
+            //$cheminDossier = implode('\\', $chmDos);
 
-            $f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
-            $obj = new COM ( 'scripting.filesystemobject' );
-            $ref = $obj->getfolder ( $f );
+            //$f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
+            //$obj = new COM ( 'scripting.filesystemobject' );
+            //$ref = $obj->getfolder ( $f );
 
-            $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+            //$nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
 
-            stockage::updateStorage($user->id, $nouveauStockage);
+            //stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
 
@@ -271,7 +271,7 @@ trait FileTrait
             $fileClient = FileRestProxy::createFileService($connectionString);
 
             $shareName = 'users/'.$user->email;
-            $directoryName = $repo->id;
+            $directoryName = $repo->name;
 
             // Create directory.
             $fileClient->deleteDirectory($shareName, $directoryName);

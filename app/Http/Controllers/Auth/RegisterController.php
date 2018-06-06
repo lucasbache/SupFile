@@ -91,7 +91,7 @@ class RegisterController extends Controller
             'name' => $repoName,
             'dossierPrimaire' => 'Y',
             'cheminDossier' => $repoName,
-            'dossierParent' => 'storage/',
+            'dossierParent' => 'users',
             'publicLink' => ' '
         ]);
 
