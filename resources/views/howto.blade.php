@@ -12,7 +12,7 @@
     <div class="hero">
         <img src="../../public/Images/supfileBig.png">
         <p>L'outil simple et puissant de stockage en ligne.</p>
-        <div class="btn btn-primary">À propos de nous</div>
+        <a href="/contact" class="btn btn-primary">À propos de nous</a>
         <a class="js-smooth" href="#howto"><div class="btn btn-primary">Comment faire ?</div></a>
     </div>
 </div>
