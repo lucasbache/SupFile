@@ -40,7 +40,7 @@ class UploadController extends Controller
 
                 $extsn = explode('.', $nomFicComplet);
                 $extension = last($extsn);
-                dd($extension);
+
                 //On récupère la taille du fichier
                 $tailleFic = $_FILES['photos']['size'][0];
 

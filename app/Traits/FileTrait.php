@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Traits;
+require_once "../vendor/autoload.php";
 use App\fileEntries;
 use App\repository;
 use Storage;
@@ -14,6 +15,17 @@ use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
 use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
+use MicrosoftAzure\Storage\Common\Internal\Resources;
+use MicrosoftAzure\Storage\Common\Internal\StorageServiceSettings;
+use MicrosoftAzure\Storage\Common\Models\Range;
+use MicrosoftAzure\Storage\Common\Models\Metrics;
+use MicrosoftAzure\Storage\Common\Models\RetentionPolicy;
+use MicrosoftAzure\Storage\Common\Models\ServiceProperties;
+use MicrosoftAzure\Storage\File\FileRestProxy;
+use MicrosoftAzure\Storage\File\FileSharedAccessSignatureHelper;
+use MicrosoftAzure\Storage\File\Models\CreateShareOptions;
+use MicrosoftAzure\Storage\File\Models\ListSharesOptions;
 
 
 trait FileTrait
@@ -53,8 +65,15 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-        File::makeDirectory($cheminDossier, 777, true);
-        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
+        $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $fileClient = FileRestProxy::createFileService($connectionString);
+
+        $shareName = 'users/'.$dossierActuel;
+        $directoryName = $repoName;
+
+        // Create directory.
+        $fileClient->createDirectory($shareName, $directoryName);
+
         return $dossier->id;
     }
 
@@ -62,10 +81,9 @@ trait FileTrait
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
-        
         $extsn = explode('.', $nomFicComplet);
         $extension = last($extsn);
-
+        
         if($stockageUtilise->stockageUtilise > 30000000000)
         {
             return false;
@@ -236,20 +254,28 @@ trait FileTrait
                 fileEntries::suppressFile($sousFic->id);
             }
 
-            $chmDos = explode('/',$objectPath);
-            $cheminDossier = implode('\\', $chmDos);
+            //$chmDos = explode('/',$objectPath);
+            //$cheminDossier = implode('\\', $chmDos);
 
-            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
-            $obj = new COM ( 'scripting.filesystemobject' );
-            $ref = $obj->getfolder ( $f );
+            //$f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
+            //$obj = new COM ( 'scripting.filesystemobject' );
+            //$ref = $obj->getfolder ( $f );
 
-            $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+            //$nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
 
-            stockage::updateStorage($user->id, $nouveauStockage);
+            //stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
 
-            File::deleteDirectory($objectPath);
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $fileClient = FileRestProxy::createFileService($connectionString);
+
+            $shareName = 'users/'.$repo->dossierParent;
+            $directoryName = $repo->name;
+
+            // Create directory.
+            $fileClient->deleteDirectory($shareName, $directoryName);
+
         }
         //On veut supprimer un fichier
         else{
