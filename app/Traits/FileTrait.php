@@ -73,10 +73,7 @@ trait FileTrait
 
         // Create directory.
         $fileClient->createDirectory($shareName, $directoryName);
-
-        dd($fileClient);
-        //File::makeDirectory($cheminDossier, 777, true);
-        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
+        
         return $dossier->id;
     }
 
