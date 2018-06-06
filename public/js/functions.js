@@ -59,7 +59,20 @@ $(document).ready(function () {
     });
 });
 
+//Pass data to modal rename
 $(document).on("click", ".open-modal", function () {
     var eventId = $(this).data('id');
     $(".modal-body #eventId").val(eventId);
+});
+
+//Pass data to modal image
+$(document).on("click", ".open-modal-image", function () {
+    var cheminFich = $(this).data('id');
+    $(".modal-body #myImg").attr("src", cheminFich);
+});
+
+//Pass data to modal video
+$(document).on("click", ".open-modal-video", function () {
+    var cheminVideo = $(this).data('id');
+    $(".modal-body #myVid").attr("src", cheminVideo);
 });
