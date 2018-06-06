@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if(Session::has('success'))
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <div class="notice notice-success alert-dismissible fade show" role="alert">
         {{ Session::get('success') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -10,7 +10,7 @@
 @endif
 
 @if(Session::has('error'))
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <div class="notice notice-alert alert-dismissible fade show" role="alert">
         {{ Session::get('error') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -23,7 +23,7 @@
     <br/>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 side-repo fixed">
+            <div class="col-md-4 side-repo fixed-top">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
@@ -65,11 +65,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+        </div>
+        <div class="row">
+            <div class="col-md-10" style="margin-left: 10%">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
+                        <nav aria-label="breadcrumb" class="breadcrumb h5">
                                 @foreach($listeDossier as $dossier)
                                     @if($dossier->dossierPrimaire == 'Y')
                                         <li class="breadcrumb-item active" aria-current="page"><a
