@@ -69,7 +69,7 @@ trait FileTrait
         $fileClient = FileRestProxy::createFileService($connectionString);
 
         $shareName = 'users';
-        $directoryName = 'users/'.$cheminDossier;
+        $directoryName = 'supfiledisk2.blob.core.windows.net/users/'.$cheminDossier;
 
         // Create directory.
         $fileClient->createDirectory($shareName, $directoryName);
