@@ -53,8 +53,8 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-        File::makeDirectory($cheminDossier, 777, true);
-        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
+        //File::makeDirectory($cheminDossier, 777, true);
+        Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
         return $dossier->id;
     }
 
