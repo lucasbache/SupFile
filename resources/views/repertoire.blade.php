@@ -128,17 +128,37 @@
                                                             or $File->extension == 'PNG'
                                                             or $File->extension == 'JPEG'
                                                             or $File->extension == 'JPG')
+                                                            @if($dossier->dossierPrimaire == 'Y')
                                                                 <a href="" data-toggle="modal" data-target="#modal-image"
-                                                                   class="open-modal-image" data-id="../{{$File->cheminFichier}}">
+                                                                   class="open-modal-image"
+                                                                   data-id="../public/{{$File->cheminFichier}}">
                                                                     <i class="material-icons">launch</i>
                                                                 </a>
+                                                            @else
+                                                                <a href="" data-toggle="modal" data-target="#modal-image"
+                                                                   class="open-modal-image"
+                                                                   data-id="../{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                         @if($File->extension == 'mp4'
                                                         or $File->extension == 'MP4')
-                                                            <a href="" data-toggle="modal" data-target="#modal-video"
-                                                               class="open-modal-video" data-id="../{{$File->cheminFichier}}">
-                                                                <i class="material-icons">launch</i>
-                                                            </a>
+                                                            @if($dossier->dossierPrimaire == 'Y')
+                                                                <a href="" data-toggle="modal"
+                                                                   data-target="#modal-video"
+                                                                   class="open-modal-video"
+                                                                   data-id="{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @else
+                                                                <a href="" data-toggle="modal"
+                                                                   data-target="#modal-video"
+                                                                   class="open-modal-video"
+                                                                   data-id="../{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     </div>
                                                     <div class="card-footer">

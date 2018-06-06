@@ -6,9 +6,7 @@ use App\fileEntries;
 use Illuminate\Http\Request;
 use App\repository;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\renameRequest;
 use App\Traits\FileTrait;
-use App\Http\Requests\createRepoRequest;
 use Illuminate\Support\Facades\Input;
 
 class repoController extends Controller
@@ -28,12 +26,14 @@ class repoController extends Controller
 
     public function postRepo(Request $request)
     {
+
         //check which submit was clicked on
         if(Input::get('createRepoButton')) {
+
             return $this->repoSubmit($request);
         }
-        elseif(Input::get('uploadFileButton'))
-        {
+        elseif(Input::get('uploadFileButton')) {
+
             return $this->uploadSubmit($request);
         }
         else{
