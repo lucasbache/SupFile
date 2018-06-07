@@ -10,14 +10,16 @@
         <div class="hero">
             <h2 style="color: white;">À PROPOS DE SUPFILE</h2>
             <h3 style="color: #f5f8fa">Qui sommes nous ?</h3>
-            <p style="margin-top: 2%;"> SUPFILE <br /> 65 Avenue de Colmar <br /> 671000 Strasbourg <br /> - France -</p>
+            <p style="margin-top: 2%;"> SUPFILE <br /> 65 Avenue de Colmar <br /> 67100 Strasbourg <br /> - France -</p>
+            <p style="margin-top: 1%;">Téléphone : 03 90 41 69 76</p>
+            <p style="margin-top: -1%;">E-mail : roman.zitzmann@supinfo.com</p>
         </div>
     </div>
 
     <div class="container">
 
         <div class="section-title" style="margin-top: 3%;">
-            <h3>Pourquoi SupFile ?</h3>
+            <h3>Notre équipe</h3>
         </div>
 
 
@@ -95,7 +97,7 @@
                             <span class="ti-lock gradient-fill ti-3x mr-3"></span>
                             <div class="media-body" style="height: 160px;">
                                 <h4 class="card-title">Roman Zitzmann</h4>
-                                <p class="card-text" style="text-align: justify">J'ai rien à dire sur moi :)</p>
+                                <p class="card-text" style="text-align: justify;">La vision artistique de Roman a aidé SupFile à être ce qu'il est : Un site agréable à l'oeil et la navigation pour tous, accessible à chaque utilisateur informatique.</p>
                             </div>
                         </div>
                     </div>
