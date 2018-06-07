@@ -8,6 +8,7 @@ use Storage;
 use File;
 use COM;
 use Zipper;
+use Zip;
 use Illuminate\Support\Facades\Auth;
 use App\stockage;
 use AppDocument;
@@ -153,6 +154,7 @@ trait FileTrait
         Zipper::make('public/'.$dossier->name)->add($files)->close();
 
         return response()->download('public/'.$dossier->name);
+
     }
 
     public function renameFiles($objectId, $newName){
