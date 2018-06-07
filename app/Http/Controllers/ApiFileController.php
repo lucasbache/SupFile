@@ -69,10 +69,10 @@ class ApiFileController extends Controller
         if($folder == "root"){
             $folder = $request->user()->email;
         }else {
-            $folder = $request->user()->email."/".$folder;
+            $folder = $request->user()->email."/".$folder."/".$filename;
         }
 
-        return $this->downloadFiles($email, $folder, $filename);
+        return $this->downloadFiles($folder);
     }
 
     public function listFiles(Request $request){

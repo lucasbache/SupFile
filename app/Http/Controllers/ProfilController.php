@@ -15,24 +15,37 @@ class ProfilController extends Controller
         $this->middleware('auth');
     }
 
+    public function index()
+    {
+        $user = Auth::user();
+        $stkgUsr = stockage::findSizeByUserId($user->id)->first();
+
+        $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
+
+        $arrondiStockage = round($stockageUser ,0);
+        $pourcentageStockage = round($stockageUser,0)/3*10;
+
+        return view('profil', compact('arrondiStockage','pourcentageStockage'));
+    }
+
     public function postAuth(Request $request)
     {
         //check which submit was clicked on
         if(Input::get('info')) {
             $ret = $this->changeInfo($request);
             if ($ret == 1){
-                return redirect()->back()->with("success","Info changed successfully !");
+                return redirect()->back()->with("success","Pseudo modifié");
             }
         } elseif(Input::get('password')) {
             $ret = $this->changePassword($request);
             if ($ret == 1){
-                return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+                return redirect()->back()->with("error","Mot de passe eronné, veuillez réessayer.");
             }
             if ($ret == 2){
-                return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+                return redirect()->back()->with("error","Votre nouveau mot de passe doit être différent du précédent.");
             }
             else {
-                return redirect()->back()->with("success","Password changed successfully !");
+                return redirect()->back()->with("success","Mot de passe modifié.");
             }
         }
 
@@ -76,18 +89,5 @@ class ProfilController extends Controller
 
         return 3;
 
-    }
-
-    public function index()
-    {
-        $user = Auth::user();
-        $stkgUsr = stockage::findSizeByUserId($user->id)->first();
-
-        $stockageUser = round((30000000000 - $stkgUsr->stockageUtilise) / 1000000000);
-
-        $arrondiStockage = round($stockageUser ,0);
-        $pourcentageStockage = round($stockageUser,0)/3*10;
-
-        return view('profil', compact('arrondiStockage','pourcentageStockage'));
     }
 }
