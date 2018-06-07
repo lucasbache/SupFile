@@ -21,18 +21,18 @@ class ProfilController extends Controller
         if(Input::get('info')) {
             $ret = $this->changeInfo($request);
             if ($ret == 1){
-                return redirect()->back()->with("success","Info changed successfully !");
+                return redirect()->back()->with("success","Pseudo modifié");
             }
         } elseif(Input::get('password')) {
             $ret = $this->changePassword($request);
             if ($ret == 1){
-                return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
+                return redirect()->back()->with("error","Mot de passe eronné, veuillez réessayer.");
             }
             if ($ret == 2){
-                return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+                return redirect()->back()->with("error","Votre nouveau mot de passe doit être différent du précédent.");
             }
             else {
-                return redirect()->back()->with("success","Password changed successfully !");
+                return redirect()->back()->with("success","Mot de passe modifié.");
             }
         }
 

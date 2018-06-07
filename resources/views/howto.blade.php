@@ -10,7 +10,7 @@
 <body>
 <div class="header-full">
     <div class="hero">
-        <img id="logo-big" class="d-inline-block mr-1" src="{{ asset('Images/supfileBig.png') }}" height="150" alt="SUPFILE">
+        <img id="logo-big" class="d-inline-block mr-1" src="{{ asset('Images/supfile.png') }}" height="150" alt="SUPFILE">
         <p>L'outil simple et puissant de stockage en ligne.</p>
         <a href="/contact" class="btn btn-primary">À propos de nous</a>
         <a class="js-smooth" href="#howto"><div class="btn btn-primary">Comment faire ?</div></a>
@@ -73,8 +73,6 @@
 
     </div>
 
-
-
 </div>
 <div id="howto"></div>
 <div class="section light-bg" style="margin-top: 5%;">
@@ -110,9 +108,7 @@
             </div>
         </div>
     </div>
-
 </div>
-
 <div class="section pt-0" style="margin-top: 3%;">
     <div class="container">
         <div class="section-title">
