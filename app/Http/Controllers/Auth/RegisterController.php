@@ -77,7 +77,7 @@ class RegisterController extends Controller
 
         $repoName = $data['email'];
 
-        File::makeDirectory($repoName, 0777, true);
+        File::makeDirectory($repoName.'/', 777, true);
 
         //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
         //$fileClient = FileRestProxy::createFileService($connectionString);

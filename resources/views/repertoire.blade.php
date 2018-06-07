@@ -339,7 +339,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                     </button>
-                                    <input type="submit" class="btn btn-primary" value="Créer">
+                                    <input type="submit" class="btn btn-primary" value="Renommer">
                                 </div>
                             </form-group>
                         </form>
@@ -372,7 +372,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                     </button>
-                                    <input type="submit" class="btn btn-primary" value="Créer">
+                                    <input type="submit" class="btn btn-primary" value="Renommer">
                                 </div>
                             </form-group>
                         </form>

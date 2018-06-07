@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Traits;
-require_once "../vendor/autoload.php";
 use App\fileEntries;
 use App\repository;
 use Storage;
@@ -15,18 +14,6 @@ use AppDocument;
 use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
-use MicrosoftAzure\Storage\Blob\BlobRestProxy;
-use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
-use MicrosoftAzure\Storage\Common\Internal\Resources;
-use MicrosoftAzure\Storage\Common\Internal\StorageServiceSettings;
-use MicrosoftAzure\Storage\Common\Models\Range;
-use MicrosoftAzure\Storage\Common\Models\Metrics;
-use MicrosoftAzure\Storage\Common\Models\RetentionPolicy;
-use MicrosoftAzure\Storage\Common\Models\ServiceProperties;
-use MicrosoftAzure\Storage\File\FileRestProxy;
-use MicrosoftAzure\Storage\File\FileSharedAccessSignatureHelper;
-use MicrosoftAzure\Storage\File\Models\CreateShareOptions;
-use MicrosoftAzure\Storage\File\Models\ListSharesOptions;
 
 
 trait FileTrait
@@ -151,9 +138,9 @@ trait FileTrait
 
         $files = glob($dossier->cheminDossier);
 
-        Zipper::make('public/'.$dossier->name)->add($files)->close();
+        Zipper::make('public/'.$dossier->name.'.zip')->add($files)->close();
 
-        return response()->download('public/'.$dossier->name);
+        return response()->download('public/'.$dossier->name.'.zip');
 
     }
 
