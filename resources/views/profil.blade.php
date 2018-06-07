@@ -36,7 +36,7 @@
 
                             <div class="form-group">
                                 <div class="">
-                                    <input type="submit" class="btn btn-success" name="info" value="Modifier">
+                                    <input type="submit" class="btn btn-primary" name="info" value="Modifier">
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@
 
                             <div class="form-group">
                                 <div class="">
-                                    <input type="submit" class="btn btn-success" name="password" value="Valider">
+                                    <input type="submit" class="btn btn-primary" name="password" value="Valider">
                                 </div>
                             </div>
 
