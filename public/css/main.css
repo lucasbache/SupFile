@@ -9,7 +9,6 @@
     margin-left: 40%;
 }
 .login-cont .form input {
-    background: whitesmoke;
     width: 100%;
     padding: 15px;
     font-size: 14px;
@@ -62,7 +61,6 @@
     text-align: center;
 }
 
-
 a{
     color: #3f681c;
 }
@@ -70,11 +68,12 @@ a{
 body {
     font-family: 'Rubik', sans-serif;
     position: relative;
+    padding-bottom: 6%;
 }
 
 a:hover,
 a:focus {
-    color: #69ba25;
+    color: #3d4344;
 }
 
 h1 {
@@ -121,7 +120,6 @@ p {
 
 .btn-light {
     border-radius: 3px;
-    background: #FFF;
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.26);
     font-size: 14px;
     font-weight: 500;
@@ -192,9 +190,6 @@ p {
     left: 0;
 }
 
-.card-text {
-    font-size: 14px;
-}
 
 .side-repo{
     margin-top: 11vw;
@@ -297,7 +292,7 @@ p {
 
 .btn:hover
 {
-    color: lightcyan;
+    color: whitesmoke;
     text-decoration: none;
 }
 
@@ -355,30 +350,4 @@ p {
     border-left: 6px solid white;
     background-color: darkred;
     color: white;
-}
-
-.dropzone {
-    border: white;
-}
-
-
-/* STYLE.CSS */
-
-.navbar-form .input-group-btn,
-.navbar-form .input-group-addon {
-    width: auto;
-}
-
-.navbar-input-group {
-    font-size: 0px; /*removes whitespace between button and input*/
-}
-
-.navbar-input-group .form-control {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-.navbar-input-group .btn {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-left: 0px;
 }
