@@ -49,3 +49,26 @@ function copyClipboard() {
     copyText.select();
     document.execCommand("copy");
 }
+
+function drop() {
+    console.log("on passe dans le js");
+    document.getElementById("subButton");
+}
+
+var holder = document.getElementById('my-dropzone');
+
+holder.ondragenter = function (e) {
+    this.className = 'nicenice lvl-over';
+    return false;
+};
+holder.ondragleave = function () {
+    this.className = 'nicenice';
+    return false;
+};
+holder.ondrop = function (e) {
+    console.log("on passe dans le js");
+    document.getElementById("subButton").click();
+};
+
+
+

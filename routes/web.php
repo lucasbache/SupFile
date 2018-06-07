@@ -25,6 +25,7 @@ Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallba
 
 Route::get('upload/{id}/{typeDoss}', 'UploadController@uploadForm');
 Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
+Route::post('/dragDrop', 'UploadController@dragDrop');
 
 Route::get('downloadFile/{fileId}', 'DownloadController@downloadFile');
 Route::get('downloadRepo/{idDossier}', 'DownloadController@downloadRepo');

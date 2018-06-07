@@ -153,7 +153,7 @@ class repoController extends Controller
         $idRepo = null;
         $retourUpload = false;
 
-        if ($request != null) {
+        if ($request->photos != null) {
             foreach ($request->photos as $file) {
                 //On récupère les informations de l'utilisateur
                 $user = Auth::user();
