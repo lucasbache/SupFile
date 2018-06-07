@@ -57,11 +57,8 @@
                                     <a href="{{ url('login/google') }}" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></a>
                                 </div>
                             </div>
-    <!--                        <div class="form-group col-md-7 mx-auto">
-
-                            </div> -->
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

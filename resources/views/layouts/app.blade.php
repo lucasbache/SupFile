@@ -138,23 +138,6 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 <script src=" {{ asset('js/dropzone.js') }}"></script>
 <script src=" {{ asset('js/dropzone-config.js') }}"></script>
-
-<script type="text/javascript">
-    $(document).on("click", ".open-modal", function () {
-        var eventId = $(this).data('id');
-        $(".modal-body #eventId").val(eventId);
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('.js-smooth').on('click', function () {
-            var page = $(this).attr('href');
-            var speed = 1000;
-            $('html, body').animate({scrollTop: $(page).offset().top}, speed);
-            return false;
-        });
-    });
-</script>
 </body>
 
 </html>
