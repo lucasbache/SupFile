@@ -27,7 +27,9 @@ Route::get('upload/{id}/{typeDoss}', 'UploadController@uploadForm');
 Route::post('upload/{id}/{typeDoss}', 'UploadController@uploadSubmit');
 
 Route::get('downloadFile/{fileId}', 'DownloadController@downloadFile');
+Route::get('downloadFilePublic/{fileId}', 'DownloadController@downloadFilePublic');
 Route::get('downloadRepo/{idDossier}', 'DownloadController@downloadRepo');
+Route::get('downloadRepoPublic/{idDossier}', 'DownloadController@downloadRepoPublic');
 
 Route::get('repertoire/{id}', 'repoController@index');
 Route::post('repertoire/{id}', 'repoController@postRepo');

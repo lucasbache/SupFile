@@ -7,13 +7,13 @@ use Storage;
 use File;
 use COM;
 use Zipper;
+use Zip;
 use Illuminate\Support\Facades\Auth;
 use App\stockage;
 use AppDocument;
 use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
-use MicrosoftAzure\Storage\Blob\BlobRestProxy;
 
 
 trait FileTrait
@@ -53,8 +53,16 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-        File::makeDirectory($cheminDossier, 777, true);
-        //Storage::disk('azure')->makeDirectory($cheminDossier, 777, true);
+        //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        //$fileClient = FileRestProxy::createFileService($connectionString);
+
+        //$shareName = 'users/'.$dossierActuel;
+        //$directoryName = $repoName;
+
+        // Create directory.
+        //$fileClient->createDirectory($shareName, $directoryName);
+        File::makeDirectory($cheminDossier, 777,true);
+
         return $dossier->id;
     }
 
@@ -62,10 +70,9 @@ trait FileTrait
 
         //On vérifie que le stockage ne dépasse pas 30Go
         $stockageUtilise = stockage::findSizeByUserId($userId)->first();
-        
         $extsn = explode('.', $nomFicComplet);
         $extension = last($extsn);
-
+        
         if($stockageUtilise->stockageUtilise > 30000000000)
         {
             return false;
@@ -131,9 +138,10 @@ trait FileTrait
 
         $files = glob($dossier->cheminDossier);
 
-        Zipper::make('public/'.$dossier->name)->add($files)->close();
+        Zipper::make('public/'.$dossier->name.'.zip')->add($files)->close();
 
-        return response()->download('public/'.$dossier->name);
+        return response()->download('public/'.$dossier->name.'.zip');
+
     }
 
     public function renameFiles($objectId, $newName){
@@ -154,7 +162,6 @@ trait FileTrait
         File::move($file->cheminFichier, $dossFichier);
 
         return $file;
-
     }
 
     public function renameRepo($objectId, $newName){
@@ -239,7 +246,7 @@ trait FileTrait
             $chmDos = explode('/',$objectPath);
             $cheminDossier = implode('\\', $chmDos);
 
-            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
+            $f = "C:\wamp\www\SupDrive\public\\".$cheminDossier;
             $obj = new COM ( 'scripting.filesystemobject' );
             $ref = $obj->getfolder ( $f );
 
@@ -249,7 +256,16 @@ trait FileTrait
 
             repository::suppressRepo($objectId);
 
-            File::deleteDirectory($objectPath);
+            //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            //$fileClient = FileRestProxy::createFileService($connectionString);
+
+            //$shareName = 'users/'.$repo->dossierParent;
+            //$directoryName = $repo->name;
+
+            // Create directory.
+            //$fileClient->deleteDirectory($shareName, $directoryName);
+
+            File::deleteDirectory($repo->cheminDossier);
         }
         //On veut supprimer un fichier
         else{

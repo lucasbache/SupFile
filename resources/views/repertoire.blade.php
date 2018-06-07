@@ -73,22 +73,22 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <nav aria-label="breadcrumb" class="breadcrumb h5">
-                                @foreach($listeDossier as $dossier)
-                                    @if($dossier->dossierPrimaire == 'Y')
-                                        <li class="breadcrumb-item active" aria-current="page"><a
-                                                    href="{{ URL::to( '/home' ) }}"> {{ $dossier->name }}</a></li>
+                            @foreach($listeDossier as $dossier)
+                                @if($dossier->dossierPrimaire == 'Y')
+                                    <li class="breadcrumb-item active" aria-current="page"><a
+                                                href="{{ URL::to( '/home' ) }}"> {{ $dossier->name }}</a></li>
+                                @else
+                                    @if($dossier->cheminDossier == $dossierActuel)
+                                        <li class="breadcrumb-item active"
+                                            aria-current="page">{{ $dossier->name }}</li>
                                     @else
-                                        @if($dossier->cheminDossier == $dossierActuel)
-                                            <li class="breadcrumb-item active"
-                                                aria-current="page">{{ $dossier->name }}</li>
-                                        @else
-                                            <li class="breadcrumb-item"><a
-                                                        href="{{ URL::to( '/repertoire/'.$dossier->id) }}"> {{ $dossier->name }}</a>
-                                            </li>
-                                        @endif
+                                        <li class="breadcrumb-item"><a
+                                                    href="{{ URL::to( '/repertoire/'.$dossier->id) }}"> {{ $dossier->name }}</a>
+                                        </li>
                                     @endif
-                                @endforeach
-                            </ol>
+                                @endif
+                            @endforeach
+                                        </ol>
                         </nav>
 
                         <h3>Vos fichiers :</h3>
@@ -150,7 +150,7 @@
                                                                 <a href="" data-toggle="modal"
                                                                    data-target="#modal-video"
                                                                    class="open-modal-video"
-                                                                   data-id="{{$File->cheminFichier}}">
+                                                                   data-id="../public/{{$File->cheminFichier}}">
                                                                     <i class="material-icons">launch</i>
                                                                 </a>
                                                             @else
@@ -340,7 +340,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                     </button>
-                                    <input type="submit" class="btn btn-primary" value="Créer">
+                                    <input type="submit" class="btn btn-primary" value="Renommer">
                                 </div>
                             </form-group>
                         </form>
@@ -373,7 +373,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                     </button>
-                                    <input type="submit" class="btn btn-primary" value="Créer">
+                                    <input type="submit" class="btn btn-primary" value="Renommer">
                                 </div>
                             </form-group>
                         </form>

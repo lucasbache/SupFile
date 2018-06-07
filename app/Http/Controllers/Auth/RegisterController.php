@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use File;
 use Storage;
 use Illuminate\Support\Facades\Crypt;
+use MicrosoftAzure\Storage\File\FileRestProxy;
 
 class RegisterController extends Controller
 {
@@ -76,6 +77,17 @@ class RegisterController extends Controller
 
         $repoName = $data['email'];
 
+        File::makeDirectory($repoName.'/', 777, true);
+
+        //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        //$fileClient = FileRestProxy::createFileService($connectionString);
+
+        //$shareName = 'users';
+        //$directoryName = $repoName;
+
+        // Create directory.
+        //$fileClient->createDirectory($shareName, $directoryName);
+
         $repo = repository::create([
             'user_id' => $userid->id,
             'name' => $repoName,
@@ -90,8 +102,6 @@ class RegisterController extends Controller
         $publicLink = 'http://localhost/SupDrive/public/'.'downloadRepoPublic/'.$idCrypted;
 
         repository::updatePublicLinkRepo($repo->id,$publicLink);
-
-        File::makeDirectory($repoName.'/', 777, true);
 
         stockage::create([
            'user_id' => $userid->id,

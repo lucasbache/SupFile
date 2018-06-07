@@ -31,6 +31,7 @@ class createRepoController extends Controller
         $cheminDossier = $request->input('path').'/'.$repoName;
 
         $dossierActuel = $request->input('path');
+        dd($dossierActuel);
 
         $dossierCree = $this->createRepo($userId, $repoName, $cheminDossier, $dossierActuel);
 

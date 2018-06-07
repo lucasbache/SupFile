@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        File::deleteDirectory('public');
+        //File::deleteDirectory('public');
         return redirect($this->redirectTo);
     }
 
