@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
         <div class="row">
             <div class="" style="padding-top: 5%">
                 <div class="panel panel-default">
@@ -39,8 +38,8 @@
 
                             <div class="form-group">
                                 <div class="">
-                                        <label class="">
-                                            <input type="checkbox" name="remember" class="message" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
+                                        <label class="message">
+                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Se souvenir de moi
                                         </label><br>
                                         <a class="message" href="{{ route('password.request') }}">
                                             Mot de passe oublié
