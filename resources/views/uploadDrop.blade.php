@@ -20,11 +20,6 @@
                   enctype="multipart/form-data" class="dropzone" id="my-dropzone">
                 {{ csrf_field() }}
                 <div class="dz-message">
-                    <div class="col-xs-8">
-                        <div class="message">
-                            <p>Drop files here or Click to Upload</p>
-                        </div>
-                    </div>
                 </div>
                 <div class="fallback">
                     <input type="file" name="file" multiple>

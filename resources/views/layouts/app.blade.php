@@ -30,7 +30,7 @@
         <div class="container">
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ URL::to( '/home' ) }}">
-                <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supfile-logo.png') }}" height="50" alt="SupFile">
+                <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supcloud.png') }}" height="50" alt="SupFile">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,15 +84,15 @@
         <div class="dividline light-grey"></div>
     </nav>
 
-
+<div id="containerSite">
     <div style="margin-top: 6%;">
         @yield('content')
     </div>
-    <footer class="page-footer font-small fixed-bottom">
-        <div class="container text-center text-md-left">
+    <footer class="page-footer font-small fixed-bottom" id="footer">
+        <div class="text-center text-md-left">
             <div class="row">
                 <div class="col-md-4">
-                    <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supfile-logo.png') }}" height="30" alt="SupFile">
+                    <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supcloud.png') }}" height="30" alt="SupFile">
                     <p>© 2018 Copyright
                         <a href="/howto">SupFile</a>
                     </p>
@@ -103,6 +103,9 @@
                     <ul class="list-unstyled">
                         <li>
                             <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="/howto">Comment faire ?</a>
                         </li>
                     </ul>
                 </div>
@@ -119,10 +122,12 @@
                 </div>
             </div>
         </div>
-  <!-- Copyright -->
-
-</footer>
+    </footer>
 </div>
+</div>
+
+
+
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -151,4 +156,5 @@
     });
 </script>
 </body>
+
 </html>

@@ -10,7 +10,7 @@
 @endif
 
 @if(Session::has('error'))
-    <div class="notice notice-alert alert-dismissible fade show" role="alert">
+    <div class="notice notice-alert alert-dismissible fade show fixed-top" role="alert">
         {{ Session::get('error') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -141,8 +141,8 @@
                                                         @endif
                                                     </div>
                                                     <div class="card-footer">
-                                                        <small class="text-muted">Last update
-                                                            on {{$File->updated_at}}</small>
+                                                        <small class="text-muted">Dernière mise à jour
+                                                            le {{$File->updated_at}}</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -153,7 +153,6 @@
                             <div class="dz-message">
                                 <div class="col-xs-8">
                                     <div class="message">
-                                        <p>Drop files here</p>
                                         <input type="hidden" name="path" value="{{$repoPath}}"/>
                                         <input type="hidden" name="id" value="{{$repo->id}}"/>
                                         <input type="hidden" name="typeDoss" value="{{$repo->dossierParent}}"/>
@@ -205,8 +204,7 @@
                                          xmlns:xlink="http://www.w3.org/1999/xlink"
                                          xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                                         <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
-                                        <title>error</title>
-                                        <desc>Created with Sketch.</desc>
+                                        <title>erreur</title>
                                         <defs></defs>
                                         <g id="Page-1" stroke="none" stroke-width="1" fill="none"
                                            fill-rule="evenodd" sketch:type="MSPage">
@@ -236,7 +234,7 @@
                                 {{ csrf_field() }}
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalCenterTitle">Importer un fichier</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
