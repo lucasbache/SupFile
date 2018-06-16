@@ -26,6 +26,7 @@ class DownloadController extends Controller
         $decryptedId = Crypt::decryptString($fileId);
         $file = fileEntries::findFileById($decryptedId)->first();
         $filename = $file->cheminFichier;
+        dd($filename);
 
         return $this->downloadFiles($filename);
     }
@@ -33,6 +34,7 @@ class DownloadController extends Controller
     public function downloadRepo($idDossier)
     {
         $repertoire = repository::findRepoById($idDossier);
+        dd($repertoire);
         return $this->downloadRepos($repertoire);
     }
 
@@ -40,6 +42,7 @@ class DownloadController extends Controller
     {
         $decryptedId = Crypt::decryptString($idDossier);
         $repertoire = repository::findRepoById($decryptedId);
+        dd($repertoire);
         return $this->downloadRepos($repertoire);
     }
 }
