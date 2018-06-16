@@ -251,7 +251,7 @@ trait FileTrait
             $listeDossierFichier = $fileClient->listDirectoriesAndFiles($shareName, $repo->name);
 
             foreach ($listeDossierFichier->getDirectories() as $sousDoss){
-                $fileClient->deleteDirectory($shareName.'/'.$repo->name, $sousDoss);
+                $fileClient->deleteDirectory($shareName.'/'.$repo->name, $sousDoss->getName());
             }
 
             $objectPath = $repo->cheminDossier;
