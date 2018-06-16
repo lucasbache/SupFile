@@ -53,14 +53,14 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-        //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        //$fileClient = FileRestProxy::createFileService($connectionString);
+        $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $fileClient = FileRestProxy::createFileService($connectionString);
 
-        //$shareName = 'users/'.$dossierActuel;
-        //$directoryName = $repoName;
+        $shareName = 'users/'.$dossierActuel;
+        $directoryName = $repoName;
 
         // Create directory.
-        //$fileClient->createDirectory($shareName, $directoryName);
+        $fileClient->createDirectory($shareName, $directoryName);
         File::makeDirectory($cheminDossier, 777,true);
 
         return $dossier->id;
@@ -256,14 +256,14 @@ trait FileTrait
 
             repository::suppressRepo($objectId);
 
-            //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            //$fileClient = FileRestProxy::createFileService($connectionString);
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $fileClient = FileRestProxy::createFileService($connectionString);
 
-            //$shareName = 'users/'.$repo->dossierParent;
-            //$directoryName = $repo->name;
+            $shareName = 'users/'.$repo->dossierParent;
+            $directoryName = $repo->name;
 
             // Create directory.
-            //$fileClient->deleteDirectory($shareName, $directoryName);
+            $fileClient->deleteDirectory($shareName, $directoryName);
 
             File::deleteDirectory($repo->cheminDossier);
         }
