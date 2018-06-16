@@ -187,7 +187,7 @@ trait FileTrait
 
         $shareName = 'users/'.$dossier->dossierParent;
 
-        $metadataRepo = $fileClient->getDirectoryMetadata($shareName, $dossier->name);
+        $metadataRepo = $fileClient->getDirectoryProperties($shareName, $dossier->name);
         dd($metadataRepo);
 
         $fichierDossier = fileEntries::findFileByRepo($dossier->cheminDossier);
