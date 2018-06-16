@@ -182,6 +182,14 @@ trait FileTrait
 
         $dossier = repository::findRepoById($objectId);
 
+        $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $fileClient = FileRestProxy::createFileService($connectionString);
+
+        $shareName = 'users/'.$dossier->dossierParent;
+
+        $metadataRepo = $fileClient->getDirectoryMetadata($shareName, $dossier->name);
+        dd($metadataRepo);
+
         $fichierDossier = fileEntries::findFileByRepo($dossier->cheminDossier);
 
         $dossierEnfant = repository::findRepoByStock($dossier->cheminDossier);
