@@ -41,7 +41,7 @@ class DownloadController extends Controller
     {
         $decryptedId = Crypt::decryptString($idDossier);
         $repertoire = repository::findRepoById($decryptedId);
-        
+
         return $this->downloadRepos($repertoire);
     }
 }
