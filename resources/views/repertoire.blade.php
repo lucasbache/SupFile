@@ -133,7 +133,7 @@
                                                             @if($dossier->dossierPrimaire == 'Y')
                                                                 <a href="" data-toggle="modal" data-target="#modal-image"
                                                                    class="open-modal-image"
-                                                                   data-id="../public/{{$File->cheminFichier}}">
+                                                                   data-id="../{{$File->cheminFichier}}">
                                                                     <i class="material-icons">launch</i>
                                                                 </a>
                                                             @else
