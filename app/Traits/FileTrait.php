@@ -106,6 +106,12 @@ trait FileTrait
             //On insert le fichier dans le répertoire
             $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
 
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $fileClient = FileRestProxy::createFileService($connectionString);
+
+            $shareName = 'users/'.$dossierActuel;
+
+            $fileClient->createFile($shareName, $nomFicComplet, 1024);
             //On créer le fichier dans la base de donnée
             $file = fileEntries::create([
                 'user_id' => $userId,
