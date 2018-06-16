@@ -242,6 +242,14 @@ trait FileTrait
             $stockageUser = stockage::findSizeByUserId($user->id)->first();
 
             $repo = repository::findRepoById($objectId);
+            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $fileClient = FileRestProxy::createFileService($connectionString);
+
+            $shareName = 'users/'.$repo->dossierParent;
+            $directoryName = $repo->name;
+
+            $listeDossierFichier = $fileClient->listDirectoriesAndFiles('users/', $repo->cheminDossier);
+            dd($listeDossierFichier);
             $objectPath = $repo->cheminDossier;
 
             $sousDossier = repository::findAllRepoByPath($objectPath);
@@ -270,14 +278,6 @@ trait FileTrait
 
             repository::suppressRepo($objectId);
 
-            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $fileClient = FileRestProxy::createFileService($connectionString);
-
-            $shareName = 'users/'.$repo->dossierParent;
-            $directoryName = $repo->name;
-
-            $listeDossierFichier = $fileClient->listDirectoriesAndFiles($shareName, $repo->cheminDossier);
-            dd($listeDossierFichier);
             // Create directory.
             $fileClient->deleteDirectory($shareName, $directoryName);
 
