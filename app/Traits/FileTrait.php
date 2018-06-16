@@ -246,7 +246,7 @@ trait FileTrait
             $chmDos = explode('/',$objectPath);
             $cheminDossier = implode('\\', $chmDos);
 
-            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
+            $f = "D:\home\site\public\\".$cheminDossier;
             $obj = new COM ( 'scripting.filesystemobject' );
             $ref = $obj->getfolder ( $f );
 
