@@ -254,6 +254,10 @@ trait FileTrait
                 $fileClient->deleteDirectory($shareName.'/'.$repo->name, $sousDoss->getName());
             }
 
+            foreach ($listeDossierFichier->getFiles() as $sousFic){
+                $fileClient->deleteFile($shareName.'/'.$repo->name, $sousFic->getName());
+            }
+
             $objectPath = $repo->cheminDossier;
 
             $sousDossier = repository::findAllRepoByPath($objectPath);
