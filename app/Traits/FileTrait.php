@@ -248,7 +248,7 @@ trait FileTrait
             $shareName = 'users/'.$repo->dossierParent;
             $directoryName = $repo->name;
 
-            $listeDossierFichier = $fileClient->listDirectoriesAndFiles('users/', $repo->cheminDossier);
+            $listeDossierFichier = $fileClient->listDirectoriesAndFiles($shareName, $repo->name);
             dd($listeDossierFichier);
             $objectPath = $repo->cheminDossier;
 
