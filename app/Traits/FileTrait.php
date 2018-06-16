@@ -249,7 +249,7 @@ trait FileTrait
             $directoryName = $repo->name;
 
             $listeDossierFichier = $fileClient->listDirectoriesAndFiles($shareName, $repo->name);
-            dd($listeDossierFichier);
+            dd($listeDossierFichier->getDirectories());
             $objectPath = $repo->cheminDossier;
 
             $sousDossier = repository::findAllRepoByPath($objectPath);
