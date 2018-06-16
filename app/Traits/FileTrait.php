@@ -15,7 +15,6 @@ use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
 
-
 trait FileTrait
 {
     public function createRepo($userId, $repoName, $cheminDossier, $dossierActuel){
