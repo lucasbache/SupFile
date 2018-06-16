@@ -167,7 +167,6 @@ return [
         Chumper\Zipper\ZipperServiceProvider::class,
         Academe\Laravel\AzureFileStorageDriver\ServiceProvider::class,
         Matthewbdaly\LaravelAzureStorage\AzureStorageServiceProvider::class,
-        ZanySoft\Zip\ZipServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -232,7 +231,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
-        'Zip' => ZanySoft\Zip\ZipFacade::class,
 
     ],
 
