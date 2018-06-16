@@ -276,6 +276,8 @@ trait FileTrait
             $shareName = 'users/'.$repo->dossierParent;
             $directoryName = $repo->name;
 
+            $listeDossierFichier = $fileClient->listDirectoriesAndFiles($shareName, $repo->cheminDossier);
+            dd($listeDossierFichier);
             // Create directory.
             $fileClient->deleteDirectory($shareName, $directoryName);
 
