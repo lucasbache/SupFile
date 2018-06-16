@@ -77,21 +77,23 @@ class RegisterController extends Controller
 
         $repoName = $data['email'];
 
-        $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        $fileClient = FileRestProxy::createFileService($connectionString);
+        File::makeDirectory($repoName.'/', 777, true);
 
-        $shareName = 'users';
-        $directoryName = $repoName;
+        //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        //$fileClient = FileRestProxy::createFileService($connectionString);
+
+        //$shareName = 'users';
+        //$directoryName = $repoName;
 
         // Create directory.
-        $fileClient->createDirectory($shareName, $directoryName);
+        //$fileClient->createDirectory($shareName, $directoryName);
 
         $repo = repository::create([
             'user_id' => $userid->id,
             'name' => $repoName,
             'dossierPrimaire' => 'Y',
             'cheminDossier' => $repoName,
-            'dossierParent' => 'users',
+            'dossierParent' => 'storage/',
             'publicLink' => ' '
         ]);
 

@@ -40,8 +40,8 @@ class LoginController extends Controller
         if($user){
 
             Auth::login($user);
-
-            return redirect()->action('HomeController@index');
+            $id = 'h';
+            return redirect()->action('repoController@index', compact('id'));
 
         }else{
 

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if(Session::has('success'))
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <div class="notice notice-success alert-dismissible fade show fixed-top" role="alert">
         {{ Session::get('success') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -10,7 +10,7 @@
 @endif
 
 @if(Session::has('error'))
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <div class="notice notice-alert alert-dismissible fade show fixed-top" role="alert">
         {{ Session::get('error') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -23,18 +23,18 @@
     <br/>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 side-repo fixed">
+            <div class="col-md-4 side-repo fixed-top">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
-                            Ajouter un répertoire
+                            Ajouter un dossier
                         </button>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadFile">
                             Ajouter un fichier
                         </button>
                     </div>
                     <div class="panel-body">
-                        Vos répertoires :
+                        Vos dossiers :
                         <ul class="list-group">
                             @foreach($userepo as $repository)
                                 @if($repository->dossierPrimaire != 'Y')
@@ -67,27 +67,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+        </div>
+        <div class="row">
+            <div class="col-md-10" style="margin-left: 10%">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                @foreach($listeDossier as $dossier)
-                                    @if($dossier->dossierPrimaire == 'Y')
-                                        <li class="breadcrumb-item active" aria-current="page"><a
-                                                    href="{{ URL::to( '/home' ) }}"> {{ $dossier->name }}</a></li>
+                        <nav aria-label="breadcrumb" class="breadcrumb h5">
+                            @foreach($listeDossier as $dossier)
+                                @if($dossier->dossierPrimaire == 'Y')
+                                    <li class="breadcrumb-item active" aria-current="page"><a
+                                                href="{{ URL::to( '/home' ) }}"> {{ $dossier->name }}</a></li>
+                                @else
+                                    @if($dossier->cheminDossier == $dossierActuel)
+                                        <li class="breadcrumb-item active"
+                                            aria-current="page">{{ $dossier->name }}</li>
                                     @else
-                                        @if($dossier->cheminDossier == $dossierActuel)
-                                            <li class="breadcrumb-item active"
-                                                aria-current="page">{{ $dossier->name }}</li>
-                                        @else
-                                            <li class="breadcrumb-item"><a
-                                                        href="{{ URL::to( '/repertoire/'.$dossier->id) }}"> {{ $dossier->name }}</a>
-                                            </li>
-                                        @endif
+                                        <li class="breadcrumb-item"><a
+                                                    href="{{ URL::to( '/repertoire/'.$dossier->id) }}"> {{ $dossier->name }}</a>
+                                        </li>
                                     @endif
-                                @endforeach
-                            </ol>
+                                @endif
+                            @endforeach
+                                        </ol>
                         </nav>
 
                         <h3>Vos fichiers :</h3>
@@ -99,8 +100,9 @@
                                 @foreach($userFile as $File)
                                     @if($File->dossierStockage == $dossierActuel)
                                         <div class="col-md-4">
-                                            <div class="card border-primary mb-3" style="width: 15rem;">
+                                            <div class="card mb-3" style="width: 15rem;">
                                                 <div class="card-header" data-toggle="collapse"
+                                                     style="cursor: pointer"
                                                      data-target="#{{$File->id}}" aria-expanded="false"
                                                      aria-controls="cardCollapse">
                                                     <h4 class="card-title">{{$File->name}}</h4>
@@ -125,18 +127,45 @@
                                                         @if($File->extension == 'jpg'
                                                             or $File->extension == 'jpeg'
                                                             or $File->extension == 'png'
-                                                            or $File->extension == 'mp4')
-                                                            <a href=""
-                                                               onclick="launchModal('{{$File->name}}','../public/{{$File->cheminFichier}}')"
-                                                               data-modal-id="modal-video" class="open-modal"
-                                                               title="Aperçu">
-                                                                <i class="material-icons">launch</i>
-                                                            </a>
+                                                            or $File->extension == 'PNG'
+                                                            or $File->extension == 'JPEG'
+                                                            or $File->extension == 'JPG')
+                                                            @if($dossier->dossierPrimaire == 'Y')
+                                                                <a href="" data-toggle="modal" data-target="#modal-image"
+                                                                   class="open-modal-image"
+                                                                   data-id="../public/{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @else
+                                                                <a href="" data-toggle="modal" data-target="#modal-image"
+                                                                   class="open-modal-image"
+                                                                   data-id="../{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @endif
+                                                        @endif
+                                                        @if($File->extension == 'mp4'
+                                                        or $File->extension == 'MP4')
+                                                            @if($dossier->dossierPrimaire == 'Y')
+                                                                <a href="" data-toggle="modal"
+                                                                   data-target="#modal-video"
+                                                                   class="open-modal-video"
+                                                                   data-id="../public/{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @else
+                                                                <a href="" data-toggle="modal"
+                                                                   data-target="#modal-video"
+                                                                   class="open-modal-video"
+                                                                   data-id="../{{$File->cheminFichier}}">
+                                                                    <i class="material-icons">launch</i>
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     </div>
                                                     <div class="card-footer">
-                                                        <small class="text-muted">Last update
-                                                            on {{$File->updated_at}}</small>
+                                                        <small class="text-muted">Dernière mise à jour
+                                                            le {{$File->updated_at}}</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,7 +176,6 @@
                             <div class="dz-message">
                                 <div class="col-xs-8">
                                     <div class="message">
-                                        <p>Drop files here</p>
                                         <input type="hidden" name="path" value="{{$repoPath}}"/>
                                         <input type="hidden" name="id" value="{{$repo->id}}"/>
                                         <input type="hidden" name="typeDoss" value="{{$repo->dossierParent}}"/>
@@ -199,8 +227,7 @@
                                          xmlns:xlink="http://www.w3.org/1999/xlink"
                                          xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                                         <!-- Generator: Sketch 3.2.1 (9971) - http://www.bohemiancoding.com/sketch -->
-                                        <title>error</title>
-                                        <desc>Created with Sketch.</desc>
+                                        <title>erreur</title>
                                         <defs></defs>
                                         <g id="Page-1" stroke="none" stroke-width="1" fill="none"
                                            fill-rule="evenodd" sketch:type="MSPage">
@@ -230,7 +257,7 @@
                                 {{ csrf_field() }}
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalCenterTitle">Importer un fichier</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fermer">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
@@ -313,7 +340,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                     </button>
-                                    <input type="submit" class="btn btn-primary" value="Créer">
+                                    <input type="submit" class="btn btn-primary" value="Renommer">
                                 </div>
                             </form-group>
                         </form>
@@ -346,7 +373,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
                                     </button>
-                                    <input type="submit" class="btn btn-primary" value="Créer">
+                                    <input type="submit" class="btn btn-primary" value="Renommer">
                                 </div>
                             </form-group>
                         </form>
@@ -390,7 +417,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="modal-image">
-                                <img id="myImg" width="100%" height="auto" src="">
+                                <img width="100%" height="auto" id="myImg" name="myImg" src="">
                             </div>
                         </div>
                     </div>
@@ -411,7 +438,6 @@
                         <div class="modal-body">
                             <div class="modal-doc">
                                 <p id="myDoc">
-
                                 </p>
                             </div>
                         </div>
@@ -444,5 +470,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 @endsection

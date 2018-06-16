@@ -1,14 +1,15 @@
 .navbar
 {
-    background-image: -moz-linear-gradient( 135deg, rgba(12, 100, 12, 0.95) 0%, rgba(140, 235, 55, 0.95) 100%);
+    /* background-image: -moz-linear-gradient( 135deg, rgba(12, 100, 12, 0.95) 0%, rgba(140, 235, 55, 0.95) 100%);
     background-image: -webkit-linear-gradient( 135deg, rgba(12, 100, 12, 0.95) 0%, rgba(140, 235, 55, 0.95) 100%);
     background-image: -ms-linear-gradient( 135deg, rgba(12, 100, 12, 0.95) 0%, rgba(140, 235, 55, 0.95) 100%);
-    background-image: linear-gradient( 135deg, rgba(12, 100, 12, 0.95) 0%, rgba(140, 235, 55, 0.95) 100%);
+    background-image: linear-gradient( 135deg, rgba(12, 100, 12, 0.95) 0%, rgba(140, 235, 55, 0.95) 100%); */
+    background-color: #69ba25;
     padding-top: 2%;
     margin-top: -1%;
     margin-left: 20%;
     margin-right: 20%;
-    border-radius: .5vw;
+    border-radius: .2vw;
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.26);
 
 }
@@ -113,4 +114,8 @@
 
 .header-full .btn-primary:hover {
     background-color:rgba(255,255,255,0.1);
+}
+
+.caret:hover {
+    color: black; !important;
 }

@@ -18,6 +18,7 @@
     <!-- Styles -->
 
     <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
@@ -25,21 +26,14 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top row">
+        <div class="container nav-cont col-md-12">
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ URL::to( '/home' ) }}">
-                <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supfile-logo.png') }}" height="50" width="200"
-                     alt="test">
+            <a class="navbar-brand" href="{{ URL::to( '/home' ) }}" id="lien-logo">
+                <img id="logo" class="" src="{{ asset('Images/supcloud.png') }}" height="50" alt="SupFile">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-
                 <ul class="navbar-nav ml-auto">
                     <form class="form-inline">
                         <div class="input-group mb-2">
@@ -84,11 +78,50 @@
         <div class="dividline light-grey"></div>
     </nav>
 
-
+<div id="containerSite">
     <div style="margin-top: 6%;">
         @yield('content')
     </div>
+    <footer class="page-footer font-small fixed-bottom" id="footer">
+        <div class="text-center text-md-left">
+            <div class="row">
+                <div class="col-md-4">
+                    <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supcloud.png') }}" height="30" alt="SupFile">
+                    <p>© 2018 Copyright
+                        <a href="/howto">SupFile</a>
+                    </p>
+                </div>
+                <hr class="">
+                <div class="col-md-4">
+                    <h5 class="text-uppercase h5">L'entreprise</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="/howto">Comment faire ?</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-uppercase h5">Mentions légales</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/legal">Mentions légales</a>
+                        </li>
+                        <li>
+                            <a href="/rgpd">Utilisation des données</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
+</div>
+
+
+
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -99,22 +132,6 @@
 <script src="{{ asset('js/functions.js') }}"></script>
 <script src=" {{ asset('js/dropzone.js') }}"></script>
 <script src=" {{ asset('js/dropzone-config.js') }}"></script>
-
-<script type="text/javascript">
-    $(document).on("click", ".open-modal", function () {
-        var eventId = $(this).data('id');
-        $(".modal-body #eventId").val(eventId);
-    });
-</script>
-<script>
-    $(document).ready(function () {
-        $('.js-smooth').on('click', function () {
-            var page = $(this).attr('href');
-            var speed = 1000;
-            $('html, body').animate({scrollTop: $(page).offset().top}, speed);
-            return false;
-        });
-    });
-</script>
 </body>
+
 </html>

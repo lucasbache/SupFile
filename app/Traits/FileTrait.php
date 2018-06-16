@@ -1,31 +1,19 @@
 <?php
 
 namespace App\Traits;
-require_once "../vendor/autoload.php";
 use App\fileEntries;
 use App\repository;
 use Storage;
 use File;
 use COM;
 use Zipper;
+use Zip;
 use Illuminate\Support\Facades\Auth;
 use App\stockage;
 use AppDocument;
 use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
-use MicrosoftAzure\Storage\Blob\BlobRestProxy;
-use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
-use MicrosoftAzure\Storage\Common\Internal\Resources;
-use MicrosoftAzure\Storage\Common\Internal\StorageServiceSettings;
-use MicrosoftAzure\Storage\Common\Models\Range;
-use MicrosoftAzure\Storage\Common\Models\Metrics;
-use MicrosoftAzure\Storage\Common\Models\RetentionPolicy;
-use MicrosoftAzure\Storage\Common\Models\ServiceProperties;
-use MicrosoftAzure\Storage\File\FileRestProxy;
-use MicrosoftAzure\Storage\File\FileSharedAccessSignatureHelper;
-use MicrosoftAzure\Storage\File\Models\CreateShareOptions;
-use MicrosoftAzure\Storage\File\Models\ListSharesOptions;
 
 
 trait FileTrait
@@ -65,14 +53,15 @@ trait FileTrait
 
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
-        $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        $fileClient = FileRestProxy::createFileService($connectionString);
+        //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        //$fileClient = FileRestProxy::createFileService($connectionString);
 
-        $shareName = 'users/'.$dossierActuel;
-        $directoryName = $repoName;
+        //$shareName = 'users/'.$dossierActuel;
+        //$directoryName = $repoName;
 
         // Create directory.
-        $fileClient->createDirectory($shareName, $directoryName);
+        //$fileClient->createDirectory($shareName, $directoryName);
+        File::makeDirectory($cheminDossier, 777,true);
 
         return $dossier->id;
     }
@@ -149,9 +138,10 @@ trait FileTrait
 
         $files = glob($dossier->cheminDossier);
 
-        Zipper::make('public/'.$dossier->name)->add($files)->close();
+        Zipper::make('public/'.$dossier->name.'.zip')->add($files)->close();
 
-        return response()->download('public/'.$dossier->name);
+        return response()->download('public/'.$dossier->name.'.zip');
+
     }
 
     public function renameFiles($objectId, $newName){
@@ -172,7 +162,6 @@ trait FileTrait
         File::move($file->cheminFichier, $dossFichier);
 
         return $file;
-
     }
 
     public function renameRepo($objectId, $newName){
@@ -254,28 +243,29 @@ trait FileTrait
                 fileEntries::suppressFile($sousFic->id);
             }
 
-            //$chmDos = explode('/',$objectPath);
-            //$cheminDossier = implode('\\', $chmDos);
+            $chmDos = explode('/',$objectPath);
+            $cheminDossier = implode('\\', $chmDos);
 
-            //$f = "https://supfiledisk2.file.core.windows.net/users/".$cheminDossier;
-            //$obj = new COM ( 'scripting.filesystemobject' );
-            //$ref = $obj->getfolder ( $f );
+            $f = "C:\wamp64\www\SupDrive\public\\".$cheminDossier;
+            $obj = new COM ( 'scripting.filesystemobject' );
+            $ref = $obj->getfolder ( $f );
 
-            //$nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
+            $nouveauStockage = $stockageUser->stockageUtilise - $ref->size;
 
-            //stockage::updateStorage($user->id, $nouveauStockage);
+            stockage::updateStorage($user->id, $nouveauStockage);
 
             repository::suppressRepo($objectId);
 
-            $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $fileClient = FileRestProxy::createFileService($connectionString);
+            //$connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            //$fileClient = FileRestProxy::createFileService($connectionString);
 
-            $shareName = 'users/'.$repo->dossierParent;
-            $directoryName = $repo->name;
+            //$shareName = 'users/'.$repo->dossierParent;
+            //$directoryName = $repo->name;
 
             // Create directory.
-            $fileClient->deleteDirectory($shareName, $directoryName);
+            //$fileClient->deleteDirectory($shareName, $directoryName);
 
+            File::deleteDirectory($repo->cheminDossier);
         }
         //On veut supprimer un fichier
         else{
