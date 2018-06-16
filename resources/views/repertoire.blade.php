@@ -116,7 +116,7 @@
                                                            class="open-modal" data-id="{{$File->id}}">
                                                             <i class="material-icons">create</i>
                                                         </a>
-                                                        <a href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.$repo->dossierParent) }}">
+                                                        <a href="{{ URL::to('/suppress/'.$File->id.'/'.'F'.'/'.$repo->id.'/'.$repo->dossierPrimaire) }}">
                                                             <i class="material-icons">delete_forever</i>
                                                         </a>
                                                         <a href="" data-toggle="modal" data-target="#publicLink"

@@ -249,7 +249,11 @@ trait FileTrait
             $directoryName = $repo->name;
 
             $listeDossierFichier = $fileClient->listDirectoriesAndFiles($shareName, $repo->name);
-            dd($listeDossierFichier->getDirectories());
+
+            foreach ($listeDossierFichier->getDirectories() as $sousDoss){
+                $fileClient->deleteDirectory($shareName.'/'.$repo->name, $directoryName);
+            }
+
             $objectPath = $repo->cheminDossier;
 
             $sousDossier = repository::findAllRepoByPath($objectPath);
@@ -278,7 +282,7 @@ trait FileTrait
 
             repository::suppressRepo($objectId);
 
-            // Create directory.
+            // Delete directory.
             $fileClient->deleteDirectory($shareName, $directoryName);
 
             File::deleteDirectory($repo->cheminDossier);

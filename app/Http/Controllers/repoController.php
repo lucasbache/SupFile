@@ -137,7 +137,7 @@ class repoController extends Controller
 
         $this->suppress($objectType,$objectId);
 
-        if($typeDoss == 'storage' )
+        if($typeDoss == 'Y' )
         {
             return redirect('home');
         }
