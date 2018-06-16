@@ -14,6 +14,7 @@ use AppDocument;
 use AppHttpRequests;
 use AppHttpControllersController;
 use Illuminate\Support\Facades\Crypt;
+use MicrosoftAzure\Storage\File\FileRestProxy;
 
 trait FileTrait
 {

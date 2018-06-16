@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use File;
 use Storage;
 use Illuminate\Support\Facades\Crypt;
-use App\Traits\FileRestProxy;
+use MicrosoftAzure\Storage\File\FileRestProxy;
 
 class RegisterController extends Controller
 {
