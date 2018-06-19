@@ -396,7 +396,7 @@
                         <div class="modal-body">
                             <div class="modal-video">
                                 <div id="MyVidModal" class="embed-responsive embed-responsive-16by9">
-                                    <video id='myVid' src='' width="568" height="240" controls></video>
+                                    <video id='myVid' src='' width="100%" height="auto" controls="controls"></video>
                                 </div>
                             </div>
                         </div>

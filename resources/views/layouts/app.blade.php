@@ -88,7 +88,7 @@
                 <div class="col-md-4">
                     <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supcloud.png') }}" height="30" alt="SupFile">
                     <p>© 2018 Copyright
-                        <a href="/howto">SupFile</a>
+                        <a href="{{ URL::to('/howto')}}">SupFile</a>
                     </p>
                 </div>
                 <hr class="">
