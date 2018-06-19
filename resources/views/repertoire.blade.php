@@ -150,7 +150,7 @@
                                                                 <a href="" data-toggle="modal"
                                                                    data-target="#modal-video"
                                                                    class="open-modal-video"
-                                                                   data-id="../public/{{$File->cheminFichier}}">
+                                                                   data-id="../{{$File->cheminFichier}}">
                                                                     <i class="material-icons">launch</i>
                                                                 </a>
                                                             @else
