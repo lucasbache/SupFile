@@ -82,6 +82,7 @@
     <div style="margin-top: 6%;">
         @yield('content')
     </div>
+    <!--
     <footer class="page-footer font-small fixed-bottom" id="footer">
         <div class="text-center text-md-left">
             <div class="row">
@@ -116,7 +117,41 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
+    <section id="footer">
+        <div class="container">
+            <div class="row text-center text-xs-center text-sm-left text-md-left">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supcloud.png') }}" height="30" alt="SupFile">
+                    <p>© 2018 Copyright
+                        <a href="/howto">SupFile</a>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5 class="text-uppercase h5">L'entreprise</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/contact">Contact</a>
+                        </li>
+                        <li>
+                            <a href="/howto">Comment faire ?</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <h5 class="text-uppercase h5">Mentions légales</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/legal">Mentions légales</a>
+                        </li>
+                        <li>
+                            <a href="/rgpd">Utilisation des données</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 </div>
 
