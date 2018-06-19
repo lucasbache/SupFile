@@ -454,7 +454,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body"> 
+                        <div class="modal-body">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" aria-describedby="basic-addon2"
                                        name="publicLinkButton" id="publicLinkButton"/>

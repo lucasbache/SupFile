@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto">
-    <div class="row mx-auto">
-        <div class="col-md-8 col-md-offset-2 mx-auto">
-            <div class="panel panel-default">
+<div class="container">
+    <div class="row">
+        <div class="">
+            <div class="col-sm panel panel-default">
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}" style="margin-left: 30%; margin-top: 10%;">
                         {{ csrf_field() }}
