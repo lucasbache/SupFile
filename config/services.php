@@ -37,16 +37,16 @@ return [
     'facebook' => [
         'client_id'     => '957394857747831',
         'client_secret' => '63251063a862ff5fe81dae508f1b5172',
-        'redirect'      => 'http://localhost/SupDrive/public/login/facebook/callback',
+        'redirect'      => 'https://supfile.azurewebsites.net/login/facebook/callback',
     ],
     'twitter' => [
         'client_id'     => 'LsorqOlhthz3DfFuAFvZJBDZT',
         'client_secret' => 'Jz1SMnXt1FCFOWJUSkjIoLx6s4eUlnfHWFH6R1T779bSDGGMEU',
-        'redirect'      => 'http://localhost/SupDrive/public/login/twitter/callback',
+        'redirect'      => 'https://supfile.azurewebsites.net/login/twitter/callback',
     ],
     'google' => [
         'client_id'     => '988341530128-u5pnifam9eeeb317okk8t8h6l8jamfic.apps.googleusercontent.com',
         'client_secret' => 'K26xXhjP2QHS7hZ4dzx13FIt',
-        'redirect'      => 'http://localhost/SupDrive/public/login/google/callback',
+        'redirect'      => 'https://supfile.azurewebsites.net/login/google/callback',
     ],
 ];
