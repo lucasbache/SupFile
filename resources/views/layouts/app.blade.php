@@ -96,10 +96,10 @@
                     <h5 class="text-uppercase h5">L'entreprise</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="/contact">Contact</a>
+                            <a href="{{ URL::to('/contact')}}">Contact</a>
                         </li>
                         <li>
-                            <a href="/howto">Comment faire ?</a>
+                            <a href="{{ URL::to('/howto')}}">Comment faire ?</a>
                         </li>
                     </ul>
                 </div>
@@ -107,10 +107,10 @@
                     <h5 class="text-uppercase h5">Mentions légales</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="/legal">Mentions légales</a>
+                            <a href="{{ URL::to('/legal')}}">Mentions légales</a>
                         </li>
                         <li>
-                            <a href="/rgpd">Utilisation des données</a>
+                            <a href="{{ URL::to('/rgpd')}}">Utilisation des données</a>
                         </li>
                     </ul>
                 </div>
