@@ -6,7 +6,7 @@
         <div class="">
             <div class="col-sm panel panel-default">
                 <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}" style="margin-left: 30%; margin-top: 10%;">
+                    <form class="form" method="POST" action="{{ route('register') }}" style="margin-left: 30%; margin-top: 10%;">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -102,13 +102,13 @@
                     </div>
                     <div class="modal-body">
                         <label>
-                            -	L’adresse mail (obligatoire) est utilisé pour le bon fonctionnement du service,
+                            -	L’adresse mail (obligatoire) est utilisée pour le bon fonctionnement du service,
                             <br>
                             -	Le pseudo (obligatoire) est utilisé pour personnaliser l’environnement,
                             <br>
                             -	Seuls les administrateurs du site SupFile pourront prendre connaissance de ces données
                             <br>
-                            -	Vous pouvez vous desinscrire du service SupFile en écrivant à roman.zitzmann@supinfo.com
+                            -	Vous pouvez vous désinscrire du service SupFile en écrivant à roman.zitzmann@supinfo.com
                         </label>
 
                     </div>
@@ -122,39 +122,4 @@
         </div>
     </div>
 </div>
-<footer class="page-footer font-small fixed-bottom" id="footer">
-    <div class="text-center text-md-left">
-        <div class="row">
-            <div class="col-md-4">
-                <img id="logo" class="d-inline-block mr-1" src="{{ asset('Images/supcloud.png') }}" height="30" alt="SupFile">
-                <p>© 2018 Copyright
-                    <a href="/howto">SupFile</a>
-                </p>
-            </div>
-            <hr class="">
-            <div class="col-md-4">
-                <h5 class="text-uppercase h5">L'entreprise</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="/contact">Contact</a>
-                    </li>
-                    <li>
-                        <a href="/howto">Comment faire ?</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5 class="text-uppercase h5">Mentions légales</h5>
-                <ul class="list-unstyled">
-                    <li>
-                        <a href="/legal">Mentions légales</a>
-                    </li>
-                    <li>
-                        <a href="/rgpd">Utilisation des données</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
 @endsection
