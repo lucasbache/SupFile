@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="">
-            <div class="col-sm panel panel-default">
+            <div class="col-sm panel panel-default" style="margin-bottom: 5%;">
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}" style="margin-left: 30%; margin-top: 10%;">
                         {{ csrf_field() }}
