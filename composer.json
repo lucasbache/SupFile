@@ -18,9 +18,10 @@
         "laravelcollective/html": "^5.4.0",
         "matthewbdaly/laravel-azure-storage": "^1.0",
         "microsoft/azure-storage-blob": "*",
-        "microsoft/azure-storage-table": "*",
+        "microsoft/azure-storage-file": "*",
         "microsoft/azure-storage-queue": "*",
-        "microsoft/azure-storage-file": "*"
+        "microsoft/azure-storage-table": "*",
+        "zanysoft/laravel-zip": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

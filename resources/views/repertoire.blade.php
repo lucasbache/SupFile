@@ -23,7 +23,7 @@
     <br/>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 side-repo fixed-top">
+            <div class="col side-repo fixed-top">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRepo">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="panel-body">
                         Vos répertoires :
-                        <ul class="list-group">
+                        <ul class="list-group col-md-6 justify-content-center">
                             @foreach($userepo as $repository)
                                 @if($repository->dossierPrimaire != 'Y')
                                     @if($repository->dossierParent == $dossierActuel)
@@ -469,5 +469,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 @endsection
