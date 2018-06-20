@@ -54,8 +54,8 @@ trait FileTrait
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
         $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=R5AZ0KNGAuG9pa/PrUQ5lJzLbP59/dJWG7ocLaUnSi1m/g1BjL4Dciw2fQVVATtlIOc7ZvI5bmaUXapbFy4x2g==';
+        $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=Gvhg1QsM8vlvlXR4SODaaEaHONuzgnHIaqH/SsjfSq6Uw1F/Pdb93fV7I1XCLyqcWAdTIbmaYrnJ7G57J2wKjQ==';
         $fileClient = FileRestProxy::createFileService($connectionString);
         $fileClient2 = FileRestProxy::createFileService($connectionString2);
         $fileClient3 = FileRestProxy::createFileService($connectionString3);
@@ -113,8 +113,8 @@ trait FileTrait
             $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
 
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=R5AZ0KNGAuG9pa/PrUQ5lJzLbP59/dJWG7ocLaUnSi1m/g1BjL4Dciw2fQVVATtlIOc7ZvI5bmaUXapbFy4x2g==';
+            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=Gvhg1QsM8vlvlXR4SODaaEaHONuzgnHIaqH/SsjfSq6Uw1F/Pdb93fV7I1XCLyqcWAdTIbmaYrnJ7G57J2wKjQ==';
             $fileClient = FileRestProxy::createFileService($connectionString);
             $fileClient2 = FileRestProxy::createFileService($connectionString2);
             $fileClient3 = FileRestProxy::createFileService($connectionString3);
@@ -182,8 +182,8 @@ trait FileTrait
         File::move($file->cheminFichier, $dossFichier);
 
         $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-        $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=R5AZ0KNGAuG9pa/PrUQ5lJzLbP59/dJWG7ocLaUnSi1m/g1BjL4Dciw2fQVVATtlIOc7ZvI5bmaUXapbFy4x2g==';
+        $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=Gvhg1QsM8vlvlXR4SODaaEaHONuzgnHIaqH/SsjfSq6Uw1F/Pdb93fV7I1XCLyqcWAdTIbmaYrnJ7G57J2wKjQ==';
         $fileClient = FileRestProxy::createFileService($connectionString);
         $fileClient2 = FileRestProxy::createFileService($connectionString2);
         $fileClient3 = FileRestProxy::createFileService($connectionString3);
@@ -265,8 +265,8 @@ trait FileTrait
 
             $repo = repository::findRepoById($objectId);
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=R5AZ0KNGAuG9pa/PrUQ5lJzLbP59/dJWG7ocLaUnSi1m/g1BjL4Dciw2fQVVATtlIOc7ZvI5bmaUXapbFy4x2g==';
+            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=Gvhg1QsM8vlvlXR4SODaaEaHONuzgnHIaqH/SsjfSq6Uw1F/Pdb93fV7I1XCLyqcWAdTIbmaYrnJ7G57J2wKjQ==';
             $fileClient = FileRestProxy::createFileService($connectionString);
             $fileClient2 = FileRestProxy::createFileService($connectionString2);
             $fileClient3 = FileRestProxy::createFileService($connectionString3);
@@ -333,8 +333,8 @@ trait FileTrait
             $objectPath = $file->cheminFichier;
             fileEntries::suppressFile($objectId);
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
-            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=R5AZ0KNGAuG9pa/PrUQ5lJzLbP59/dJWG7ocLaUnSi1m/g1BjL4Dciw2fQVVATtlIOc7ZvI5bmaUXapbFy4x2g==';
+            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=Gvhg1QsM8vlvlXR4SODaaEaHONuzgnHIaqH/SsjfSq6Uw1F/Pdb93fV7I1XCLyqcWAdTIbmaYrnJ7G57J2wKjQ==';
             $fileClient = FileRestProxy::createFileService($connectionString);
             $fileClient2 = FileRestProxy::createFileService($connectionString2);
             $fileClient3 = FileRestProxy::createFileService($connectionString3);
