@@ -54,13 +54,19 @@ trait FileTrait
         repository::updatePublicLinkRepo($dossier->id,$publicLink);
 
         $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
         $fileClient = FileRestProxy::createFileService($connectionString);
+        $fileClient2 = FileRestProxy::createFileService($connectionString2);
+        $fileClient3 = FileRestProxy::createFileService($connectionString3);
 
         $shareName = 'users/'.$dossierActuel;
         $directoryName = $repoName;
 
         // Create directory.
         $fileClient->createDirectory($shareName, $directoryName);
+        $fileClient2->createDirectory($shareName, $directoryName);
+        $fileClient3->createDirectory($shareName, $directoryName);
         File::makeDirectory($cheminDossier, 777,true);
 
         return $dossier->id;
@@ -107,11 +113,19 @@ trait FileTrait
             $filepath = $file->storeAs($dossierActuel, $nomFicComplet);
 
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
             $fileClient = FileRestProxy::createFileService($connectionString);
+            $fileClient2 = FileRestProxy::createFileService($connectionString2);
+            $fileClient3 = FileRestProxy::createFileService($connectionString3);
+
 
             $shareName = 'users/'.$dossierActuel;
 
             $fileClient->createFile($shareName, $nomFicComplet, 1024);
+            $fileClient2->createFile($shareName, $nomFicComplet, 1024);
+            $fileClient3->createFile($shareName, $nomFicComplet, 1024);
+
             //On créer le fichier dans la base de donnée
             $file = fileEntries::create([
                 'user_id' => $userId,
@@ -168,12 +182,20 @@ trait FileTrait
         File::move($file->cheminFichier, $dossFichier);
 
         $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+        $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
         $fileClient = FileRestProxy::createFileService($connectionString);
+        $fileClient2 = FileRestProxy::createFileService($connectionString2);
+        $fileClient3 = FileRestProxy::createFileService($connectionString3);
 
         $shareName = 'users/'.$file->dossierStockage;
 
         $fileClient->deleteFile($shareName, $file->name);
+        $fileClient2->deleteFile($shareName, $file->name);
+        $fileClient3->deleteFile($shareName, $file->name);
         $fileClient->createFile($shareName, $newName, 1024);
+        $fileClient2->createFile($shareName, $newName, 1024);
+        $fileClient3->createFile($shareName, $newName, 1024);
 
         return $file;
     }
@@ -243,7 +265,11 @@ trait FileTrait
 
             $repo = repository::findRepoById($objectId);
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
             $fileClient = FileRestProxy::createFileService($connectionString);
+            $fileClient2 = FileRestProxy::createFileService($connectionString2);
+            $fileClient3 = FileRestProxy::createFileService($connectionString3);
 
             $shareName = 'users/'.$repo->dossierParent;
             $directoryName = $repo->name;
@@ -288,6 +314,8 @@ trait FileTrait
 
             // Delete directory.
             $fileClient->deleteDirectory($shareName, $directoryName);
+            $fileClient2->deleteDirectory($shareName, $directoryName);
+            $fileClient3->deleteDirectory($shareName, $directoryName);
 
             File::deleteDirectory($repo->cheminDossier);
         }
@@ -305,11 +333,17 @@ trait FileTrait
             $objectPath = $file->cheminFichier;
             fileEntries::suppressFile($objectId);
             $connectionString = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk2;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString2 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk3;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
+            $connectionString3 = 'DefaultEndpointsProtocol=https;AccountName=supfiledisk4;AccountKey=4tTfRML46yoQrkdanKHiktLvEy91fZZZ+x7MZo8Th2lMmaSG/W0BbOef7+Wf6UlIJ7pYv6rDcYMR7T3TOPsTTA==';
             $fileClient = FileRestProxy::createFileService($connectionString);
+            $fileClient2 = FileRestProxy::createFileService($connectionString2);
+            $fileClient3 = FileRestProxy::createFileService($connectionString3);
 
             $shareName = 'users/'.$file->dossierStockage;
 
             $fileClient->deleteFile($shareName, $file->name);
+            $fileClient2->deleteFile($shareName, $file->name);
+            $fileClient3->deleteFile($shareName, $file->name);
             File::delete($objectPath);
         }
     }
