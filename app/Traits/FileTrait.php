@@ -278,10 +278,14 @@ trait FileTrait
 
             foreach ($listeDossierFichier->getDirectories() as $sousDoss){
                 $fileClient->deleteDirectory($shareName.'/'.$repo->name, $sousDoss->getName());
+                $fileClient2->deleteDirectory($shareName.'/'.$repo->name, $sousDoss->getName());
+                $fileClient3->deleteDirectory($shareName.'/'.$repo->name, $sousDoss->getName());
             }
 
             foreach ($listeDossierFichier->getFiles() as $sousFic){
                 $fileClient->deleteFile($shareName.'/'.$repo->name, $sousFic->getName());
+                $fileClient2->deleteFile($shareName.'/'.$repo->name, $sousFic->getName());
+                $fileClient3->deleteFile($shareName.'/'.$repo->name, $sousFic->getName());
             }
 
             $objectPath = $repo->cheminDossier;
