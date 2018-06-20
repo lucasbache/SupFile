@@ -13,7 +13,7 @@
 Auth::routes();
 
 Route::get('/home', 'repoController@index')->name('home');
-//Route::get('/', 'repoController@index')->name('home');
+//Route::get('/', 'repoController@index')->name('home')
 Route::get('/', 'howtoController@index');
 Route::post('/home', 'repoController@postRepo');
 Route::post('/', 'repoController@postRepo');
